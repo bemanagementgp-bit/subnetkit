@@ -1,0 +1,218 @@
+[
+  {
+    "slug": "24-subnet-calculator",
+    "keyword": "/24 subnet calculator",
+    "title": "/24 Subnet Calculator – 254 Hosts, Mask 255.255.255.0 | SubnetKit",
+    "description": "/24 subnet calculator: network, broadcast, usable range and mask 255.255.255.0 for any address, plus a split of a /24 into /25, /26 or /27 blocks. Free, in-browser.",
+    "eyebrow": "IPv4 · Subnetting",
+    "h1": "/24 Subnet Calculator",
+    "tagline": "Enter any address with a /24 prefix and get the network, broadcast, host range, masks and an instant split into smaller subnets.",
+    "intro": "<p>A /24 is the subnet almost everyone meets first: 256 addresses, 254 of them usable for hosts, with the familiar mask 255.255.255.0. It maps neatly onto the last octet, which is why home routers, small offices and most lab topologies use it.</p><p>SubnetKit calculates all of it in the browser for free. The calculator above is already loaded with <code>192.168.1.0/24</code>; change the address or prefix and every field updates as you type, with nothing sent to a server.</p>",
+    "sections": [
+      {
+        "h2": "Worked example: 192.168.1.0/24",
+        "html": "<ul><li><strong>Network address:</strong> 192.168.1.0</li><li><strong>First usable host:</strong> 192.168.1.1</li><li><strong>Last usable host:</strong> 192.168.1.254</li><li><strong>Broadcast:</strong> 192.168.1.255</li><li><strong>Subnet mask:</strong> 255.255.255.0 (binary: 24 ones followed by 8 zeros)</li><li><strong>Wildcard mask:</strong> 0.0.0.255</li><li><strong>Total addresses:</strong> 256 (2^8)</li><li><strong>Usable hosts:</strong> 254 (256 minus network and broadcast)</li></ul><p>Any address in the range belongs to the same subnet; for instance 192.168.1.37/24 and 192.168.1.200/24 are on-link with each other and share the gateway, which is conventionally .1 or .254.</p>"
+      },
+      {
+        "h2": "Splitting a /24 into smaller subnets",
+        "html": "<p>Borrowing host bits turns one /24 into several equal blocks. Each borrowed bit doubles the subnet count and halves the hosts:</p><ul><li><strong>/25:</strong> 2 subnets × 126 hosts (192.168.1.0/25 and 192.168.1.128/25), mask 255.255.255.128</li><li><strong>/26:</strong> 4 subnets × 62 hosts (.0, .64, .128, .192), mask 255.255.255.192</li><li><strong>/27:</strong> 8 subnets × 30 hosts (.0, .32, .64 … .224), mask 255.255.255.224</li><li><strong>/28:</strong> 16 subnets × 14 hosts, mask 255.255.255.240</li></ul><p>The split table in SubnetKit lists each block's network, first and last host and broadcast, and you can switch between \"split by prefix\" and \"split by number of subnets\" depending on how the question is phrased.</p>"
+      }
+    ],
+    "faq": [
+      { "q": "How many hosts are in a /24?", "a": "254 usable hosts. The block has 256 addresses, but the first is the network address and the last is the broadcast address." },
+      { "q": "What is the subnet mask for /24?", "a": "255.255.255.0. The wildcard mask, used in Cisco ACLs and OSPF statements, is 0.0.0.255." },
+      { "q": "How many /24 subnets fit in a /16?", "a": "256. A /16 such as 10.5.0.0/16 contains 10.5.0.0/24 through 10.5.255.0/24." },
+      { "q": "Is a /24 the same as a Class C network?", "a": "In size, yes: a classful Class C network was 256 addresses. Since CIDR, /24 is just a prefix length and can be used in any address range, including former Class A or B space." }
+    ],
+    "query": "tab=ipv4&ip4Addr=192.168.1.0&ip4Prefix=24&ip4SplitMode=prefix&ip4SplitPrefix=26"
+  },
+  {
+    "slug": "30-and-31-point-to-point-subnets",
+    "keyword": "/30 subnet calculator",
+    "title": "/30 and /31 Subnet Calculator for Point-to-Point Links | SubnetKit",
+    "description": "/30 subnet calculator for point-to-point links: 4 addresses, 2 usable, mask 255.255.255.252. Compare with /31 (RFC 3021) and plan router-to-router links. Free tool.",
+    "eyebrow": "IPv4 · Point-to-point links",
+    "h1": "/30 and /31 Subnets for Point-to-Point Links",
+    "tagline": "Work out the two usable addresses of any /30, or the two addresses of an RFC 3021 /31, for router and WAN links.",
+    "intro": "<p>A link between two routers needs exactly two addresses. The traditional answer is a /30, which reserves four addresses to deliver two. The modern answer, standardised in RFC 3021, is a /31, which uses both addresses and wastes none.</p><p>SubnetKit handles both correctly: it reports 2 usable hosts for /30 and 2 for /31 rather than the naive 0. The tool is free and runs entirely in your browser, so you can plan dozens of links without any account.</p>",
+    "sections": [
+      {
+        "h2": "Worked example: 10.0.0.0/30",
+        "html": "<ul><li><strong>Subnet mask:</strong> 255.255.255.252 (wildcard 0.0.0.3)</li><li><strong>Network address:</strong> 10.0.0.0</li><li><strong>Usable hosts:</strong> 10.0.0.1 and 10.0.0.2 (one per router)</li><li><strong>Broadcast:</strong> 10.0.0.3</li><li><strong>Next /30:</strong> 10.0.0.4/30, then 10.0.0.8/30, 10.0.0.12/30 and so on in steps of 4</li></ul><p>Because the block size is 4, a valid /30 always starts at a multiple of 4 in the last octet. 10.0.0.6/30 is a host inside 10.0.0.4/30, not a network address, and SubnetKit normalises it for you and shows the real network.</p>"
+      },
+      {
+        "h2": "/31 links and why they are allowed",
+        "html": "<p>RFC 3021 permits a /31 on point-to-point interfaces because such links have no need for a broadcast address: there is only one other endpoint. 10.0.0.0/31 therefore assigns 10.0.0.0 to one router and 10.0.0.1 to the other, with mask 255.255.255.254.</p><p>The saving is significant at scale. A single /24 provides 64 /30 links (128 usable addresses) but 128 /31 links (256 usable addresses). Cisco IOS, IOS-XE, Junos, Arista EOS and Linux all support /31 on routed interfaces; older access switches and some firewalls do not, so check before deploying. For a loopback, use a /32: one address, no waste.</p><p>In SubnetKit's VLSM tab, the <em>Use /31 for 2-host links</em> switch applies this rule automatically to every requirement of 2 hosts.</p>"
+      }
+    ],
+    "faq": [
+      { "q": "How many usable IP addresses are in a /30?", "a": "Two. The block has four addresses: network, two hosts and broadcast." },
+      { "q": "How many usable addresses are in a /31?", "a": "Two, under RFC 3021. Both addresses in the block are assigned to the endpoints because a point-to-point link has no broadcast address." },
+      { "q": "Should I use /30 or /31 for router links?", "a": "Use /31 where both devices support it to halve address consumption. Use /30 for compatibility with legacy equipment or where the vendor documentation does not list /31 support." },
+      { "q": "What is the subnet mask for /30?", "a": "255.255.255.252. For /31 it is 255.255.255.254 and for a /32 host route it is 255.255.255.255." }
+    ],
+    "query": "tab=ipv4&ip4Addr=10.0.0.0&ip4Prefix=30"
+  },
+  {
+    "slug": "27-subnet-calculator",
+    "keyword": "/27 subnet calculator",
+    "title": "/27 Subnet Calculator – 30 Hosts, Mask 255.255.255.224 | SubnetKit",
+    "description": "/27 subnet calculator: 32 addresses, 30 usable hosts, mask 255.255.255.224. Find the network, broadcast and host range of any /27 and list all eight /27s in a /24.",
+    "eyebrow": "IPv4 · Subnetting",
+    "h1": "/27 Subnet Calculator",
+    "tagline": "Find the block boundaries, host range and masks of any /27, the go-to size for small departments and VLANs of up to 30 devices.",
+    "intro": "<p>A /27 gives you 32 addresses and 30 usable hosts. It is the sweet spot for a small team's VLAN, a guest Wi-Fi segment or a rack of management interfaces, and it appears constantly in certification exams because its boundaries are easy to get wrong.</p><p>SubnetKit shows the correct network and broadcast for whatever address you type, in the browser and at no cost. The calculator is preloaded with <code>192.168.1.0/27</code> below.</p>",
+    "sections": [
+      {
+        "h2": "Worked example: 192.168.1.0/27",
+        "html": "<ul><li><strong>Subnet mask:</strong> 255.255.255.224 (binary last octet 11100000)</li><li><strong>Wildcard mask:</strong> 0.0.0.31</li><li><strong>Network:</strong> 192.168.1.0</li><li><strong>Usable hosts:</strong> 192.168.1.1 – 192.168.1.30</li><li><strong>Broadcast:</strong> 192.168.1.31</li><li><strong>Total / usable:</strong> 32 / 30</li></ul><p>The block size is 32, so every /27 in a /24 starts at a multiple of 32: 192.168.1.0, .32, .64, .96, .128, .160, .192 and .224. That is 8 subnets × 30 hosts = 240 usable addresses, compared with 254 for the undivided /24.</p>"
+      },
+      {
+        "h2": "Finding which /27 an address belongs to",
+        "html": "<p>Take the last octet and divide by 32, discarding the remainder. For 192.168.1.77: 77 ÷ 32 = 2 remainder 13, so the address sits in block number 2, which starts at 2 × 32 = 64. The subnet is therefore <strong>192.168.1.64/27</strong>, hosts run from .65 to .94 and the broadcast is .95.</p><p>Try the same with 192.168.1.200: 200 ÷ 32 = 6, block start 192, so 192.168.1.192/27 with hosts .193–.222 and broadcast .223. Typing either address into SubnetKit with prefix /27 returns these values immediately, and the binary view highlights the three borrowed bits that make the /27 distinct from the /24.</p>"
+      }
+    ],
+    "faq": [
+      { "q": "How many hosts does a /27 have?", "a": "30 usable hosts out of 32 addresses. The remaining two are the network and broadcast addresses." },
+      { "q": "What is the subnet mask for a /27?", "a": "255.255.255.224. The wildcard mask is 0.0.0.31." },
+      { "q": "How many /27 subnets are in a /24?", "a": "Eight, starting at .0, .32, .64, .96, .128, .160, .192 and .224." },
+      { "q": "When should I use a /27 instead of a /28?", "a": "Choose /27 when a segment needs between 15 and 30 devices. A /28 only offers 14 usable hosts, and growing past it later means re-addressing." }
+    ],
+    "query": "tab=ipv4&ip4Addr=192.168.1.0&ip4Prefix=27"
+  },
+  {
+    "slug": "vlsm-calculator-ccna",
+    "keyword": "VLSM calculator for CCNA",
+    "title": "VLSM Calculator for CCNA – Worked Subnetting Example | SubnetKit",
+    "description": "VLSM calculator for CCNA practice: enter a base network and host counts per department, get the largest-first allocation with masks, ranges and wasted addresses.",
+    "eyebrow": "IPv4 · VLSM",
+    "h1": "VLSM Calculator for CCNA",
+    "tagline": "Turn a list of host requirements into a correct variable-length subnet plan, the way the CCNA exam expects it.",
+    "intro": "<p>Variable Length Subnet Masking lets you carve one address block into subnets of different sizes so that a 60-user LAN and a 2-address WAN link do not each burn a /24. The CCNA tests the method, not just the answer: allocate largest first, align each block to its size and avoid overlap.</p><p>SubnetKit's VLSM tab does exactly that in the browser, free, and shows every intermediate value so you can check your own working against it.</p>",
+    "sections": [
+      {
+        "h2": "Worked example: four networks from 192.168.10.0/24",
+        "html": "<p>Requirements: Sales 60 hosts, Engineering 28, Admin 12, WAN link 2. Sorted largest first:</p><ol><li><strong>Sales, 60 hosts → /26</strong> (64 addresses, 62 usable): 192.168.10.0/26, mask 255.255.255.192, hosts .1–.62, broadcast .63</li><li><strong>Engineering, 28 → /27</strong> (32, 30 usable): 192.168.10.64/27, mask 255.255.255.224, hosts .65–.94, broadcast .95</li><li><strong>Admin, 12 → /28</strong> (16, 14 usable): 192.168.10.96/28, mask 255.255.255.240, hosts .97–.110, broadcast .111</li><li><strong>WAN link, 2 → /30</strong> (4, 2 usable): 192.168.10.112/30, mask 255.255.255.252, hosts .113–.114, broadcast .115</li></ol><p>Total used: 116 of 256 addresses; the next free address is 192.168.10.116, leaving room for growth. These rows are preloaded in the calculator.</p>"
+      },
+      {
+        "h2": "How to pick each prefix",
+        "html": "<p>For a requirement of <em>n</em> hosts, find the smallest power of two that is at least <em>n</em> + 2 (network and broadcast), then the prefix is 32 minus that exponent. For 28 hosts: 28 + 2 = 30, the next power of two is 32 = 2^5, so the prefix is 32 − 5 = /27.</p><p>Two rules trip people up. First, each block must start on a multiple of its own size: after the /26 ends at .63, a /27 can start at .64 because 64 is divisible by 32. Second, allocate in descending order of size; placing the WAN /30 first at .0 would force the /26 to start at .64 and waste the gap. SubnetKit reports the wasted addresses per row so you can see the cost of any plan.</p>"
+      }
+    ],
+    "faq": [
+      { "q": "What is VLSM in simple terms?", "a": "Using different subnet masks within one network so each subnet is sized to its real host count, instead of giving every segment the same fixed size." },
+      { "q": "Why allocate the largest subnet first?", "a": "Large blocks have strict alignment (a /26 must start on a multiple of 64). Placing them first keeps the blocks contiguous and prevents gaps that small subnets could otherwise have filled." },
+      { "q": "Does the calculator support /31 for point-to-point links?", "a": "Yes. Toggle the /31 option and any requirement of 2 hosts becomes a /31 per RFC 3021, and a requirement of 1 becomes a /32." },
+      { "q": "How many networks can I plan for free?", "a": "Up to 5 requirements per plan on the free tier, which covers typical CCNA practice questions. Pro removes the limit for larger designs." }
+    ],
+    "query": "tab=vlsm&vlsmBase=192.168.10.0%2F24&vlsmP2P=0&rows=Sales:60,Engineering:28,Admin:12,WAN%20link:2"
+  },
+  {
+    "slug": "wildcard-mask-calculator",
+    "keyword": "wildcard mask calculator",
+    "title": "Wildcard Mask Calculator for Cisco ACLs and OSPF | SubnetKit",
+    "description": "Wildcard mask calculator: convert any prefix or subnet mask to the inverse mask Cisco ACLs, OSPF and EIGRP use, with a worked example and a /8 to /32 reference table.",
+    "eyebrow": "IPv4 · Cisco IOS",
+    "h1": "Wildcard Mask Calculator",
+    "tagline": "Get the inverse mask for any subnet so your access-list and OSPF network statements match exactly the addresses you intend.",
+    "intro": "<p>Cisco access lists, OSPF and EIGRP <code>network</code> statements take a wildcard mask rather than a subnet mask. A 0 bit means \"must match\", a 1 bit means \"ignore\", so the wildcard is simply the bitwise inverse of the subnet mask: 255.255.255.255 minus the mask, octet by octet.</p><p>SubnetKit shows the wildcard next to the subnet mask for every calculation, and its free-form input accepts the <code>address wildcard</code> syntax straight from an IOS config. It is free and runs in the browser.</p>",
+    "sections": [
+      {
+        "h2": "Worked example: 172.16.32.0/20",
+        "html": "<ul><li><strong>Subnet mask:</strong> 255.255.240.0</li><li><strong>Wildcard mask:</strong> 0.0.15.255 (255 − 255 = 0, 255 − 255 = 0, 255 − 240 = 15, 255 − 0 = 255)</li><li><strong>Address range covered:</strong> 172.16.32.0 – 172.16.47.255 (4,096 addresses)</li></ul><p>The same block in IOS syntax:</p><ul><li><code>access-list 10 permit 172.16.32.0 0.0.15.255</code></li><li><code>router ospf 1</code> then <code>network 172.16.32.0 0.0.15.255 area 0</code></li></ul><p>To match a single host use wildcard 0.0.0.0, or the <code>host</code> keyword; to match everything use 0.0.0.0 255.255.255.255, or <code>any</code>. Paste <code>172.16.32.0 0.0.15.255</code> into SubnetKit's quick-entry box and it is parsed as /20 automatically.</p>"
+      },
+      {
+        "h2": "Reference: prefix, mask and wildcard",
+        "html": "<ul><li><strong>/8</strong> 255.0.0.0 → 0.255.255.255</li><li><strong>/16</strong> 255.255.0.0 → 0.0.255.255</li><li><strong>/20</strong> 255.255.240.0 → 0.0.15.255</li><li><strong>/24</strong> 255.255.255.0 → 0.0.0.255</li><li><strong>/25</strong> 255.255.255.128 → 0.0.0.127</li><li><strong>/26</strong> 255.255.255.192 → 0.0.0.63</li><li><strong>/27</strong> 255.255.255.224 → 0.0.0.31</li><li><strong>/28</strong> 255.255.255.240 → 0.0.0.15</li><li><strong>/30</strong> 255.255.255.252 → 0.0.0.3</li><li><strong>/32</strong> 255.255.255.255 → 0.0.0.0</li></ul><p>Wildcards are not limited to contiguous ones. In an ACL, 0.0.1.0 would match every even-numbered or odd-numbered third octet, a trick occasionally used to match alternate subnets in one line. Such discontiguous masks are legal in ACLs but not in OSPF.</p>"
+      }
+    ],
+    "faq": [
+      { "q": "How do I calculate a wildcard mask?", "a": "Subtract each octet of the subnet mask from 255. For 255.255.255.192 the result is 0.0.0.63." },
+      { "q": "Is a wildcard mask the same as an inverse mask?", "a": "Yes. Cisco documentation uses both terms for the bitwise complement of the subnet mask." },
+      { "q": "Why does OSPF use wildcard masks?", "a": "The network statement originally reused ACL matching logic, which tests address bits selectively. Modern IOS also accepts a subnet mask here and converts it, but exams still expect the wildcard form." },
+      { "q": "What wildcard matches a single host?", "a": "0.0.0.0, meaning every bit must match. In ACLs you can write host 10.1.1.5 instead of 10.1.1.5 0.0.0.0." }
+    ],
+    "query": "tab=ipv4&ip4Addr=172.16.32.0&ip4Prefix=20"
+  },
+  {
+    "slug": "ipv6-subnet-calculator-64",
+    "keyword": "IPv6 /64 subnet calculator",
+    "title": "IPv6 /64 Subnet Calculator – Network, Range, Expanded Form | SubnetKit",
+    "description": "IPv6 /64 subnet calculator: network prefix, first and last address, expanded and compressed notation, reverse DNS, and how many /64s fit in a /48 or /56. Free tool.",
+    "eyebrow": "IPv6 · Subnetting",
+    "h1": "IPv6 /64 Subnet Calculator",
+    "tagline": "Resolve any IPv6 address to its /64 network, see both notations and plan how many /64s your allocation can hold.",
+    "intro": "<p>The /64 is the standard IPv6 subnet size for any LAN, wireless segment or VM network. It is fixed at 64 bits because Stateless Address Autoconfiguration (SLAAC) builds the host portion from a 64-bit interface identifier; anything longer than /64 breaks it.</p><p>SubnetKit works with the full 128-bit address space in your browser, free of charge, and the IPv6 tab above is loaded with the documentation prefix <code>2001:db8:abcd:12::/64</code>.</p>",
+    "sections": [
+      {
+        "h2": "Worked example: 2001:db8:abcd:12::/64",
+        "html": "<ul><li><strong>Network:</strong> 2001:db8:abcd:12::/64</li><li><strong>Expanded form:</strong> 2001:0db8:abcd:0012:0000:0000:0000:0000</li><li><strong>First address:</strong> 2001:db8:abcd:12::</li><li><strong>Last address:</strong> 2001:db8:abcd:12:ffff:ffff:ffff:ffff</li><li><strong>Addresses:</strong> 2^64 = 18,446,744,073,709,551,616</li><li><strong>Type:</strong> global unicast (2001:db8::/32 is reserved for documentation)</li></ul><p>The first four hextets (64 bits) are the routing prefix and subnet ID; the last four are the interface identifier. Routers advertise this prefix on the link and hosts generate their own addresses, so you never run out of host addresses in a /64 and there is no concept of a broadcast address.</p>"
+      },
+      {
+        "h2": "How many /64 subnets you get",
+        "html": "<p>Allocations are usually expressed by how many /64s they contain. Each 4 bits of prefix equals one hex digit, so the arithmetic is quick:</p><ul><li><strong>/48</strong> (typical business site): 2^16 = 65,536 /64 subnets</li><li><strong>/56</strong> (common residential allocation): 2^8 = 256 /64 subnets</li><li><strong>/60</strong> (some ISPs): 2^4 = 16 /64 subnets</li><li><strong>/32</strong> (ISP allocation from a RIR): 2^32 = 4,294,967,296 /64 subnets</li></ul><p>In SubnetKit, enter a /48 or /56 and set the split prefix to 64 to list the first subnets of the range with their boundaries. Use a /127 for point-to-point router links (RFC 6164) and a /128 for loopbacks; everything with end hosts stays /64.</p>"
+      }
+    ],
+    "faq": [
+      { "q": "How many addresses are in an IPv6 /64?", "a": "2^64, which is 18,446,744,073,709,551,616. There is no broadcast and no reserved network address, though the all-zeros interface identifier is conventionally avoided." },
+      { "q": "Why must a LAN be a /64?", "a": "SLAAC derives a 64-bit interface identifier from the MAC address or a random value, so autoconfiguration only works when exactly 64 bits remain for the host portion." },
+      { "q": "How many /64s are in a /48?", "a": "65,536. The 16 bits between /48 and /64 form the subnet ID, usually written as the fourth hextet." },
+      { "q": "Can I use /127 or /126 on router links?", "a": "Yes, RFC 6164 recommends /127 for point-to-point links between routers to avoid neighbor-cache exhaustion attacks. Host segments should still be /64." }
+    ],
+    "query": "tab=ipv6&ip6Addr=2001:db8:abcd:12::%2F64"
+  },
+  {
+    "slug": "ip-range-to-cidr",
+    "keyword": "IP range to CIDR converter",
+    "title": "IP Range to CIDR Converter – Minimal Block List | SubnetKit",
+    "description": "IP range to CIDR converter: turn a start and end address into the smallest set of CIDR blocks for firewall rules, ACLs and allowlists. Free, instant, in-browser.",
+    "eyebrow": "IPv4 · CIDR",
+    "h1": "IP Range to CIDR Converter",
+    "tagline": "Paste a first and last address and get the exact CIDR blocks that cover the range and nothing outside it.",
+    "intro": "<p>Firewalls, cloud security groups and route tables want CIDR notation, but vendors, ISPs and spreadsheets often give you a range like 192.168.1.100 to 192.168.1.199. Unless the range happens to be a power-of-two block starting on an aligned boundary, it takes several CIDRs to express precisely.</p><p>SubnetKit's CIDR tab computes the minimal list in the browser, for free, and also does the reverse: expand any CIDR into its first and last address.</p>",
+    "sections": [
+      {
+        "h2": "Worked example: 192.168.1.100 – 192.168.1.199",
+        "html": "<p>100 addresses, not aligned to any single block, so the converter produces five CIDRs:</p><ol><li><strong>192.168.1.100/30</strong> → .100–.103 (4 addresses)</li><li><strong>192.168.1.104/29</strong> → .104–.111 (8)</li><li><strong>192.168.1.112/28</strong> → .112–.127 (16)</li><li><strong>192.168.1.128/26</strong> → .128–.191 (64)</li><li><strong>192.168.1.192/29</strong> → .192–.199 (8)</li></ol><p>4 + 8 + 16 + 64 + 8 = 100, with no address outside the request. The algorithm walks from the start address, each time choosing the largest block that both starts on an aligned boundary (a /29 must begin on a multiple of 8, a /26 on a multiple of 64) and does not overshoot the end address.</p>"
+      },
+      {
+        "h2": "Ranges that collapse to a single CIDR",
+        "html": "<p>Some ranges are already clean blocks, and the tool reports just one line:</p><ul><li>192.168.1.0 – 192.168.1.255 → <strong>192.168.1.0/24</strong></li><li>10.0.0.0 – 10.0.1.255 → <strong>10.0.0.0/23</strong> (512 addresses)</li><li>172.16.0.0 – 172.31.255.255 → <strong>172.16.0.0/12</strong></li></ul><p>A common mistake is to exclude the network and broadcast when writing the range. 10.0.0.1 – 10.0.0.254 is not a /24; it needs 14 CIDRs (10.0.0.1/32, 10.0.0.2/31, 10.0.0.4/30 … 10.0.0.254/32). If you mean the whole subnet, enter .0 to .255. SubnetKit also includes a membership check so you can confirm a single address, such as 192.168.1.150, falls inside the CIDR you are about to put in a rule.</p>"
+      }
+    ],
+    "faq": [
+      { "q": "Why does my range turn into several CIDR blocks?", "a": "CIDR blocks must be a power of two in size and start on a boundary divisible by that size. A range that is not aligned has to be covered by multiple smaller blocks." },
+      { "q": "How do I convert a CIDR back to a range?", "a": "Enter the CIDR in the CIDR-to-range field; SubnetKit shows the first and last address, total count and mask." },
+      { "q": "Can I check whether an IP is inside a CIDR?", "a": "Yes. The CIDR tab includes a check that tells you whether an address belongs to a given block, for example whether 192.168.1.150 is in 192.168.1.128/26." },
+      { "q": "Is there a limit on range size?", "a": "No. Any IPv4 range from a single address up to 0.0.0.0–255.255.255.255 is supported, and results are computed instantly in the browser." }
+    ],
+    "query": "tab=cidr&rangeStart=192.168.1.100&rangeEnd=192.168.1.199&chkIp=192.168.1.150&chkCidr=192.168.1.128%2F26"
+  },
+  {
+    "slug": "private-ip-address-ranges",
+    "keyword": "private IP address ranges",
+    "title": "Private IP Address Ranges Explained: 10/8, 172.16/12, 192.168/16 | SubnetKit",
+    "description": "Private IP address ranges explained: the three RFC 1918 blocks (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16), their sizes, plus CGNAT and link-local. Check any IP free.",
+    "eyebrow": "IPv4 · Addressing",
+    "h1": "Private IP Address Ranges Explained",
+    "tagline": "See exactly which addresses are private under RFC 1918, how big each block is, and test whether a given IP is inside one.",
+    "intro": "<p>RFC 1918 reserves three blocks of IPv4 space for use inside private networks. They are never routed on the public internet, which is why every home, office and cloud VPC can reuse them behind NAT.</p><p>The blocks are easy to misremember, especially the 172 range. SubnetKit lets you type any address and CIDR to check membership, free and in the browser; the calculator above is set to test <code>172.20.5.1</code> against <code>172.16.0.0/12</code>.</p>",
+    "sections": [
+      {
+        "h2": "The three RFC 1918 blocks",
+        "html": "<ul><li><strong>10.0.0.0/8</strong> — 10.0.0.0 to 10.255.255.255, mask 255.0.0.0, 16,777,216 addresses. Used by large enterprises and most cloud VPCs.</li><li><strong>172.16.0.0/12</strong> — 172.16.0.0 to 172.31.255.255, mask 255.240.0.0, 1,048,576 addresses. Docker's default bridge networks come from here.</li><li><strong>192.168.0.0/16</strong> — 192.168.0.0 to 192.168.255.255, mask 255.255.0.0, 65,536 addresses. Home routers and small offices.</li></ul><p>The 172 block is the one people get wrong: 172.15.0.1 and 172.32.0.1 are <em>public</em> addresses. Only second octets 16 through 31 are private, because /12 leaves four bits of the second octet for the network, and 16 = 00010000 through 31 = 00011111 share the same top four bits.</p>"
+      },
+      {
+        "h2": "Other reserved ranges that look private",
+        "html": "<ul><li><strong>100.64.0.0/10</strong> (100.64.0.0–100.127.255.255): shared address space for carrier-grade NAT, RFC 6598. If your router's WAN address is here, your ISP is using CGNAT and port forwarding will not work.</li><li><strong>169.254.0.0/16</strong>: link-local, self-assigned when DHCP fails (RFC 3927). Seeing one on a client almost always means a DHCP problem.</li><li><strong>127.0.0.0/8</strong>: loopback; 127.0.0.1 is the usual address but the whole /8 points at the local host.</li><li><strong>192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24</strong>: documentation ranges that are public but never assigned, safe for examples.</li></ul><p>When designing a network, pick a block that will not collide with networks you may later connect to over VPN. 10.0.0.0/8 and 192.168.0.0/16 overlap frequently; a less common slice such as 172.22.0.0/16 reduces that risk.</p>"
+      }
+    ],
+    "faq": [
+      { "q": "Is 172.32.0.1 a private IP address?", "a": "No. The private range 172.16.0.0/12 ends at 172.31.255.255; 172.32.0.0 onward is public space." },
+      { "q": "How many private IPv4 addresses are there in total?", "a": "17,891,328: 16,777,216 in 10.0.0.0/8, 1,048,576 in 172.16.0.0/12 and 65,536 in 192.168.0.0/16." },
+      { "q": "Can I use 100.64.0.0/10 inside my LAN?", "a": "It is reserved for ISP carrier-grade NAT and may conflict with your provider's addressing. Use one of the RFC 1918 blocks for internal networks." },
+      { "q": "Are private addresses the same in IPv6?", "a": "The equivalent is Unique Local Address space, fc00::/7, in practice fd00::/8 with a random 40-bit global ID. Unlike IPv4, most IPv6 LANs use public global unicast addresses instead." }
+    ],
+    "query": "tab=cidr&cidrIn=172.16.0.0%2F12&chkIp=172.20.5.1&chkCidr=172.16.0.0%2F12"
+  }
+]

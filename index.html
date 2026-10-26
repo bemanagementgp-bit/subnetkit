@@ -394,6 +394,16 @@
         </ul>
         <button class="btn btn-primary btn-block" onclick="openPro('sidebar')">Get Pro – <span data-pro-price>$12</span> one-time</button>
       </div>
+      <div class="card lead-card" id="leadCard" hidden>
+        <h3>Subnetting cheat sheet</h3>
+        <p class="hint">Get the printable subnet cheat sheet plus new networking tools. No spam.</p>
+        <form class="lead-form" onsubmit="return subscribeNewsletter(event)">
+          <input type="email" name="email" required placeholder="you@email.com" aria-label="Email address" autocomplete="email">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+          <button class="btn btn-primary" type="submit">Send it</button>
+        </form>
+        <p class="hint tiny">No spam. Unsubscribe anytime.</p>
+      </div>
       <div class="card course-card hidden" id="courseCard">
         <h3>Recommended course</h3>
         <p id="courseText">Level up your subnetting for the CCNA with a structured course.</p>
