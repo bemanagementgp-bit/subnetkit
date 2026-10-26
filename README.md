@@ -2,7 +2,7 @@
 
 Free, static IP subnet calculator for network engineers and CCNA students. Pure HTML/CSS/JS – no build step, no dependencies, no backend. Deployed as-is to Vercel.
 
-**Live URL:** https://__SITE_URL__/ (placeholder – replaced after first deploy)
+**Live URL:** https://subnetkit-tool.vercel.app/ (placeholder – replaced after first deploy)
 
 ## Features
 
@@ -39,7 +39,7 @@ All switches live in `config.js`:
 3. **Google Analytics** – set `GA_ID` (`G-XXXXXXX`). Events tracked: `calculate`, `copy`, `share`, `download`, `print`, `project_save`, `vlsm_calc`, `supernet_run`, `pro_click`, `begin_checkout`, `affiliate_click`.
 4. **Recommended course** – fill `AFFILIATE_LINKS.course` with `{ name, url }` (e.g. a CCNA course). The card renders in the sidebar only when `url` is non-empty. Links use `rel="sponsored noopener"`.
 
-After the first deploy, replace the `__SITE_URL__` placeholder in `index.html`, `privacy.html`, `terms.html`, `robots.txt`, `sitemap.xml` and `config.js` with the real domain (e.g. `sed -i 's/__SITE_URL__/subnetkit.vercel.app/g' *.html *.txt *.xml *.js`).
+After the first deploy, replace the `subnetkit-tool.vercel.app` placeholder in `index.html`, `privacy.html`, `terms.html`, `robots.txt`, `sitemap.xml` and `config.js` with the real domain (e.g. `sed -i 's/subnetkit-tool.vercel.app/subnetkit.vercel.app/g' *.html *.txt *.xml *.js`).
 
 ## Files
 
