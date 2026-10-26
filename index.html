@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IP Subnet Calculator – CIDR, VLSM, IPv6 & Wildcard Masks (Free) | SubnetKit</title>
+  <meta name="description" content="Free IP subnet calculator: network, broadcast, usable hosts, wildcard mask and binary for any CIDR. Includes VLSM planner, IPv6 calculator, range to CIDR and a /0–/32 cheat sheet.">
+  <link rel="canonical" href="https://__SITE_URL__/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://__SITE_URL__/">
+  <meta property="og:title" content="IP Subnet Calculator – CIDR, VLSM, IPv6 & Wildcard Masks | SubnetKit">
+  <meta property="og:description" content="Calculate network, broadcast, usable hosts, wildcard masks and binary for any IPv4 or IPv6 prefix. VLSM planner, range to CIDR and route summarization. 100% free, runs in your browser.">
+  <meta property="og:image" content="https://__SITE_URL__/favicon.svg">
+  <meta property="og:site_name" content="SubnetKit">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="IP Subnet Calculator – SubnetKit">
+  <meta name="twitter:description" content="Free IPv4/IPv6 subnet calculator with VLSM, wildcard masks, range to CIDR and route summarization.">
+  <meta name="twitter:image" content="https://__SITE_URL__/favicon.svg">
+  <meta name="theme-color" content="#0b0f17">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "SubnetKit – IP Subnet Calculator",
+    "url": "https://__SITE_URL__/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "description": "Free IP subnet calculator with CIDR, subnet and wildcard masks, binary view, VLSM planner, IPv6 calculator, range to CIDR conversion and route summarization.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": ["IPv4 subnet calculator with binary view", "Split a network into subnets", "VLSM planner", "IPv6 subnet calculator", "CIDR to range and range to CIDR", "Wildcard masks for ACLs", "Route summarization", "CSV export and shareable links"]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate a subnet?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Write the IP address and the subnet mask in binary. The network address is the bitwise AND of the two; the broadcast address is the network address with all host bits set to 1. For 192.168.1.10/26 the mask is 255.255.255.192, the network is 192.168.1.0, the broadcast is 192.168.1.63 and the usable hosts run from .1 to .62. The number of addresses in a block is 2 to the power of (32 minus the prefix length), and usable hosts are that number minus 2." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between a subnet mask and a wildcard mask?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A subnet mask marks the network bits with 1s (255.255.255.0 for /24). A wildcard mask is its bitwise inverse: 0s mark bits that must match and 1s mark bits that are ignored (0.0.0.255 for /24). Routing protocols such as OSPF and EIGRP, and Cisco access lists, use wildcard masks. You can convert one to the other by subtracting each octet from 255." }
+      },
+      {
+        "@type": "Question",
+        "name": "How many hosts are in a /27?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A /27 has 32 addresses (2 to the power of 5) and 30 usable hosts, because one address is the network address and one is the broadcast address. Its subnet mask is 255.255.255.224 and its wildcard mask is 0.0.0.31. A /24 can be divided into eight /27 subnets." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is VLSM?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Variable Length Subnet Masking means dividing a network into subnets of different sizes instead of equal blocks, so each department or link gets a subnet that matches its host count. Sort the requirements from largest to smallest, give each one the smallest block that fits its hosts plus the network and broadcast addresses, and allocate them back to back starting from the base network. The VLSM tab automates this and reports wasted addresses and efficiency." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does IPv6 have a broadcast address?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. IPv6 replaced broadcast with multicast groups such as ff02::1 (all nodes on the link). Because there is no broadcast and no reserved network address in the same sense, every address in an IPv6 prefix is usable. Standard LANs use a /64 so that stateless address autoconfiguration (SLAAC) works, and sites typically receive a /48 or /56 from their provider." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this subnet calculator free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The IPv4 and IPv6 calculators, subnet splitting, VLSM for up to five networks, CIDR to range conversion, the in-subnet checker, copy and share links are free with no sign-up, and everything runs in your browser. An optional one-time Pro licence adds unlimited VLSM networks, the route summarization tool, CSV downloads, saved projects and printable subnet plans." }
+      }
+    ]
+  }
+  </script>
+  <script src="/config.js"></script>
+  <script src="/monetize.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/" aria-label="SubnetKit home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text"><span class="brand-name">SubnetKit</span><span class="brand-desc">IP subnet calculator</span></span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <span class="brand-by">by <b>Be Management</b></span>
+      <button class="btn btn-primary btn-sm" onclick="openPro('nav')">Pro</button>
+      <button class="btn icon-btn" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero container">
+  <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Be Management Tools · Networking</span>
+  <h1>IP Subnet Calculator</h1>
+  <p class="tagline">Enter an IP address and prefix to get the network, broadcast, host range and masks instantly, plus VLSM, IPv6 and CIDR-to-range tools.</p>
+  <div class="badges">
+  <span class="badge">100% free</span>
+  <span class="badge">No sign-up</span>
+  <span class="badge">Runs in your browser</span>
+  <span class="badge">IPv4 + IPv6</span>
+  <span class="badge">Shareable links</span>
+  </div>
+</section>
+
+<main class="container">
+  <div class="tool-layout">
+    <div class="tool-col">
+
+      <section class="card tool-card" id="toolCard" aria-labelledby="toolTitle">
+        <h2 id="toolTitle" class="sr-only">Subnet tools</h2>
+        <div class="tabs no-print" role="tablist" aria-label="Tools" id="tabBar">
+          <button class="tab active" role="tab" data-tab="ipv4" id="tab-ipv4" aria-selected="true" aria-controls="panel-ipv4">IPv4 Subnet</button>
+          <button class="tab" role="tab" data-tab="vlsm" id="tab-vlsm" aria-selected="false" aria-controls="panel-vlsm">VLSM</button>
+          <button class="tab" role="tab" data-tab="ipv6" id="tab-ipv6" aria-selected="false" aria-controls="panel-ipv6">IPv6</button>
+          <button class="tab" role="tab" data-tab="cidr" id="tab-cidr" aria-selected="false" aria-controls="panel-cidr">CIDR ↔ Range</button>
+          <button class="tab" role="tab" data-tab="supernet" id="tab-supernet" aria-selected="false" aria-controls="panel-supernet">Supernet <span class="pro-badge" data-pro-lock>PRO</span></button>
+        </div>
+
+        <!-- ================= IPv4 ================= -->
+        <div class="panel active" id="panel-ipv4" role="tabpanel" aria-labelledby="tab-ipv4">
+          <div class="print-only report-head"><h2>SubnetKit – Subnet plan</h2><p id="ip4ReportMeta"></p><p>Generated <span data-report-date></span> · https://__SITE_URL__/</p></div>
+          <div class="grid-3 no-plan">
+            <div class="field">
+              <label for="ip4Addr">IP address</label>
+              <input type="text" id="ip4Addr" class="mono" value="192.168.1.10" placeholder="192.168.1.10" autocomplete="off" spellcheck="false" inputmode="decimal" data-persist>
+            </div>
+            <div class="field">
+              <label for="ip4Prefix">Prefix (CIDR)</label>
+              <select id="ip4Prefix" class="mono" data-persist></select>
+            </div>
+            <div class="field">
+              <label for="ip4Mask">Subnet mask</label>
+              <select id="ip4Mask" class="mono" data-persist></select>
+            </div>
+          </div>
+          <div class="field no-plan">
+            <label for="ip4Free">Or paste any form: CIDR, IP + mask, IP + wildcard</label>
+            <input type="text" id="ip4Free" class="mono" placeholder="192.168.1.10/24 · 192.168.1.10 255.255.255.0 · 192.168.1.10 0.0.0.255" autocomplete="off" spellcheck="false">
+            <p class="err" id="ip4Err" role="alert"></p>
+          </div>
+
+          <div id="ip4Results">
+            <dl class="kv" id="ip4Grid"></dl>
+            <h3 class="sub-title">Binary <span class="hint" style="margin:0">(network bits highlighted)</span></h3>
+            <div class="bin" id="ip4Bin"></div>
+          </div>
+
+          <h3 class="sub-title no-plan">Split into subnets</h3>
+          <div class="grid-3 no-plan">
+            <div class="field">
+              <label for="ip4SplitMode">Split by</label>
+              <select id="ip4SplitMode" data-persist>
+                <option value="prefix">New prefix length</option>
+                <option value="count">Number of subnets</option>
+              </select>
+            </div>
+            <div class="field" id="ip4SplitPrefixWrap">
+              <label for="ip4SplitPrefix">New prefix</label>
+              <select id="ip4SplitPrefix" class="mono" data-persist></select>
+            </div>
+            <div class="field hidden" id="ip4SplitCountWrap">
+              <label for="ip4SplitCount">Subnets</label>
+              <select id="ip4SplitCount" class="mono" data-persist></select>
+            </div>
+          </div>
+          <p class="err" id="ip4SplitErr" role="alert"></p>
+          <div id="ip4SplitOut">
+            <div class="table-actions no-print" data-table="ip4SplitTable">
+              <button class="btn btn-sm" type="button" data-act="copy-text">📋 Copy table as text</button>
+              <button class="btn btn-sm" type="button" data-act="copy">Copy as CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Download CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Print plan <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="ip4SplitTable">
+                <thead><tr><th class="num">#</th><th>Network</th><th>Usable range</th><th>Broadcast</th><th class="num">Hosts</th></tr></thead>
+                <tbody id="ip4SplitBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="ip4SplitNote"></p>
+          </div>
+        </div>
+
+        <!-- ================= VLSM ================= -->
+        <div class="panel" id="panel-vlsm" role="tabpanel" aria-labelledby="tab-vlsm">
+          <div class="print-only report-head"><h2>SubnetKit – VLSM subnet plan</h2><p id="vlsmReportMeta"></p><p>Generated <span data-report-date></span> · https://__SITE_URL__/</p></div>
+          <div class="grid-2 no-plan">
+            <div class="field">
+              <label for="vlsmBase">Base network (CIDR)</label>
+              <input type="text" id="vlsmBase" class="mono" value="192.168.10.0/24" placeholder="192.168.10.0/24" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label class="checkbox" for="vlsmP2P" style="margin-top:28px"><input type="checkbox" id="vlsmP2P" data-persist> Use /31 for point-to-point links (2 hosts)</label>
+            </div>
+          </div>
+          <div class="vlsm-head no-plan" aria-hidden="true"><span>Subnet name</span><span>Hosts needed</span><span></span></div>
+          <div class="vlsm-rows" id="vlsmRows" aria-label="Subnet requirements"></div>
+          <div class="row no-plan">
+            <button class="btn btn-sm" type="button" id="btnVlsmAdd">＋ Add network</button>
+            <span class="hint" id="vlsmLimitHint" style="margin:0"></span>
+          </div>
+          <p class="err" id="vlsmErr" role="alert"></p>
+          <div id="vlsmOut">
+            <div class="table-actions no-print" data-table="vlsmTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copy as CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Download CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Print plan <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="vlsmTable">
+                <thead><tr><th class="name">Name</th><th class="num">Needed</th><th class="num">Allocated</th><th>Network</th><th>Mask</th><th>Usable range</th><th>Broadcast</th><th class="num">Wasted</th></tr></thead>
+                <tbody id="vlsmBody"></tbody>
+              </table>
+            </div>
+            <div class="sum" id="vlsmSummary"></div>
+          </div>
+        </div>
+
+        <!-- ================= IPv6 ================= -->
+        <div class="panel" id="panel-ipv6" role="tabpanel" aria-labelledby="tab-ipv6">
+          <div class="print-only report-head"><h2>SubnetKit – IPv6 subnet plan</h2><p id="ip6ReportMeta"></p><p>Generated <span data-report-date></span> · https://__SITE_URL__/</p></div>
+          <div class="field no-plan">
+            <label for="ip6Addr">IPv6 address with prefix</label>
+            <input type="text" id="ip6Addr" class="mono" value="2001:db8:85a3::8a2e:370:7334/64" placeholder="2001:db8::1/64" autocomplete="off" spellcheck="false" data-persist>
+            <p class="err" id="ip6Err" role="alert"></p>
+          </div>
+          <div id="ip6Results">
+            <dl class="kv" id="ip6Grid"></dl>
+            <h3 class="sub-title">Binary – first 64 bits <span class="hint" style="margin:0">(network bits highlighted)</span></h3>
+            <div class="bin" id="ip6Bin"></div>
+          </div>
+
+          <h3 class="sub-title no-plan">Split into subnets</h3>
+          <div class="grid-2 no-plan">
+            <div class="field">
+              <label for="ip6SplitPrefix">New prefix length</label>
+              <input type="number" id="ip6SplitPrefix" class="mono" min="1" max="128" step="1" value="68" data-persist>
+            </div>
+            <div class="field">
+              <label>Result</label>
+              <p class="hint" id="ip6SplitInfo" style="margin-top:12px"></p>
+            </div>
+          </div>
+          <p class="err" id="ip6SplitErr" role="alert"></p>
+          <div id="ip6SplitOut">
+            <div class="table-actions no-print" data-table="ip6SplitTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copy as CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Download CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Print plan <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="ip6SplitTable">
+                <thead><tr><th class="num">#</th><th>Subnet</th><th>First address</th><th>Last address</th></tr></thead>
+                <tbody id="ip6SplitBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="ip6SplitNote"></p>
+          </div>
+        </div>
+
+        <!-- ================= CIDR ↔ Range ================= -->
+        <div class="panel" id="panel-cidr" role="tabpanel" aria-labelledby="tab-cidr">
+          <h3 class="sub-title" style="border:none;padding-top:0;margin-top:0">CIDR → IP range</h3>
+          <div class="field">
+            <label for="cidrIn">CIDR block</label>
+            <input type="text" id="cidrIn" class="mono" value="10.0.0.0/22" placeholder="10.0.0.0/22" autocomplete="off" spellcheck="false" data-persist>
+            <p class="err" id="cidrErr" role="alert"></p>
+          </div>
+          <dl class="kv" id="cidrGrid"></dl>
+
+          <h3 class="sub-title">IP range → CIDR blocks</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="rangeStart">Start IP</label>
+              <input type="text" id="rangeStart" class="mono" value="10.0.0.1" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label for="rangeEnd">End IP</label>
+              <input type="text" id="rangeEnd" class="mono" value="10.0.0.254" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+          </div>
+          <p class="err" id="rangeErr" role="alert"></p>
+          <div id="rangeOut">
+            <p class="hint" id="rangeInfo"></p>
+            <div class="cidr-list" id="rangeList"></div>
+            <div class="table-actions no-print" data-table="rangeTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copy as CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Download CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="rangeTable">
+                <thead><tr><th class="num">#</th><th>CIDR</th><th>Mask</th><th>First</th><th>Last</th><th class="num">Addresses</th></tr></thead>
+                <tbody id="rangeBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <h3 class="sub-title">Is IP in subnet?</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="chkIp">IP address</label>
+              <input type="text" id="chkIp" class="mono" value="192.168.1.130" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label for="chkCidr">Subnet (CIDR)</label>
+              <input type="text" id="chkCidr" class="mono" value="192.168.1.0/25" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+          </div>
+          <p class="err" id="chkErr" role="alert"></p>
+          <div class="check-out" id="chkOut" aria-live="polite"></div>
+
+          <details class="ref" id="refDetails">
+            <summary>Reference: all prefixes /0 – /32 (mask, wildcard, addresses, hosts)</summary>
+            <div class="table-actions no-print" data-table="refTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copy as CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Download CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="refTable">
+                <thead><tr><th>CIDR</th><th>Subnet mask</th><th>Wildcard</th><th class="num">Addresses</th><th class="num">Usable hosts</th></tr></thead>
+                <tbody id="refBody"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+
+        <!-- ================= Supernet (Pro) ================= -->
+        <div class="panel" id="panel-supernet" role="tabpanel" aria-labelledby="tab-supernet">
+          <p class="hint" style="margin-top:0">Paste one CIDR per line (or separated by spaces/commas). SubnetKit merges adjacent and contained blocks into the smallest equivalent set – ideal for route summarization and ACL cleanup. <span class="pro-badge" data-pro-lock>PRO</span></p>
+          <div class="field">
+            <label for="snInput">Networks to summarize</label>
+            <textarea id="snInput" class="mono" rows="7" spellcheck="false" data-persist>192.168.0.0/24
+192.168.1.0/24
+192.168.2.0/24
+192.168.3.0/24
+10.10.0.0/16
+10.10.5.0/24
+172.16.4.0/22
+172.16.8.0/22</textarea>
+          </div>
+          <div class="row">
+            <button class="btn btn-primary" type="button" id="btnSnRun">Summarize routes</button>
+            <button class="btn btn-ghost" type="button" id="btnSnClear">Clear</button>
+          </div>
+          <p class="err" id="snErr" role="alert"></p>
+          <div id="snOut" class="hidden">
+            <div class="sum" id="snSummary"></div>
+            <div class="table-actions no-print" data-table="snTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copy as CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Download CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="snTable">
+                <thead><tr><th class="num">#</th><th>Aggregate</th><th>Mask</th><th>First</th><th>Last</th><th class="num">Addresses</th><th class="name">Covers</th></tr></thead>
+                <tbody id="snBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="row actions no-print">
+          <button class="btn" id="btnCopyResults" type="button">📋 Copy results</button>
+          <button class="btn" id="btnShare" type="button">🔗 Share link</button>
+          <button class="btn btn-ghost" id="btnReset" type="button">↺ Reset tab</button>
+        </div>
+      </section>
+
+      <!-- Saved projects (Pro: unlimited, free: 1) -->
+      <section class="card no-print" aria-labelledby="projTitle">
+        <h2 id="projTitle" class="card-title">Saved projects <span class="pro-badge" data-pro-lock title="Free: 1 project · Pro: unlimited">PRO</span></h2>
+        <p class="hint">Save every input across all tabs under a name and reload it later. Free plan: 1 project, Pro: unlimited.</p>
+        <div class="row">
+          <input type="text" id="projectName" placeholder="Project name (e.g. HQ addressing plan)" maxlength="60" aria-label="Project name">
+          <button class="btn btn-primary" id="btnSaveProject" type="button">💾 Save project</button>
+        </div>
+        <div class="proj-list" id="projectList"></div>
+      </section>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="ad-slot" data-slot="sidebar-1"></div>
+      <div class="card pro-card">
+        <h3>Go Pro <span class="pro-badge">LIFETIME</span></h3>
+        <ul>
+          <li>Unlimited VLSM networks</li>
+          <li>Route summarization (supernet) tool</li>
+          <li>CSV export of every table</li>
+          <li>Saved projects &amp; printable subnet plans</li>
+        </ul>
+        <button class="btn btn-primary btn-block" onclick="openPro('sidebar')">Get Pro – <span data-pro-price>$12</span> one-time</button>
+      </div>
+      <div class="card course-card hidden" id="courseCard">
+        <h3>Recommended course</h3>
+        <p id="courseText">Level up your subnetting for the CCNA with a structured course.</p>
+        <a class="btn btn-block" id="courseLink" href="#" rel="sponsored noopener" target="_blank">View course →</a>
+        <p class="hint" style="margin-top:8px">Partner link – we may earn a commission at no extra cost to you.</p>
+      </div>
+      <div class="ad-slot" data-slot="sidebar-2"></div>
+    </aside>
+  </div>
+
+  <div class="ad-slot horizontal" data-slot="below-tool"></div>
+</main>
+
+<section class="content container">
+  <div class="features">
+    <div class="feature"><div class="ic">🧮</div><h3>Every IPv4 detail</h3><p>Network, broadcast, hosts, mask, wildcard, class, type, binary with highlighted network bits, hex and reverse DNS.</p></div>
+    <div class="feature"><div class="ic">🧩</div><h3>VLSM planner</h3><p>Enter host counts per department and get an efficient, back-to-back allocation with waste and efficiency stats.</p></div>
+    <div class="feature"><div class="ic">🌐</div><h3>IPv6 ready</h3><p>Expand, compress, find the network and split any IPv6 prefix with exact 128-bit math.</p></div>
+    <div class="feature"><div class="ic">🔗</div><h3>Range ↔ CIDR</h3><p>Turn an arbitrary IP range into the minimal CIDR list, check membership and summarize routes.</p></div>
+  </div>
+
+  <h2>What is subnetting and how does CIDR work?</h2>
+  <p>An IPv4 address is 32 bits, usually written as four decimal octets such as <code>192.168.1.10</code>. Subnetting splits those 32 bits into a <strong>network part</strong> (shared by every device in the subnet) and a <strong>host part</strong> (unique to each device). CIDR notation – the <code>/26</code> after an address – states how many leading bits belong to the network. The remaining <code>32 − 26 = 6</code> bits identify hosts, so the block holds <code>2<sup>6</sup> = 64</code> addresses.</p>
+  <p>Two of those addresses are reserved: the first (all host bits 0) is the <strong>network address</strong> and the last (all host bits 1) is the <strong>broadcast address</strong>. That leaves <code>64 − 2 = 62</code> usable hosts. Worked example for <code>192.168.1.70/26</code>:</p>
+  <ol>
+    <li>Mask for /26 is <code>255.255.255.192</code> (binary <code>11111111.11111111.11111111.11000000</code>).</li>
+    <li>Block size in the last octet is <code>256 − 192 = 64</code>, so subnets start at .0, .64, .128 and .192.</li>
+    <li>70 falls in the .64 block: network <code>192.168.1.64</code>, broadcast <code>192.168.1.127</code>.</li>
+    <li>Usable hosts: <code>192.168.1.65 – 192.168.1.126</code> (62 addresses).</li>
+  </ol>
+  <p>The calculator does exactly this with a bitwise AND between the address and the mask, and it also shows the result in binary so you can see which bits are fixed.</p>
+
+  <h2>Subnet mask vs wildcard mask (Cisco ACLs)</h2>
+  <p>A <strong>subnet mask</strong> uses 1s for network bits and 0s for host bits. A <strong>wildcard mask</strong> is the exact inverse: 0 means "this bit must match", 1 means "ignore this bit". For /24 the mask is <code>255.255.255.0</code> and the wildcard is <code>0.0.0.255</code>; for /27 they are <code>255.255.255.224</code> and <code>0.0.0.31</code>. Cisco IOS uses wildcard masks in access lists and in OSPF/EIGRP <code>network</code> statements, for example <code>access-list 10 permit 192.168.1.0 0.0.0.255</code> or <code>network 10.1.0.0 0.0.255.255 area 0</code>. The quick conversion is to subtract each octet of the subnet mask from 255 – the IPv4 tab shows both side by side and accepts either form as input.</p>
+
+  <h2>VLSM step by step</h2>
+  <p>With fixed-length subnetting every subnet gets the same size, which wastes space when a point-to-point link only needs 2 addresses but a /26 gives it 64. <strong>Variable Length Subnet Masking (VLSM)</strong> fixes this by allocating different sizes from one block:</p>
+  <ol>
+    <li>List each network with the number of hosts it needs and sort them from largest to smallest.</li>
+    <li>For each requirement, pick the smallest block that holds hosts + 2 (network and broadcast). 50 hosts → 64 addresses → /26; 25 → 32 → /27; 10 → 16 → /28; 2 → 4 → /30 (or /31 on point-to-point links, RFC 3021).</li>
+    <li>Allocate them back to back starting from the base network. Because sizes are powers of two and sorted descending, every block is automatically aligned to its boundary.</li>
+    <li>Document each subnet's mask, range and broadcast, and keep the leftover space for growth.</li>
+  </ol>
+  <p>The VLSM tab runs this algorithm for the example of Sales (50), IT (25), Management (10) and two WAN links from <code>192.168.10.0/24</code>, and tells you how many addresses are wasted and how much of the base block remains.</p>
+
+  <h2>IPv6 basics: no broadcast, /64 everywhere</h2>
+  <p>IPv6 addresses are 128 bits written as eight hexadecimal groups, with leading zeros dropped and one run of zero groups collapsible to <code>::</code> (RFC 5952 compression). The first 64 bits identify the network and the last 64 the interface. Unlike IPv4 there is <strong>no broadcast address</strong>: IPv6 uses multicast (for example <code>ff02::1</code> for all nodes on the link) and there are no reserved network/broadcast addresses, so every address in a prefix is usable. LANs use a <strong>/64</strong> so that SLAAC (stateless autoconfiguration) can build the interface identifier; organizations typically receive a /48 (65,536 /64 subnets) or a /56. Point-to-point links are often numbered from a /127. The IPv6 tab shows the compressed and expanded forms, the network and the address type (global unicast, unique local <code>fc00::/7</code>, link-local <code>fe80::/10</code>, multicast, documentation <code>2001:db8::/32</code> and more).</p>
+
+  <h2>Subnetting cheat sheet</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>CIDR</th><th>Subnet mask</th><th>Wildcard</th><th class="num">Addresses</th><th class="num">Usable hosts</th><th class="num">Subnets per /24</th></tr></thead>
+      <tbody>
+        <tr><td>/24</td><td>255.255.255.0</td><td>0.0.0.255</td><td class="num">256</td><td class="num">254</td><td class="num">1</td></tr>
+        <tr><td>/25</td><td>255.255.255.128</td><td>0.0.0.127</td><td class="num">128</td><td class="num">126</td><td class="num">2</td></tr>
+        <tr><td>/26</td><td>255.255.255.192</td><td>0.0.0.63</td><td class="num">64</td><td class="num">62</td><td class="num">4</td></tr>
+        <tr><td>/27</td><td>255.255.255.224</td><td>0.0.0.31</td><td class="num">32</td><td class="num">30</td><td class="num">8</td></tr>
+        <tr><td>/28</td><td>255.255.255.240</td><td>0.0.0.15</td><td class="num">16</td><td class="num">14</td><td class="num">16</td></tr>
+        <tr><td>/29</td><td>255.255.255.248</td><td>0.0.0.7</td><td class="num">8</td><td class="num">6</td><td class="num">32</td></tr>
+        <tr><td>/30</td><td>255.255.255.252</td><td>0.0.0.3</td><td class="num">4</td><td class="num">2</td><td class="num">64</td></tr>
+        <tr><td>/31</td><td>255.255.255.254</td><td>0.0.0.1</td><td class="num">2</td><td class="num">2 (P2P)</td><td class="num">128</td></tr>
+        <tr><td>/32</td><td>255.255.255.255</td><td>0.0.0.0</td><td class="num">1</td><td class="num">1 (host)</td><td class="num">256</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Memorize the "magic numbers" 128, 192, 224, 240, 248, 252, 254, 255 – each adds one more network bit – and the block sizes 128, 64, 32, 16, 8, 4, 2, 1. The full /0–/32 table is in the CIDR ↔ Range tab.</p>
+
+  <h2>Tips for the CCNA exam</h2>
+  <ul>
+    <li><strong>Find the interesting octet.</strong> It is the octet where the mask is neither 255 nor 0. The block size is 256 minus that mask octet; subnets start at multiples of the block size.</li>
+    <li><strong>Count host bits, not subnet bits.</strong> Hosts = 2<sup>host bits</sup> − 2. For "how many subnets" questions, subnet bits = new prefix − original prefix.</li>
+    <li><strong>Remember the exceptions.</strong> A /31 has 2 usable addresses on point-to-point links and a /32 is a single host route; both appear in real configs and in exam questions.</li>
+    <li><strong>Know the special ranges.</strong> RFC 1918 private (10/8, 172.16/12, 192.168/16), loopback 127/8, link-local 169.254/16, CGNAT 100.64/10, multicast 224/4 and the documentation blocks 192.0.2.0/24, 198.51.100.0/24 and 203.0.113.0/24.</li>
+    <li><strong>Practice with VLSM.</strong> Exam scenarios usually list departments with host counts; sort descending, allocate largest first, and double-check that the total fits the base block.</li>
+    <li><strong>Convert wildcards instantly.</strong> 255 − mask octet = wildcard octet. For OSPF you can also use the subnet mask of the interface as a wildcard (0.0.0.0 for a single interface).</li>
+  </ul>
+
+  <h2>Frequently asked questions</h2>
+  <div class="faq">
+    <details>
+      <summary>How do I calculate a subnet?</summary>
+      <p>Write the IP address and the subnet mask in binary. The network address is the bitwise AND of the two; the broadcast address is the network address with all host bits set to 1. For 192.168.1.10/26 the mask is 255.255.255.192, the network is 192.168.1.0, the broadcast is 192.168.1.63 and the usable hosts run from .1 to .62. The number of addresses in a block is 2 to the power of (32 minus the prefix length), and usable hosts are that number minus 2.</p>
+    </details>
+    <details>
+      <summary>What is the difference between a subnet mask and a wildcard mask?</summary>
+      <p>A subnet mask marks the network bits with 1s (255.255.255.0 for /24). A wildcard mask is its bitwise inverse: 0s mark bits that must match and 1s mark bits that are ignored (0.0.0.255 for /24). Routing protocols such as OSPF and EIGRP, and Cisco access lists, use wildcard masks. You can convert one to the other by subtracting each octet from 255.</p>
+    </details>
+    <details>
+      <summary>How many hosts are in a /27?</summary>
+      <p>A /27 has 32 addresses (2 to the power of 5) and 30 usable hosts, because one address is the network address and one is the broadcast address. Its subnet mask is 255.255.255.224 and its wildcard mask is 0.0.0.31. A /24 can be divided into eight /27 subnets.</p>
+    </details>
+    <details>
+      <summary>What is VLSM?</summary>
+      <p>Variable Length Subnet Masking means dividing a network into subnets of different sizes instead of equal blocks, so each department or link gets a subnet that matches its host count. Sort the requirements from largest to smallest, give each one the smallest block that fits its hosts plus the network and broadcast addresses, and allocate them back to back starting from the base network. The VLSM tab automates this and reports wasted addresses and efficiency.</p>
+    </details>
+    <details>
+      <summary>Does IPv6 have a broadcast address?</summary>
+      <p>No. IPv6 replaced broadcast with multicast groups such as ff02::1 (all nodes on the link). Because there is no broadcast and no reserved network address in the same sense, every address in an IPv6 prefix is usable. Standard LANs use a /64 so that stateless address autoconfiguration (SLAAC) works, and sites typically receive a /48 or /56 from their provider.</p>
+    </details>
+    <details>
+      <summary>Is this subnet calculator free?</summary>
+      <p>Yes. The IPv4 and IPv6 calculators, subnet splitting, VLSM for up to five networks, CIDR to range conversion, the in-subnet checker, copy and share links are free with no sign-up, and everything runs in your browser. An optional one-time Pro licence adds unlimited VLSM networks, the route summarization tool, CSV downloads, saved projects and printable subnet plans.</p>
+    </details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark lg" aria-hidden="true"></span>
+      <div>
+        <strong>Be Management Tools</strong>
+        <p>A collection of free, private tools that run entirely in your browser. SubnetKit is the ip subnet calculator of the family, built and maintained by Be Management.</p>
+      </div>
+    </div>
+    <div class="footer-tools">
+      <strong>More free tools</strong>
+      <ul>
+        <li><a href="https://quickinvoice-tool.vercel.app">QuickInvoice · Invoices</a></li>
+        <li><a href="https://ratecalc-tool.vercel.app">RateCalc · Freelance rates</a></li>
+        <li><a href="https://qrforge-tool.vercel.app">QRForge · QR codes</a></li>
+        <li><a href="https://squish-tool.vercel.app">Squish · Image compressor</a></li>
+        <li><a href="https://growthcalc-tool.vercel.app">GrowthCalc · Compound interest</a></li>
+        <li><a href="https://subnetkit-tool.vercel.app" class="current">SubnetKit · IP subnets</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">
+      <span>© <span data-year></span> Be Management · SubnetKit. Free subnet calculator for network engineers.</span>
+      <span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="proModal" role="dialog" aria-modal="true" aria-labelledby="proTitle">
+  <div class="card">
+    <button class="btn btn-sm close" onclick="closePro()" aria-label="Close">✕</button>
+    <h3 id="proTitle">Upgrade to SubnetKit Pro <span class="pro-badge">LIFETIME</span></h3>
+    <div class="price"><span id="proPrice"></span> <small>one-time</small></div>
+    <ul>
+      <li>Unlimited VLSM networks</li>
+      <li>Route summarization tool</li>
+      <li>CSV export</li>
+      <li>Saved projects</li>
+      <li>Printable subnet plans</li>
+      <li>Lifetime updates</li>
+    </ul>
+    <button class="btn btn-primary btn-block" onclick="goCheckout()">Get Pro</button>
+    <p class="hint" style="margin-top:12px">Already purchased? <a href="#" onclick="document.getElementById('licenseRow').classList.toggle('hidden');return false">Enter license key</a></p>
+    <div class="row hidden" id="licenseRow"><input id="licenseKey" placeholder="License key" aria-label="License key"><button class="btn" onclick="activateLicense(document.getElementById('licenseKey').value)">Activate</button></div>
+  </div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>
