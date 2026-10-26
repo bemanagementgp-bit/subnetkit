@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://subnetkit-tool.vercel.app/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://subnetkit-tool.vercel.app/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://subnetkit-tool.vercel.app/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://subnetkit-tool.vercel.app/</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://subnetkit-tool.vercel.app/24-subnet-calculator</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://subnetkit-tool.vercel.app/27-subnet-calculator</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://subnetkit-tool.vercel.app/vlsm-calculator-ccna</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://subnetkit-tool.vercel.app/wildcard-mask-calculator</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://subnetkit-tool.vercel.app/ip-range-to-cidr</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://subnetkit-tool.vercel.app/private-ip-address-ranges</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://subnetkit-tool.vercel.app/privacy</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://subnetkit-tool.vercel.app/terms</loc><lastmod>2026-10-26</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
 </urlset>
