@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Les plages d'adresses IP privées expliquées : 10/8, 172.16/12, 192.168/16 | SubnetKit</title>
+  <meta name="description" content="Les plages d'adresses IP privées expliquées : les trois blocs RFC 1918 (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16), leurs tailles, plus le CGNAT et le lien local.">
+  <link rel="canonical" href="https://subnetkit-tool.vercel.app/fr/private-ip-address-ranges">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://subnetkit-tool.vercel.app/fr/private-ip-address-ranges">
+  <meta property="og:title" content="Les plages d'adresses IP privées expliquées : 10/8, 172.16/12, 192.168/16 | SubnetKit">
+  <meta property="og:description" content="Les plages d'adresses IP privées expliquées : les trois blocs RFC 1918 (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16), leurs tailles, plus le CGNAT et le lien local.">
+  <meta property="og:image" content="https://subnetkit-tool.vercel.app/favicon.svg">
+  <meta property="og:site_name" content="SubnetKit">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Les plages d'adresses IP privées expliquées : 10/8, 172.16/12, 192.168/16 | SubnetKit">
+  <meta name="twitter:description" content="Les plages d'adresses IP privées expliquées : les trois blocs RFC 1918 (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16), leurs tailles, plus le CGNAT et le lien local.">
+  <meta name="twitter:image" content="https://subnetkit-tool.vercel.app/favicon.svg">
+  <meta name="theme-color" content="#050403">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SubnetKit">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/config.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/consent.js"></script>
+  <script src="/monetize.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Les plages d'adresses IP privées expliquées : 10/8, 172.16/12, 192.168/16 | SubnetKit","description":"Les plages d'adresses IP privées expliquées : les trois blocs RFC 1918 (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16), leurs tailles, plus le CGNAT et le lien local.","url":"https://subnetkit-tool.vercel.app/private-ip-address-ranges","isPartOf":{"@type":"WebSite","name":"SubnetKit","url":"https://subnetkit-tool.vercel.app/"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SubnetKit","item":"https://subnetkit-tool.vercel.app/"},{"@type":"ListItem","position":2,"name":"Les plages d'adresses IP privées expliquées","item":"https://subnetkit-tool.vercel.app/private-ip-address-ranges"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"172.32.0.1 est-elle une adresse IP privée ?","acceptedAnswer":{"@type":"Answer","text":"Non. La plage privée 172.16.0.0/12 se termine à 172.31.255.255 ; à partir de 172.32.0.0, c'est de l'espace public."}},{"@type":"Question","name":"Combien y a-t-il d'adresses IPv4 privées au total ?","acceptedAnswer":{"@type":"Answer","text":"17 891 328 : 16 777 216 dans 10.0.0.0/8, 1 048 576 dans 172.16.0.0/12 et 65 536 dans 192.168.0.0/16."}},{"@type":"Question","name":"Puis-je utiliser 100.64.0.0/10 dans mon réseau local ?","acceptedAnswer":{"@type":"Answer","text":"Il est réservé au NAT de niveau opérateur des FAI et peut entrer en conflit avec l'adressage de votre fournisseur. Utilisez l'un des blocs RFC 1918 pour les réseaux internes."}},{"@type":"Question","name":"Les adresses privées sont-elles les mêmes en IPv6 ?","acceptedAnswer":{"@type":"Answer","text":"L'équivalent est l'espace des adresses locales uniques (ULA), fc00::/7, en pratique fd00::/8 avec un identifiant global aléatoire de 40 bits. Contrairement à l'IPv4, la plupart des réseaux locaux IPv6 utilisent plutôt des adresses publiques en unicast global."}}]}</script>
+  <!-- hreflang:start -->
+  <meta name="bm-langs" content="en,es,pt,fr,de,it">
+  <link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges">
+  <link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/private-ip-address-ranges">
+  <link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/private-ip-address-ranges">
+  <link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/private-ip-address-ranges">
+  <link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/private-ip-address-ranges">
+  <link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/private-ip-address-ranges">
+  <link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges">
+  <!-- hreflang:end -->
+  <meta property="og:locale" content="fr_FR">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+    <a class="brand" href="/fr/" aria-label="Accueil SubnetKit">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text"><span class="brand-name">SubnetKit</span><span class="brand-desc">Calculateur de sous-réseaux IP</span></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <details class="more-tools">
+        <summary class="btn btn-ghost btn-sm" aria-label="Plus d'outils"><span class="mt-label">Plus d'outils</span> ▾</summary>
+        <div class="menu">
+          <a href="https://quickinvoice-tool.vercel.app"><span class="mi">Q</span>QuickInvoice<small>Factures</small></a>
+          <a href="https://ratecalc-tool.vercel.app"><span class="mi">R</span>RateCalc<small>Tarifs freelance</small></a>
+          <a href="https://qrforge-tool.vercel.app"><span class="mi">Q</span>QRForge<small>Codes QR</small></a>
+          <a href="https://squish-tool.vercel.app"><span class="mi">S</span>Squish<small>Compresseur d'images</small></a>
+          <a href="https://growthcalc-tool.vercel.app"><span class="mi">G</span>GrowthCalc<small>Intérêts composés</small></a>
+          <a href="https://subnetkit-tool.vercel.app" class="current"><span class="mi">N</span>SubnetKit<small>Sous-réseaux IP</small></a>
+          <a href="https://shotstudio-tool.vercel.app"><span class="mi">S</span>Screenshot Studio<small>Mockups de captures d'écran</small></a>
+          <a href="https://mockuplab-tool.vercel.app"><span class="mi">M</span>Social Mockup Lab<small>Mockups de chats et de posts</small></a>
+          <a href="https://carouselmaker-tool.vercel.app"><span class="mi">C</span>Carousel Maker<small>Slides de carrousel</small></a>
+          <a href="https://creativeresize-tool.vercel.app"><span class="mi">R</span>Creative Resize<small>Formats pour réseaux sociaux</small></a>
+          <a href="https://framelab-tool.vercel.app"><span class="mi">F</span>Frame Lab<small>Cadres photo et mockups</small></a>
+          <a href="https://giveaway-tool.vercel.app"><span class="mi">G</span>Giveaway Picker<small>Concours Instagram</small></a>
+          <a href="https://iplookup-tool.vercel.app"><span class="mi">I</span>IP Lookup<small>Recherche d'adresse IP</small></a>
+          <a href="https://sizeconverter-tool.vercel.app"><span class="mi">Z</span>Size Converter<small>Redimensionnement d'images et de vidéos</small></a>
+        </div>
+      </details>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="brand-by">par <b>Be Management</b></span>
+      <button class="btn btn-sm hidden" id="installBtn" data-action="install" title="Installer cet outil comme une app">⤓ Installer</button>
+      <span class="lang-switch"><select id="langSelect" aria-label="Language" translate="no"><option value="en">EN</option></select></span>
+      <button class="btn btn-primary btn-sm" data-action="pro" data-arg="nav">Pro</button>
+      <button class="btn icon-btn" data-action="theme" aria-label="Changer de thème">◐</button>
+    </nav>
+    </div>
+  </div>
+</header>
+
+<section class="hero container">
+  <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Be Management Tools · IPv4 · Adressage</span>
+  <h1>Les plages d'adresses IP privées expliquées</h1>
+  <p class="tagline">Voyez exactement quelles adresses sont privées selon la RFC 1918, quelle est la taille de chaque bloc, et testez si une IP donnée s'y trouve.</p>
+  <div class="badges">
+  <span class="badge">100 % gratuit</span>
+  <span class="badge">Sans inscription</span>
+  <span class="badge">Fonctionne dans votre navigateur</span>
+  <span class="badge">IPv4 + IPv6</span>
+  <span class="badge">Liens partageables</span>
+  </div>
+</section>
+
+<main class="container">
+  <div class="tool-layout">
+    <div class="tool-col">
+
+      <section class="card tool-card" id="toolCard" aria-labelledby="toolTitle">
+        <h2 id="toolTitle" class="sr-only">Outils de sous-réseaux</h2>
+        <div class="tabs no-print" role="tablist" aria-label="Outils" id="tabBar">
+          <button class="tab active" role="tab" data-tab="ipv4" id="tab-ipv4" aria-selected="true" aria-controls="panel-ipv4">Sous-réseau IPv4</button>
+          <button class="tab" role="tab" data-tab="vlsm" id="tab-vlsm" aria-selected="false" aria-controls="panel-vlsm">VLSM</button>
+          <button class="tab" role="tab" data-tab="ipv6" id="tab-ipv6" aria-selected="false" aria-controls="panel-ipv6">IPv6</button>
+          <button class="tab" role="tab" data-tab="cidr" id="tab-cidr" aria-selected="false" aria-controls="panel-cidr">CIDR ↔ Plage</button>
+          <button class="tab" role="tab" data-tab="supernet" id="tab-supernet" aria-selected="false" aria-controls="panel-supernet">Supernet <span class="pro-badge" data-pro-lock>PRO</span></button>
+        </div>
+
+        <!-- ================= IPv4 ================= -->
+        <div class="panel active" id="panel-ipv4" role="tabpanel" aria-labelledby="tab-ipv4">
+          <div class="print-only report-head"><h2>SubnetKit – Plan de sous-réseaux</h2><p id="ip4ReportMeta"></p><p>Généré le <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="grid-3 no-plan">
+            <div class="field">
+              <label for="ip4Addr">Adresse IP</label>
+              <input type="text" id="ip4Addr" class="mono" value="192.168.1.10" placeholder="192.168.1.10" autocomplete="off" spellcheck="false" inputmode="decimal" data-persist>
+            </div>
+            <div class="field">
+              <label for="ip4Prefix">Préfixe (CIDR)</label>
+              <select id="ip4Prefix" class="mono" data-persist></select>
+            </div>
+            <div class="field">
+              <label for="ip4Mask">Masque de sous-réseau</label>
+              <select id="ip4Mask" class="mono" data-persist></select>
+            </div>
+          </div>
+          <div class="field no-plan">
+            <label for="ip4Free">Ou collez n'importe quelle forme : CIDR, IP + masque, IP + masque générique</label>
+            <input type="text" id="ip4Free" class="mono" placeholder="192.168.1.10/24 · 192.168.1.10 255.255.255.0 · 192.168.1.10 0.0.0.255" autocomplete="off" spellcheck="false">
+            <p class="err" id="ip4Err" role="alert"></p>
+          </div>
+
+          <div id="ip4Results">
+            <dl class="kv" id="ip4Grid"></dl>
+            <h3 class="sub-title">Binaire <span class="hint" style="margin:0">(bits réseau mis en évidence)</span></h3>
+            <div class="bin" id="ip4Bin"></div>
+          </div>
+
+          <h3 class="sub-title no-plan">Découper en sous-réseaux</h3>
+          <div class="grid-3 no-plan">
+            <div class="field">
+              <label for="ip4SplitMode">Découper par</label>
+              <select id="ip4SplitMode" data-persist>
+                <option value="prefix">Nouvelle longueur de préfixe</option>
+                <option value="count">Nombre de sous-réseaux</option>
+              </select>
+            </div>
+            <div class="field" id="ip4SplitPrefixWrap">
+              <label for="ip4SplitPrefix">Nouveau préfixe</label>
+              <select id="ip4SplitPrefix" class="mono" data-persist></select>
+            </div>
+            <div class="field hidden" id="ip4SplitCountWrap">
+              <label for="ip4SplitCount">Sous-réseaux</label>
+              <select id="ip4SplitCount" class="mono" data-persist></select>
+            </div>
+          </div>
+          <p class="err" id="ip4SplitErr" role="alert"></p>
+          <div id="ip4SplitOut">
+            <div class="table-actions no-print" data-table="ip4SplitTable">
+              <button class="btn btn-sm" type="button" data-act="copy-text">📋 Copier le tableau en texte</button>
+              <button class="btn btn-sm" type="button" data-act="copy">Copier en CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Télécharger le CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Imprimer le plan <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="ip4SplitTable">
+                <thead><tr><th class="num">#</th><th>Réseau</th><th>Plage utilisable</th><th>Broadcast</th><th class="num">Hôtes</th></tr></thead>
+                <tbody id="ip4SplitBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="ip4SplitNote"></p>
+          </div>
+        </div>
+
+        <!-- ================= VLSM ================= -->
+        <div class="panel" id="panel-vlsm" role="tabpanel" aria-labelledby="tab-vlsm">
+          <div class="print-only report-head"><h2>SubnetKit – Plan de sous-réseaux VLSM</h2><p id="vlsmReportMeta"></p><p>Généré le <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="grid-2 no-plan">
+            <div class="field">
+              <label for="vlsmBase">Réseau de base (CIDR)</label>
+              <input type="text" id="vlsmBase" class="mono" value="192.168.10.0/24" placeholder="192.168.10.0/24" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label class="checkbox" for="vlsmP2P" style="margin-top:28px"><input type="checkbox" id="vlsmP2P" data-persist> Utiliser /31 pour les liaisons point à point (2 hôtes)</label>
+            </div>
+          </div>
+          <div class="vlsm-head no-plan" aria-hidden="true"><span>Nom du sous-réseau</span><span>Hôtes nécessaires</span><span></span></div>
+          <div class="vlsm-rows" id="vlsmRows" aria-label="Besoins en sous-réseaux"></div>
+          <div class="row no-plan">
+            <button class="btn btn-sm" type="button" id="btnVlsmAdd">＋ Ajouter un réseau</button>
+            <span class="hint" id="vlsmLimitHint" style="margin:0"></span>
+          </div>
+          <p class="err" id="vlsmErr" role="alert"></p>
+          <div id="vlsmOut">
+            <div class="table-actions no-print" data-table="vlsmTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copier en CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Télécharger le CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Imprimer le plan <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="vlsmTable">
+                <thead><tr><th class="name">Nom</th><th class="num">Nécessaire</th><th class="num">Attribué</th><th>Réseau</th><th>Masque</th><th>Plage utilisable</th><th>Broadcast</th><th class="num">Gaspillé</th></tr></thead>
+                <tbody id="vlsmBody"></tbody>
+              </table>
+            </div>
+            <div class="sum" id="vlsmSummary"></div>
+          </div>
+        </div>
+
+        <!-- ================= IPv6 ================= -->
+        <div class="panel" id="panel-ipv6" role="tabpanel" aria-labelledby="tab-ipv6">
+          <div class="print-only report-head"><h2>SubnetKit – Plan de sous-réseaux IPv6</h2><p id="ip6ReportMeta"></p><p>Généré le <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="field no-plan">
+            <label for="ip6Addr">Adresse IPv6 avec préfixe</label>
+            <input type="text" id="ip6Addr" class="mono" value="2001:db8:85a3::8a2e:370:7334/64" placeholder="2001:db8::1/64" autocomplete="off" spellcheck="false" data-persist>
+            <p class="err" id="ip6Err" role="alert"></p>
+          </div>
+          <div id="ip6Results">
+            <dl class="kv" id="ip6Grid"></dl>
+            <h3 class="sub-title">Binaire – 64 premiers bits <span class="hint" style="margin:0">(bits réseau mis en évidence)</span></h3>
+            <div class="bin" id="ip6Bin"></div>
+          </div>
+
+          <h3 class="sub-title no-plan">Découper en sous-réseaux</h3>
+          <div class="grid-2 no-plan">
+            <div class="field">
+              <label for="ip6SplitPrefix">Nouvelle longueur de préfixe</label>
+              <input type="number" id="ip6SplitPrefix" class="mono" min="1" max="128" step="1" value="68" data-persist>
+            </div>
+            <div class="field">
+              <label>Résultat</label>
+              <p class="hint" id="ip6SplitInfo" style="margin-top:12px"></p>
+            </div>
+          </div>
+          <p class="err" id="ip6SplitErr" role="alert"></p>
+          <div id="ip6SplitOut">
+            <div class="table-actions no-print" data-table="ip6SplitTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copier en CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Télécharger le CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Imprimer le plan <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="ip6SplitTable">
+                <thead><tr><th class="num">#</th><th>Sous-réseau</th><th>Première adresse</th><th>Dernière adresse</th></tr></thead>
+                <tbody id="ip6SplitBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="ip6SplitNote"></p>
+          </div>
+        </div>
+
+        <!-- ================= CIDR ↔ Range ================= -->
+        <div class="panel" id="panel-cidr" role="tabpanel" aria-labelledby="tab-cidr">
+          <h3 class="sub-title" style="border:none;padding-top:0;margin-top:0">CIDR → plage IP</h3>
+          <div class="field">
+            <label for="cidrIn">Bloc CIDR</label>
+            <input type="text" id="cidrIn" class="mono" value="10.0.0.0/22" placeholder="10.0.0.0/22" autocomplete="off" spellcheck="false" data-persist>
+            <p class="err" id="cidrErr" role="alert"></p>
+          </div>
+          <dl class="kv" id="cidrGrid"></dl>
+
+          <h3 class="sub-title">Plage IP → blocs CIDR</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="rangeStart">IP de début</label>
+              <input type="text" id="rangeStart" class="mono" value="10.0.0.1" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label for="rangeEnd">IP de fin</label>
+              <input type="text" id="rangeEnd" class="mono" value="10.0.0.254" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+          </div>
+          <p class="err" id="rangeErr" role="alert"></p>
+          <div id="rangeOut">
+            <p class="hint" id="rangeInfo"></p>
+            <div class="cidr-list" id="rangeList"></div>
+            <div class="table-actions no-print" data-table="rangeTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copier en CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Télécharger le CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="rangeTable">
+                <thead><tr><th class="num">#</th><th>CIDR</th><th>Masque</th><th>Première</th><th>Dernière</th><th class="num">Adresses</th></tr></thead>
+                <tbody id="rangeBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <h3 class="sub-title">L'IP est-elle dans le sous-réseau ?</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="chkIp">Adresse IP</label>
+              <input type="text" id="chkIp" class="mono" value="192.168.1.130" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label for="chkCidr">Sous-réseau (CIDR)</label>
+              <input type="text" id="chkCidr" class="mono" value="192.168.1.0/25" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+          </div>
+          <p class="err" id="chkErr" role="alert"></p>
+          <div class="check-out" id="chkOut" aria-live="polite"></div>
+
+          <details class="ref" id="refDetails">
+            <summary>Référence : tous les préfixes de /0 à /32 (masque, masque générique, adresses, hôtes)</summary>
+            <div class="table-actions no-print" data-table="refTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copier en CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Télécharger le CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="refTable">
+                <thead><tr><th>CIDR</th><th>Masque de sous-réseau</th><th>Masque générique</th><th class="num">Adresses</th><th class="num">Hôtes utilisables</th></tr></thead>
+                <tbody id="refBody"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+
+        <!-- ================= Supernet (Pro) ================= -->
+        <div class="panel" id="panel-supernet" role="tabpanel" aria-labelledby="tab-supernet">
+          <p class="hint" style="margin-top:0">Collez un CIDR par ligne (ou séparés par des espaces/virgules). SubnetKit fusionne les blocs adjacents et inclus en un ensemble équivalent minimal – idéal pour l'agrégation de routes et le nettoyage d'ACL. <span class="pro-badge" data-pro-lock>PRO</span></p>
+          <div class="field">
+            <label for="snInput">Réseaux à agréger</label>
+            <textarea id="snInput" class="mono" rows="7" spellcheck="false" data-persist>192.168.0.0/24
+192.168.1.0/24
+192.168.2.0/24
+192.168.3.0/24
+10.10.0.0/16
+10.10.5.0/24
+172.16.4.0/22
+172.16.8.0/22</textarea>
+          </div>
+          <div class="row">
+            <button class="btn btn-primary" type="button" id="btnSnRun">Agréger des routes</button>
+            <button class="btn btn-ghost" type="button" id="btnSnClear">Effacer</button>
+          </div>
+          <p class="err" id="snErr" role="alert"></p>
+          <div id="snOut" class="hidden">
+            <div class="sum" id="snSummary"></div>
+            <div class="table-actions no-print" data-table="snTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copier en CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Télécharger le CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="snTable">
+                <thead><tr><th class="num">#</th><th>Agrégat</th><th>Masque</th><th>Première</th><th>Dernière</th><th class="num">Adresses</th><th class="name">Couvre</th></tr></thead>
+                <tbody id="snBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="row actions no-print">
+          <button class="btn" id="btnCopyResults" type="button">📋 Copier les résultats</button>
+          <button class="btn" id="btnShare" type="button">🔗 Lien de partage</button>
+          <button class="btn btn-ghost" id="btnReset" type="button">↺ Réinitialiser l'onglet</button>
+        </div>
+      </section>
+
+      <!-- Saved projects (Pro: unlimited, free: 1) -->
+      <section class="card no-print" aria-labelledby="projTitle">
+        <h2 id="projTitle" class="card-title">Projets enregistrés <span class="pro-badge" data-pro-lock title="Free: 1 project · Pro: unlimited">PRO</span></h2>
+        <p class="hint">Enregistrez toutes les saisies de tous les onglets sous un nom et rechargez-les plus tard. Plan gratuit : 1 projet, Pro : illimité.</p>
+        <div class="row">
+          <input type="text" id="projectName" placeholder="Nom du projet (ex. plan d'adressage du siège)" maxlength="60" aria-label="Nom du projet">
+          <button class="btn btn-primary" id="btnSaveProject" type="button">💾 Enregistrer le projet</button>
+        </div>
+        <div class="proj-list" id="projectList"></div>
+      </section>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="ad-slot" data-slot="sidebar-1"></div>
+      <div class="card pro-card">
+        <h3>Passer à Pro <span class="pro-badge">À VIE</span></h3>
+        <ul>
+          <li>Réseaux VLSM illimités</li>
+          <li>Outil d'agrégation de routes (supernet)</li>
+          <li>Export CSV de chaque tableau</li>
+          <li>Projets enregistrés et plans de sous-réseaux imprimables</li>
+        </ul>
+        <button class="btn btn-primary btn-block" data-action="pro" data-arg="sidebar">Passer à Pro – <span data-pro-price>$12</span> paiement unique</button>
+      </div>
+      <div class="card lead-card" id="leadCard" hidden>
+        <h3>Aide-mémoire des sous-réseaux</h3>
+        <p class="hint">Recevez l'aide-mémoire imprimable des sous-réseaux et nos nouveaux outils réseau. Pas de spam.</p>
+        <form class="lead-form" data-action="newsletter">
+          <input type="email" name="email" required placeholder="vous@email.com" aria-label="Adresse e-mail" autocomplete="email">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+          <button class="btn btn-primary" type="submit">Envoyer</button>
+        </form>
+        <p class="hint tiny">Pas de spam. Désabonnement à tout moment.</p>
+      </div>
+      <div class="card course-card hidden" id="courseCard">
+        <h3>Formation recommandée</h3>
+        <p id="courseText">Progressez en sous-réseaux pour le CCNA avec une formation structurée.</p>
+        <a class="btn btn-block" id="courseLink" href="#" rel="sponsored noopener" target="_blank">Voir la formation →</a>
+        <p class="hint" style="margin-top:8px">Lien partenaire – nous pouvons percevoir une commission sans coût supplémentaire pour vous.</p>
+      </div>
+      <div class="ad-slot" data-slot="sidebar-2"></div>
+    </aside>
+  </div>
+
+  <div class="ad-slot horizontal" data-slot="below-tool"></div>
+</main>
+
+<!-- uses:start -->
+<section class="uses container" id="popular-uses" aria-labelledby="usesTitle">
+  <h2 id="usesTitle">Plus de façons d'utiliser SubnetKit</h2>
+  <ul class="uses-grid">
+      <li><a href="/fr/24-subnet-calculator">Calculateur de sous-réseau /24</a></li>
+      <li><a href="/fr/30-and-31-point-to-point-subnets">Sous-réseaux /30 et /31 pour liaisons point à point</a></li>
+      <li><a href="/fr/27-subnet-calculator">Calculateur de sous-réseau /27</a></li>
+      <li><a href="/fr/vlsm-calculator-ccna">Calculateur VLSM pour le CCNA</a></li>
+      <li><a href="/fr/wildcard-mask-calculator">Calculateur de masque générique</a></li>
+      <li><a href="/fr/ipv6-subnet-calculator-64">Calculateur de sous-réseau IPv6 /64</a></li>
+      <li><a href="/fr/ip-range-to-cidr">Convertisseur de plage IP en CIDR</a></li>
+      <li><a href="/fr/private-ip-address-ranges" class="current" aria-current="page">Les plages d'adresses IP privées expliquées</a></li>
+  </ul>
+</section>
+<!-- uses:end -->
+
+<section class="content container">
+  <p class="breadcrumb"><a href="/fr/">SubnetKit</a> › Les plages d'adresses IP privées expliquées</p>
+  <h2>Les plages d'adresses IP privées expliquées : comment ça marche</h2>
+  <p>La RFC 1918 réserve trois blocs d'espace IPv4 à l'usage des réseaux privés. Ils ne sont jamais routés sur l'Internet public, c'est pourquoi chaque domicile, bureau et VPC cloud peut les réutiliser derrière un NAT.</p><p>Les blocs sont faciles à confondre, surtout la plage 172. SubnetKit vous permet de saisir n'importe quelle adresse et n'importe quel CIDR pour vérifier l'appartenance, gratuitement et dans le navigateur ; le calculateur ci-dessus est réglé pour tester <code>172.20.5.1</code> dans <code>172.16.0.0/12</code>.</p>
+  <h2>Les trois blocs RFC 1918</h2>
+  <ul><li><strong>10.0.0.0/8</strong> — de 10.0.0.0 à 10.255.255.255, masque 255.0.0.0, 16 777 216 adresses. Utilisé par les grandes entreprises et la plupart des VPC cloud.</li><li><strong>172.16.0.0/12</strong> — de 172.16.0.0 à 172.31.255.255, masque 255.240.0.0, 1 048 576 adresses. Les réseaux bridge par défaut de Docker en sont issus.</li><li><strong>192.168.0.0/16</strong> — de 192.168.0.0 à 192.168.255.255, masque 255.255.0.0, 65 536 adresses. Box internet et petits bureaux.</li></ul><p>Le bloc 172 est celui sur lequel on se trompe le plus souvent : 172.15.0.1 et 172.32.0.1 sont des adresses <em>publiques</em>. Seuls les deuxièmes octets de 16 à 31 sont privés, car un /12 laisse quatre bits du deuxième octet au réseau, et de 16 = 00010000 à 31 = 00011111, les valeurs partagent les mêmes quatre bits de poids fort.</p>
+  <h2>Autres plages réservées qui ressemblent à des plages privées</h2>
+  <ul><li><strong>100.64.0.0/10</strong> (100.64.0.0–100.127.255.255) : espace d'adressage partagé pour le NAT de niveau opérateur, RFC 6598. Si l'adresse WAN de votre routeur s'y trouve, votre FAI utilise le CGNAT et la redirection de ports ne fonctionnera pas.</li><li><strong>169.254.0.0/16</strong> : lien local, adresse auto-attribuée quand le DHCP échoue (RFC 3927). En voir une sur un client signifie presque toujours un problème DHCP.</li><li><strong>127.0.0.0/8</strong> : boucle locale ; 127.0.0.1 est l'adresse habituelle, mais tout le /8 désigne l'hôte local.</li><li><strong>192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24</strong> : plages de documentation publiques mais jamais attribuées, sûres pour les exemples.</li></ul><p>Lors de la conception d'un réseau, choisissez un bloc qui n'entrera pas en conflit avec des réseaux auxquels vous pourriez vous connecter plus tard via un VPN. 10.0.0.0/8 et 192.168.0.0/16 se chevauchent souvent ; une tranche moins courante comme 172.22.0.0/16 réduit ce risque.</p>
+  <h2>Questions fréquentes</h2>
+  <div class="faq">
+    <details><summary>172.32.0.1 est-elle une adresse IP privée ?</summary><p>Non. La plage privée 172.16.0.0/12 se termine à 172.31.255.255 ; à partir de 172.32.0.0, c'est de l'espace public.</p></details>
+    <details><summary>Combien y a-t-il d'adresses IPv4 privées au total ?</summary><p>17 891 328 : 16 777 216 dans 10.0.0.0/8, 1 048 576 dans 172.16.0.0/12 et 65 536 dans 192.168.0.0/16.</p></details>
+    <details><summary>Puis-je utiliser 100.64.0.0/10 dans mon réseau local ?</summary><p>Il est réservé au NAT de niveau opérateur des FAI et peut entrer en conflit avec l'adressage de votre fournisseur. Utilisez l'un des blocs RFC 1918 pour les réseaux internes.</p></details>
+    <details><summary>Les adresses privées sont-elles les mêmes en IPv6 ?</summary><p>L'équivalent est l'espace des adresses locales uniques (ULA), fc00::/7, en pratique fd00::/8 avec un identifiant global aléatoire de 40 bits. Contrairement à l'IPv4, la plupart des réseaux locaux IPv6 utilisent plutôt des adresses publiques en unicast global.</p></details>
+  </div>
+  <p class="back-guide">Vous cherchez le guide complet, des conseils et toute la FAQ ? Consultez la <a href="/fr/">page principale de SubnetKit</a>.</p>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark lg" aria-hidden="true"></span>
+      <div>
+        <strong>Be Management Tools</strong>
+        <p>Une collection d'outils gratuits et confidentiels qui fonctionnent entièrement dans votre navigateur. SubnetKit est le calculateur de sous-réseaux IP de la famille, conçu et maintenu par Be Management.</p>
+      </div>
+    </div>
+    <div class="footer-tools">
+      <strong>Plus d'outils gratuits</strong>
+      <ul>
+        <li><a href="https://quickinvoice-tool.vercel.app">QuickInvoice · Factures</a></li>
+        <li><a href="https://ratecalc-tool.vercel.app">RateCalc · Tarifs freelance</a></li>
+        <li><a href="https://qrforge-tool.vercel.app">QRForge · Codes QR</a></li>
+        <li><a href="https://squish-tool.vercel.app">Squish · Compresseur d'images</a></li>
+        <li><a href="https://growthcalc-tool.vercel.app">GrowthCalc · Intérêts composés</a></li>
+        <li><a href="https://subnetkit-tool.vercel.app" class="current">SubnetKit · Sous-réseaux IP</a></li>
+        <li><a href="https://shotstudio-tool.vercel.app">Screenshot Studio · Mockups de captures d'écran</a></li>
+        <li><a href="https://mockuplab-tool.vercel.app">Social Mockup Lab · Mockups de chats et de posts</a></li>
+        <li><a href="https://carouselmaker-tool.vercel.app">Carousel Maker · Slides de carrousel</a></li>
+        <li><a href="https://creativeresize-tool.vercel.app">Creative Resize · Formats réseaux sociaux</a></li>
+        <li><a href="https://framelab-tool.vercel.app">Frame Lab · Cadres photo et mockups</a></li>
+        <li><a href="https://giveaway-tool.vercel.app">Giveaway Picker · Concours Instagram</a></li>
+        <li><a href="https://iplookup-tool.vercel.app">IP Lookup · Recherche d'IP</a></li>
+        <li><a href="https://sizeconverter-tool.vercel.app">Size Converter · Redimensionneur d'images et de vidéos</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">
+      <span>© <span data-year></span> Be Management · SubnetKit. Calculateur de sous-réseaux gratuit pour ingénieurs réseau.</span>
+      <span><a href="/fr/privacy" data-i18n-href="/fr/privacy">Confidentialité</a> · <a href="/fr/terms" data-i18n-href="/fr/terms">Conditions</a> · <a href="#" data-action="cookie-settings">Paramètres des cookies</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="proModal" role="dialog" aria-modal="true" aria-labelledby="proTitle">
+  <div class="card">
+    <button class="btn btn-sm close" data-action="close-pro" aria-label="Fermer">✕</button>
+    <h3 id="proTitle">Passer à SubnetKit Pro <span class="pro-badge">À VIE</span></h3>
+    <div class="price"><span id="proPrice"></span> <small>paiement unique</small></div>
+    <ul>
+      <li>Réseaux VLSM illimités</li>
+      <li>Outil d'agrégation de routes</li>
+      <li>Export CSV</li>
+      <li>Projets enregistrés</li>
+      <li>Plans de sous-réseaux imprimables</li>
+      <li>Mises à jour à vie</li>
+    </ul>
+    <button class="btn btn-primary btn-block" data-action="checkout">Passer à Pro</button>
+    <p class="hint" style="margin-top:12px">Déjà acheté ? <a href="#" data-action="toggle-license">Saisissez votre clé de licence</a></p>
+    <div class="row hidden" id="licenseRow"><input id="licenseKey" placeholder="Clé de licence" aria-label="Clé de licence"><button class="btn" data-action="activate-license">Activer</button></div>
+  </div>
+</div>
+<script src="/preset.js" data-q="tab=cidr&amp;cidrIn=172.16.0.0%2F12&amp;chkIp=172.20.5.1&amp;chkCidr=172.16.0.0%2F12"></script>
+<script src="/app.js"></script>
+</body>
+</html>

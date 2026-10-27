@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculateur de sous-réseaux IP – CIDR, VLSM, IPv6 et masques génériques (gratuit) | SubnetKit</title>
+  <meta name="description" content="Calculateur de sous-réseaux IP gratuit : réseau, broadcast, hôtes utilisables, masque générique et binaire pour n'importe quel CIDR. Inclut un planificateur VLSM, un calculateur IPv6, la conversion plage vers CIDR et un aide-mémoire de /0 à /32.">
+  <link rel="canonical" href="https://subnetkit-tool.vercel.app/fr/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://subnetkit-tool.vercel.app/fr/">
+  <meta property="og:title" content="Calculateur de sous-réseaux IP – CIDR, VLSM, IPv6 et masques génériques | SubnetKit">
+  <meta property="og:description" content="Calculez le réseau, le broadcast, les hôtes utilisables, les masques génériques et le binaire de n'importe quel préfixe IPv4 ou IPv6. Planificateur VLSM, plage vers CIDR et agrégation de routes. 100 % gratuit, fonctionne dans votre navigateur.">
+  <meta property="og:image" content="https://subnetkit-tool.vercel.app/favicon.svg">
+  <meta property="og:site_name" content="SubnetKit">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Calculateur de sous-réseaux IP – SubnetKit">
+  <meta name="twitter:description" content="Calculateur de sous-réseaux IPv4/IPv6 gratuit avec VLSM, masques génériques, plage vers CIDR et agrégation de routes.">
+  <meta name="twitter:image" content="https://subnetkit-tool.vercel.app/favicon.svg">
+  <meta name="theme-color" content="#050403">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SubnetKit">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"SubnetKit – Calculateur de sous-réseaux IP","url":"https://subnetkit-tool.vercel.app/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Calculateur de sous-réseaux IP gratuit avec CIDR, masques de sous-réseau et génériques, vue binaire, planificateur VLSM, calculateur IPv6, conversion plage vers CIDR et agrégation de routes.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Calculateur de sous-réseaux IPv4 avec vue binaire","Découper un réseau en sous-réseaux","Planificateur VLSM","Calculateur de sous-réseaux IPv6","CIDR vers plage et plage vers CIDR","Masques génériques pour les ACL","Agrégation de routes","Export CSV et liens partageables"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment calculer un sous-réseau ?","acceptedAnswer":{"@type":"Answer","text":"Écrivez l'adresse IP et le masque de sous-réseau en binaire. L'adresse réseau est le ET bit à bit des deux ; l'adresse de broadcast est l'adresse réseau avec tous les bits d'hôte à 1. Pour 192.168.1.10/26, le masque est 255.255.255.192, le réseau 192.168.1.0, le broadcast 192.168.1.63 et les hôtes utilisables vont de .1 à .62. Le nombre d'adresses d'un bloc est 2 puissance (32 moins la longueur du préfixe), et le nombre d'hôtes utilisables est ce nombre moins 2."}},{"@type":"Question","name":"Quelle est la différence entre un masque de sous-réseau et un masque générique ?","acceptedAnswer":{"@type":"Answer","text":"Un masque de sous-réseau marque les bits réseau avec des 1 (255.255.255.0 pour un /24). Un masque générique en est l'inverse bit à bit : les 0 marquent les bits qui doivent correspondre et les 1 ceux qui sont ignorés (0.0.0.255 pour un /24). Les protocoles de routage comme OSPF et EIGRP, ainsi que les listes d'accès Cisco, utilisent des masques génériques. Vous pouvez passer de l'un à l'autre en soustrayant chaque octet de 255."}},{"@type":"Question","name":"Combien d'hôtes dans un /27 ?","acceptedAnswer":{"@type":"Answer","text":"Un /27 compte 32 adresses (2 puissance 5) et 30 hôtes utilisables, car une adresse est l'adresse réseau et une autre l'adresse de broadcast. Son masque de sous-réseau est 255.255.255.224 et son masque générique 0.0.0.31. Un /24 peut être divisé en huit sous-réseaux /27."}},{"@type":"Question","name":"Qu'est-ce que le VLSM ?","acceptedAnswer":{"@type":"Answer","text":"Le masque de sous-réseau à longueur variable consiste à diviser un réseau en sous-réseaux de tailles différentes plutôt qu'en blocs égaux, pour que chaque service ou liaison obtienne un sous-réseau adapté à son nombre d'hôtes. Triez les besoins du plus grand au plus petit, attribuez à chacun le plus petit bloc qui contient ses hôtes plus les adresses réseau et broadcast, et allouez-les à la suite à partir du réseau de base. L'onglet VLSM automatise cela et indique les adresses gaspillées et l'efficacité."}},{"@type":"Question","name":"L'IPv6 a-t-il une adresse de broadcast ?","acceptedAnswer":{"@type":"Answer","text":"Non. L'IPv6 a remplacé le broadcast par des groupes multicast comme ff02::1 (tous les nœuds du lien). Comme il n'y a ni broadcast ni adresse réseau réservée au même sens, chaque adresse d'un préfixe IPv6 est utilisable. Les réseaux locaux standard utilisent un /64 pour que l'autoconfiguration sans état (SLAAC) fonctionne, et les sites reçoivent généralement un /48 ou un /56 de leur fournisseur."}},{"@type":"Question","name":"Ce calculateur de sous-réseaux est-il gratuit ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Les calculateurs IPv4 et IPv6, le découpage en sous-réseaux, le VLSM jusqu'à cinq réseaux, la conversion CIDR vers plage, la vérification d'appartenance, la copie et les liens de partage sont gratuits, sans inscription, et tout fonctionne dans votre navigateur. Une licence Pro facultative en achat unique ajoute les réseaux VLSM illimités, l'outil d'agrégation de routes, les téléchargements CSV, les projets enregistrés et les plans de sous-réseaux imprimables."}}]}</script>
+  <script src="/config.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/consent.js"></script>
+  <script src="/monetize.js"></script>
+  <!-- hreflang:start -->
+  <meta name="bm-langs" content="en,es,pt,fr,de,it">
+  <link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/">
+  <link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/">
+  <link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/">
+  <link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/">
+  <link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/">
+  <link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/">
+  <link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/">
+  <!-- hreflang:end -->
+  <meta property="og:locale" content="fr_FR">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+    <a class="brand" href="/fr/" aria-label="Accueil SubnetKit">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text"><span class="brand-name">SubnetKit</span><span class="brand-desc">Calculateur de sous-réseaux IP</span></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <details class="more-tools">
+        <summary class="btn btn-ghost btn-sm" aria-label="Plus d'outils"><span class="mt-label">Plus d'outils</span> ▾</summary>
+        <div class="menu">
+          <a href="https://quickinvoice-tool.vercel.app"><span class="mi">Q</span>QuickInvoice<small>Factures</small></a>
+          <a href="https://ratecalc-tool.vercel.app"><span class="mi">R</span>RateCalc<small>Tarifs freelance</small></a>
+          <a href="https://qrforge-tool.vercel.app"><span class="mi">Q</span>QRForge<small>Codes QR</small></a>
+          <a href="https://squish-tool.vercel.app"><span class="mi">S</span>Squish<small>Compresseur d'images</small></a>
+          <a href="https://growthcalc-tool.vercel.app"><span class="mi">G</span>GrowthCalc<small>Intérêts composés</small></a>
+          <a href="https://subnetkit-tool.vercel.app" class="current"><span class="mi">N</span>SubnetKit<small>Sous-réseaux IP</small></a>
+          <a href="https://shotstudio-tool.vercel.app"><span class="mi">S</span>Screenshot Studio<small>Mockups de captures d'écran</small></a>
+          <a href="https://mockuplab-tool.vercel.app"><span class="mi">M</span>Social Mockup Lab<small>Mockups de chats et de posts</small></a>
+          <a href="https://carouselmaker-tool.vercel.app"><span class="mi">C</span>Carousel Maker<small>Slides de carrousel</small></a>
+          <a href="https://creativeresize-tool.vercel.app"><span class="mi">R</span>Creative Resize<small>Formats pour réseaux sociaux</small></a>
+          <a href="https://framelab-tool.vercel.app"><span class="mi">F</span>Frame Lab<small>Cadres photo et mockups</small></a>
+          <a href="https://giveaway-tool.vercel.app"><span class="mi">G</span>Giveaway Picker<small>Concours Instagram</small></a>
+          <a href="https://iplookup-tool.vercel.app"><span class="mi">I</span>IP Lookup<small>Recherche d'adresse IP</small></a>
+          <a href="https://sizeconverter-tool.vercel.app"><span class="mi">Z</span>Size Converter<small>Redimensionnement d'images et de vidéos</small></a>
+        </div>
+      </details>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="brand-by">par <b>Be Management</b></span>
+      <button class="btn btn-sm hidden" id="installBtn" data-action="install" title="Installer cet outil comme une app">⤓ Installer</button>
+      <span class="lang-switch"><select id="langSelect" aria-label="Language" translate="no"><option value="en">EN</option></select></span>
+      <button class="btn btn-primary btn-sm" data-action="pro" data-arg="nav">Pro</button>
+      <button class="btn icon-btn" data-action="theme" aria-label="Changer de thème">◐</button>
+    </nav>
+    </div>
+  </div>
+</header>
+
+<section class="hero container">
+  <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Be Management Tools · Réseaux</span>
+  <h1>Calculateur de sous-réseaux IP</h1>
+  <p class="tagline">Saisissez une adresse IP et un préfixe pour obtenir instantanément le réseau, le broadcast, la plage d'hôtes et les masques, plus des outils VLSM, IPv6 et CIDR vers plage.</p>
+  <div class="badges">
+  <span class="badge">100 % gratuit</span>
+  <span class="badge">Sans inscription</span>
+  <span class="badge">Fonctionne dans votre navigateur</span>
+  <span class="badge">IPv4 + IPv6</span>
+  <span class="badge">Liens partageables</span>
+  </div>
+</section>
+
+<main class="container">
+  <div class="tool-layout">
+    <div class="tool-col">
+
+      <section class="card tool-card" id="toolCard" aria-labelledby="toolTitle">
+        <h2 id="toolTitle" class="sr-only">Outils de sous-réseaux</h2>
+        <div class="tabs no-print" role="tablist" aria-label="Outils" id="tabBar">
+          <button class="tab active" role="tab" data-tab="ipv4" id="tab-ipv4" aria-selected="true" aria-controls="panel-ipv4">Sous-réseau IPv4</button>
+          <button class="tab" role="tab" data-tab="vlsm" id="tab-vlsm" aria-selected="false" aria-controls="panel-vlsm">VLSM</button>
+          <button class="tab" role="tab" data-tab="ipv6" id="tab-ipv6" aria-selected="false" aria-controls="panel-ipv6">IPv6</button>
+          <button class="tab" role="tab" data-tab="cidr" id="tab-cidr" aria-selected="false" aria-controls="panel-cidr">CIDR ↔ Plage</button>
+          <button class="tab" role="tab" data-tab="supernet" id="tab-supernet" aria-selected="false" aria-controls="panel-supernet">Supernet <span class="pro-badge" data-pro-lock>PRO</span></button>
+        </div>
+
+        <!-- ================= IPv4 ================= -->
+        <div class="panel active" id="panel-ipv4" role="tabpanel" aria-labelledby="tab-ipv4">
+          <div class="print-only report-head"><h2>SubnetKit – Plan de sous-réseaux</h2><p id="ip4ReportMeta"></p><p>Généré le <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="grid-3 no-plan">
+            <div class="field">
+              <label for="ip4Addr">Adresse IP</label>
+              <input type="text" id="ip4Addr" class="mono" value="192.168.1.10" placeholder="192.168.1.10" autocomplete="off" spellcheck="false" inputmode="decimal" data-persist>
+            </div>
+            <div class="field">
+              <label for="ip4Prefix">Préfixe (CIDR)</label>
+              <select id="ip4Prefix" class="mono" data-persist></select>
+            </div>
+            <div class="field">
+              <label for="ip4Mask">Masque de sous-réseau</label>
+              <select id="ip4Mask" class="mono" data-persist></select>
+            </div>
+          </div>
+          <div class="field no-plan">
+            <label for="ip4Free">Ou collez n'importe quelle forme : CIDR, IP + masque, IP + masque générique</label>
+            <input type="text" id="ip4Free" class="mono" placeholder="192.168.1.10/24 · 192.168.1.10 255.255.255.0 · 192.168.1.10 0.0.0.255" autocomplete="off" spellcheck="false">
+            <p class="err" id="ip4Err" role="alert"></p>
+          </div>
+
+          <div id="ip4Results">
+            <dl class="kv" id="ip4Grid"></dl>
+            <h3 class="sub-title">Binaire <span class="hint" style="margin:0">(bits réseau mis en évidence)</span></h3>
+            <div class="bin" id="ip4Bin"></div>
+          </div>
+
+          <h3 class="sub-title no-plan">Découper en sous-réseaux</h3>
+          <div class="grid-3 no-plan">
+            <div class="field">
+              <label for="ip4SplitMode">Découper par</label>
+              <select id="ip4SplitMode" data-persist>
+                <option value="prefix">Nouvelle longueur de préfixe</option>
+                <option value="count">Nombre de sous-réseaux</option>
+              </select>
+            </div>
+            <div class="field" id="ip4SplitPrefixWrap">
+              <label for="ip4SplitPrefix">Nouveau préfixe</label>
+              <select id="ip4SplitPrefix" class="mono" data-persist></select>
+            </div>
+            <div class="field hidden" id="ip4SplitCountWrap">
+              <label for="ip4SplitCount">Sous-réseaux</label>
+              <select id="ip4SplitCount" class="mono" data-persist></select>
+            </div>
+          </div>
+          <p class="err" id="ip4SplitErr" role="alert"></p>
+          <div id="ip4SplitOut">
+            <div class="table-actions no-print" data-table="ip4SplitTable">
+              <button class="btn btn-sm" type="button" data-act="copy-text">📋 Copier le tableau en texte</button>
+              <button class="btn btn-sm" type="button" data-act="copy">Copier en CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Télécharger le CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Imprimer le plan <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="ip4SplitTable">
+                <thead><tr><th class="num">#</th><th>Réseau</th><th>Plage utilisable</th><th>Broadcast</th><th class="num">Hôtes</th></tr></thead>
+                <tbody id="ip4SplitBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="ip4SplitNote"></p>
+          </div>
+        </div>
+
+        <!-- ================= VLSM ================= -->
+        <div class="panel" id="panel-vlsm" role="tabpanel" aria-labelledby="tab-vlsm">
+          <div class="print-only report-head"><h2>SubnetKit – Plan de sous-réseaux VLSM</h2><p id="vlsmReportMeta"></p><p>Généré le <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="grid-2 no-plan">
+            <div class="field">
+              <label for="vlsmBase">Réseau de base (CIDR)</label>
+              <input type="text" id="vlsmBase" class="mono" value="192.168.10.0/24" placeholder="192.168.10.0/24" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label class="checkbox" for="vlsmP2P" style="margin-top:28px"><input type="checkbox" id="vlsmP2P" data-persist> Utiliser /31 pour les liaisons point à point (2 hôtes)</label>
+            </div>
+          </div>
+          <div class="vlsm-head no-plan" aria-hidden="true"><span>Nom du sous-réseau</span><span>Hôtes nécessaires</span><span></span></div>
+          <div class="vlsm-rows" id="vlsmRows" aria-label="Besoins en sous-réseaux"></div>
+          <div class="row no-plan">
+            <button class="btn btn-sm" type="button" id="btnVlsmAdd">＋ Ajouter un réseau</button>
+            <span class="hint" id="vlsmLimitHint" style="margin:0"></span>
+          </div>
+          <p class="err" id="vlsmErr" role="alert"></p>
+          <div id="vlsmOut">
+            <div class="table-actions no-print" data-table="vlsmTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copier en CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Télécharger le CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Imprimer le plan <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="vlsmTable">
+                <thead><tr><th class="name">Nom</th><th class="num">Nécessaire</th><th class="num">Attribué</th><th>Réseau</th><th>Masque</th><th>Plage utilisable</th><th>Broadcast</th><th class="num">Gaspillé</th></tr></thead>
+                <tbody id="vlsmBody"></tbody>
+              </table>
+            </div>
+            <div class="sum" id="vlsmSummary"></div>
+          </div>
+        </div>
+
+        <!-- ================= IPv6 ================= -->
+        <div class="panel" id="panel-ipv6" role="tabpanel" aria-labelledby="tab-ipv6">
+          <div class="print-only report-head"><h2>SubnetKit – Plan de sous-réseaux IPv6</h2><p id="ip6ReportMeta"></p><p>Généré le <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="field no-plan">
+            <label for="ip6Addr">Adresse IPv6 avec préfixe</label>
+            <input type="text" id="ip6Addr" class="mono" value="2001:db8:85a3::8a2e:370:7334/64" placeholder="2001:db8::1/64" autocomplete="off" spellcheck="false" data-persist>
+            <p class="err" id="ip6Err" role="alert"></p>
+          </div>
+          <div id="ip6Results">
+            <dl class="kv" id="ip6Grid"></dl>
+            <h3 class="sub-title">Binaire – 64 premiers bits <span class="hint" style="margin:0">(bits réseau mis en évidence)</span></h3>
+            <div class="bin" id="ip6Bin"></div>
+          </div>
+
+          <h3 class="sub-title no-plan">Découper en sous-réseaux</h3>
+          <div class="grid-2 no-plan">
+            <div class="field">
+              <label for="ip6SplitPrefix">Nouvelle longueur de préfixe</label>
+              <input type="number" id="ip6SplitPrefix" class="mono" min="1" max="128" step="1" value="68" data-persist>
+            </div>
+            <div class="field">
+              <label>Résultat</label>
+              <p class="hint" id="ip6SplitInfo" style="margin-top:12px"></p>
+            </div>
+          </div>
+          <p class="err" id="ip6SplitErr" role="alert"></p>
+          <div id="ip6SplitOut">
+            <div class="table-actions no-print" data-table="ip6SplitTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copier en CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Télécharger le CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Imprimer le plan <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="ip6SplitTable">
+                <thead><tr><th class="num">#</th><th>Sous-réseau</th><th>Première adresse</th><th>Dernière adresse</th></tr></thead>
+                <tbody id="ip6SplitBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="ip6SplitNote"></p>
+          </div>
+        </div>
+
+        <!-- ================= CIDR ↔ Range ================= -->
+        <div class="panel" id="panel-cidr" role="tabpanel" aria-labelledby="tab-cidr">
+          <h3 class="sub-title" style="border:none;padding-top:0;margin-top:0">CIDR → plage IP</h3>
+          <div class="field">
+            <label for="cidrIn">Bloc CIDR</label>
+            <input type="text" id="cidrIn" class="mono" value="10.0.0.0/22" placeholder="10.0.0.0/22" autocomplete="off" spellcheck="false" data-persist>
+            <p class="err" id="cidrErr" role="alert"></p>
+          </div>
+          <dl class="kv" id="cidrGrid"></dl>
+
+          <h3 class="sub-title">Plage IP → blocs CIDR</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="rangeStart">IP de début</label>
+              <input type="text" id="rangeStart" class="mono" value="10.0.0.1" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label for="rangeEnd">IP de fin</label>
+              <input type="text" id="rangeEnd" class="mono" value="10.0.0.254" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+          </div>
+          <p class="err" id="rangeErr" role="alert"></p>
+          <div id="rangeOut">
+            <p class="hint" id="rangeInfo"></p>
+            <div class="cidr-list" id="rangeList"></div>
+            <div class="table-actions no-print" data-table="rangeTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copier en CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Télécharger le CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="rangeTable">
+                <thead><tr><th class="num">#</th><th>CIDR</th><th>Masque</th><th>Première</th><th>Dernière</th><th class="num">Adresses</th></tr></thead>
+                <tbody id="rangeBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <h3 class="sub-title">L'IP est-elle dans le sous-réseau ?</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="chkIp">Adresse IP</label>
+              <input type="text" id="chkIp" class="mono" value="192.168.1.130" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label for="chkCidr">Sous-réseau (CIDR)</label>
+              <input type="text" id="chkCidr" class="mono" value="192.168.1.0/25" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+          </div>
+          <p class="err" id="chkErr" role="alert"></p>
+          <div class="check-out" id="chkOut" aria-live="polite"></div>
+
+          <details class="ref" id="refDetails">
+            <summary>Référence : tous les préfixes de /0 à /32 (masque, masque générique, adresses, hôtes)</summary>
+            <div class="table-actions no-print" data-table="refTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copier en CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Télécharger le CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="refTable">
+                <thead><tr><th>CIDR</th><th>Masque de sous-réseau</th><th>Masque générique</th><th class="num">Adresses</th><th class="num">Hôtes utilisables</th></tr></thead>
+                <tbody id="refBody"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+
+        <!-- ================= Supernet (Pro) ================= -->
+        <div class="panel" id="panel-supernet" role="tabpanel" aria-labelledby="tab-supernet">
+          <p class="hint" style="margin-top:0">Collez un CIDR par ligne (ou séparés par des espaces/virgules). SubnetKit fusionne les blocs adjacents et inclus en un ensemble équivalent minimal – idéal pour l'agrégation de routes et le nettoyage d'ACL. <span class="pro-badge" data-pro-lock>PRO</span></p>
+          <div class="field">
+            <label for="snInput">Réseaux à agréger</label>
+            <textarea id="snInput" class="mono" rows="7" spellcheck="false" data-persist>192.168.0.0/24
+192.168.1.0/24
+192.168.2.0/24
+192.168.3.0/24
+10.10.0.0/16
+10.10.5.0/24
+172.16.4.0/22
+172.16.8.0/22</textarea>
+          </div>
+          <div class="row">
+            <button class="btn btn-primary" type="button" id="btnSnRun">Agréger des routes</button>
+            <button class="btn btn-ghost" type="button" id="btnSnClear">Effacer</button>
+          </div>
+          <p class="err" id="snErr" role="alert"></p>
+          <div id="snOut" class="hidden">
+            <div class="sum" id="snSummary"></div>
+            <div class="table-actions no-print" data-table="snTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copier en CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Télécharger le CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="snTable">
+                <thead><tr><th class="num">#</th><th>Agrégat</th><th>Masque</th><th>Première</th><th>Dernière</th><th class="num">Adresses</th><th class="name">Couvre</th></tr></thead>
+                <tbody id="snBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="row actions no-print">
+          <button class="btn" id="btnCopyResults" type="button">📋 Copier les résultats</button>
+          <button class="btn" id="btnShare" type="button">🔗 Lien de partage</button>
+          <button class="btn btn-ghost" id="btnReset" type="button">↺ Réinitialiser l'onglet</button>
+        </div>
+      </section>
+
+      <!-- Saved projects (Pro: unlimited, free: 1) -->
+      <section class="card no-print" aria-labelledby="projTitle">
+        <h2 id="projTitle" class="card-title">Projets enregistrés <span class="pro-badge" data-pro-lock title="Free: 1 project · Pro: unlimited">PRO</span></h2>
+        <p class="hint">Enregistrez toutes les saisies de tous les onglets sous un nom et rechargez-les plus tard. Plan gratuit : 1 projet, Pro : illimité.</p>
+        <div class="row">
+          <input type="text" id="projectName" placeholder="Nom du projet (ex. plan d'adressage du siège)" maxlength="60" aria-label="Nom du projet">
+          <button class="btn btn-primary" id="btnSaveProject" type="button">💾 Enregistrer le projet</button>
+        </div>
+        <div class="proj-list" id="projectList"></div>
+      </section>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="ad-slot" data-slot="sidebar-1"></div>
+      <div class="card pro-card">
+        <h3>Passer à Pro <span class="pro-badge">À VIE</span></h3>
+        <ul>
+          <li>Réseaux VLSM illimités</li>
+          <li>Outil d'agrégation de routes (supernet)</li>
+          <li>Export CSV de chaque tableau</li>
+          <li>Projets enregistrés et plans de sous-réseaux imprimables</li>
+        </ul>
+        <button class="btn btn-primary btn-block" data-action="pro" data-arg="sidebar">Passer à Pro – <span data-pro-price>$12</span> paiement unique</button>
+      </div>
+      <div class="card lead-card" id="leadCard" hidden>
+        <h3>Aide-mémoire des sous-réseaux</h3>
+        <p class="hint">Recevez l'aide-mémoire imprimable des sous-réseaux et nos nouveaux outils réseau. Pas de spam.</p>
+        <form class="lead-form" data-action="newsletter">
+          <input type="email" name="email" required placeholder="vous@email.com" aria-label="Adresse e-mail" autocomplete="email">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+          <button class="btn btn-primary" type="submit">Envoyer</button>
+        </form>
+        <p class="hint tiny">Pas de spam. Désabonnement à tout moment.</p>
+      </div>
+      <div class="card course-card hidden" id="courseCard">
+        <h3>Formation recommandée</h3>
+        <p id="courseText">Progressez en sous-réseaux pour le CCNA avec une formation structurée.</p>
+        <a class="btn btn-block" id="courseLink" href="#" rel="sponsored noopener" target="_blank">Voir la formation →</a>
+        <p class="hint" style="margin-top:8px">Lien partenaire – nous pouvons percevoir une commission sans coût supplémentaire pour vous.</p>
+      </div>
+      <div class="ad-slot" data-slot="sidebar-2"></div>
+    </aside>
+  </div>
+
+  <div class="ad-slot horizontal" data-slot="below-tool"></div>
+</main>
+
+<!-- uses:start -->
+<section class="uses container" id="popular-uses" aria-labelledby="usesTitle">
+  <h2 id="usesTitle">Façons populaires d'utiliser SubnetKit</h2>
+  <ul class="uses-grid">
+      <li><a href="/fr/24-subnet-calculator">Calculateur de sous-réseau /24</a></li>
+      <li><a href="/fr/30-and-31-point-to-point-subnets">Sous-réseaux /30 et /31 pour liaisons point à point</a></li>
+      <li><a href="/fr/27-subnet-calculator">Calculateur de sous-réseau /27</a></li>
+      <li><a href="/fr/vlsm-calculator-ccna">Calculateur VLSM pour le CCNA</a></li>
+      <li><a href="/fr/wildcard-mask-calculator">Calculateur de masque générique</a></li>
+      <li><a href="/fr/ipv6-subnet-calculator-64">Calculateur de sous-réseau IPv6 /64</a></li>
+      <li><a href="/fr/ip-range-to-cidr">Convertisseur de plage IP en CIDR</a></li>
+      <li><a href="/fr/private-ip-address-ranges">Les plages d'adresses IP privées expliquées</a></li>
+  </ul>
+</section>
+<!-- uses:end -->
+
+<section class="content container">
+  <div class="features">
+    <div class="feature"><div class="ic">🧮</div><h3>Tous les détails IPv4</h3><p>Réseau, broadcast, hôtes, masque, masque générique, classe, type, binaire avec bits réseau mis en évidence, hexadécimal et DNS inverse.</p></div>
+    <div class="feature"><div class="ic">🧩</div><h3>Planificateur VLSM</h3><p>Saisissez le nombre d'hôtes par service et obtenez une attribution efficace et contiguë, avec statistiques de gaspillage et d'efficacité.</p></div>
+    <div class="feature"><div class="ic">🌐</div><h3>Compatible IPv6</h3><p>Développez, compressez, trouvez le réseau et découpez n'importe quel préfixe IPv6 avec un calcul exact sur 128 bits.</p></div>
+    <div class="feature"><div class="ic">🔗</div><h3>Plage ↔ CIDR</h3><p>Transformez une plage IP quelconque en liste CIDR minimale, vérifiez l'appartenance et agrégez des routes.</p></div>
+  </div>
+
+  <h2>Qu'est-ce que le découpage en sous-réseaux et comment fonctionne le CIDR ?</h2>
+  <p>Une adresse IPv4 fait 32 bits, généralement écrite sous forme de quatre octets décimaux comme <code>192.168.1.10</code>. Le découpage en sous-réseaux divise ces 32 bits en une <strong>partie réseau</strong> (partagée par tous les appareils du sous-réseau) et une <strong>partie hôte</strong> (propre à chaque appareil). La notation CIDR – le <code>/26</code> après une adresse – indique combien de bits de tête appartiennent au réseau. Les <code>32 − 26 = 6</code> bits restants identifient les hôtes, le bloc contient donc <code>2<sup>6</sup> = 64</code> adresses.</p>
+  <p>Deux de ces adresses sont réservées : la première (tous les bits d'hôte à 0) est <strong>l'adresse réseau</strong> et la dernière (tous les bits d'hôte à 1) est <strong>l'adresse de broadcast</strong>. Il reste donc <code>64 − 2 = 62</code> hôtes utilisables. Exemple commenté pour <code>192.168.1.70/26</code> :</p>
+  <ol>
+    <li>Le masque d'un /26 est <code>255.255.255.192</code> (binaire <code>11111111.11111111.11111111.11000000</code>).</li>
+    <li>La taille de bloc dans le dernier octet est <code>256 − 192 = 64</code>, les sous-réseaux commencent donc à .0, .64, .128 et .192.</li>
+    <li>70 tombe dans le bloc .64 : réseau <code>192.168.1.64</code>, broadcast <code>192.168.1.127</code>.</li>
+    <li>Hôtes utilisables : <code>192.168.1.65 – 192.168.1.126</code> (62 adresses).</li>
+  </ol>
+  <p>Le calculateur fait exactement cela avec un ET bit à bit entre l'adresse et le masque, et affiche aussi le résultat en binaire pour que vous voyiez quels bits sont fixes.</p>
+
+  <h2>Masque de sous-réseau ou masque générique (ACL Cisco)</h2>
+  <p>Un <strong>masque de sous-réseau</strong> utilise des 1 pour les bits réseau et des 0 pour les bits d'hôte. Un <strong>masque générique</strong> en est l'inverse exact : 0 signifie « ce bit doit correspondre », 1 signifie « ignorer ce bit ». Pour un /24, le masque est <code>255.255.255.0</code> et le masque générique est <code>0.0.0.255</code> ; pour un /27, ce sont <code>255.255.255.224</code> et <code>0.0.0.31</code>. Cisco IOS utilise les masques génériques dans les listes d'accès et dans les instructions <code>network</code> d'OSPF/EIGRP, par exemple <code>access-list 10 permit 192.168.1.0 0.0.0.255</code> ou <code>network 10.1.0.0 0.0.255.255 area 0</code>. La conversion rapide consiste à soustraire chaque octet du masque de sous-réseau de 255 – l'onglet IPv4 affiche les deux côte à côte et accepte l'une ou l'autre forme en entrée.</p>
+
+  <h2>Le VLSM étape par étape</h2>
+  <p>Avec un découpage à longueur fixe, chaque sous-réseau a la même taille, ce qui gaspille de l'espace quand une liaison point à point n'a besoin que de 2 adresses alors qu'un /26 lui en donne 64. Le <strong>masque de sous-réseau à longueur variable (VLSM)</strong> résout ce problème en attribuant des tailles différentes à partir d'un même bloc :</p>
+  <ol>
+    <li>Listez chaque réseau avec le nombre d'hôtes nécessaire et triez-les du plus grand au plus petit.</li>
+    <li>Pour chaque besoin, choisissez le plus petit bloc qui contient hôtes + 2 (réseau et broadcast). 50 hôtes → 64 adresses → /26 ; 25 → 32 → /27 ; 10 → 16 → /28 ; 2 → 4 → /30 (ou /31 sur les liaisons point à point, RFC 3021).</li>
+    <li>Attribuez-les à la suite à partir du réseau de base. Les tailles étant des puissances de deux triées par ordre décroissant, chaque bloc est automatiquement aligné sur sa limite.</li>
+    <li>Documentez le masque, la plage et le broadcast de chaque sous-réseau, et gardez l'espace restant pour la croissance.</li>
+  </ol>
+  <p>L'onglet VLSM exécute cet algorithme pour l'exemple Ventes (50), IT (25), Direction (10) et deux liaisons WAN à partir de <code>192.168.10.0/24</code>, et indique combien d'adresses sont gaspillées et ce qu'il reste du bloc de base.</p>
+
+  <h2>Les bases de l'IPv6 : pas de broadcast, des /64 partout</h2>
+  <p>Les adresses IPv6 font 128 bits et s'écrivent en huit groupes hexadécimaux, en supprimant les zéros de tête ; une suite de groupes nuls peut être réduite à <code>::</code> (compression RFC 5952). Les 64 premiers bits identifient le réseau et les 64 derniers l'interface. Contrairement à l'IPv4, il n'y a <strong>aucune adresse de broadcast</strong> : l'IPv6 utilise le multicast (par exemple <code>ff02::1</code> pour tous les nœuds du lien) et il n'y a pas d'adresses réseau/broadcast réservées : chaque adresse d'un préfixe est utilisable. Les réseaux locaux utilisent un <strong>/64</strong> pour que SLAAC (autoconfiguration sans état) puisse construire l'identifiant d'interface ; les organisations reçoivent généralement un /48 (65 536 sous-réseaux /64) ou un /56. Les liaisons point à point sont souvent numérotées à partir d'un /127. L'onglet IPv6 affiche les formes compressée et développée, le réseau et le type d'adresse (unicast global, locale unique <code>fc00::/7</code>, lien local <code>fe80::/10</code>, multicast, documentation <code>2001:db8::/32</code> et plus encore).</p>
+
+  <h2>Aide-mémoire des sous-réseaux</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>CIDR</th><th>Masque de sous-réseau</th><th>Masque générique</th><th class="num">Adresses</th><th class="num">Hôtes utilisables</th><th class="num">Sous-réseaux par /24</th></tr></thead>
+      <tbody>
+        <tr><td>/24</td><td>255.255.255.0</td><td>0.0.0.255</td><td class="num">256</td><td class="num">254</td><td class="num">1</td></tr>
+        <tr><td>/25</td><td>255.255.255.128</td><td>0.0.0.127</td><td class="num">128</td><td class="num">126</td><td class="num">2</td></tr>
+        <tr><td>/26</td><td>255.255.255.192</td><td>0.0.0.63</td><td class="num">64</td><td class="num">62</td><td class="num">4</td></tr>
+        <tr><td>/27</td><td>255.255.255.224</td><td>0.0.0.31</td><td class="num">32</td><td class="num">30</td><td class="num">8</td></tr>
+        <tr><td>/28</td><td>255.255.255.240</td><td>0.0.0.15</td><td class="num">16</td><td class="num">14</td><td class="num">16</td></tr>
+        <tr><td>/29</td><td>255.255.255.248</td><td>0.0.0.7</td><td class="num">8</td><td class="num">6</td><td class="num">32</td></tr>
+        <tr><td>/30</td><td>255.255.255.252</td><td>0.0.0.3</td><td class="num">4</td><td class="num">2</td><td class="num">64</td></tr>
+        <tr><td>/31</td><td>255.255.255.254</td><td>0.0.0.1</td><td class="num">2</td><td class="num">2 (P2P)</td><td class="num">128</td></tr>
+        <tr><td>/32</td><td>255.255.255.255</td><td>0.0.0.0</td><td class="num">1</td><td class="num">1 (hôte)</td><td class="num">256</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Mémorisez les « nombres magiques » 128, 192, 224, 240, 248, 252, 254, 255 – chacun ajoute un bit réseau – et les tailles de bloc 128, 64, 32, 16, 8, 4, 2, 1. Le tableau complet de /0 à /32 se trouve dans l'onglet CIDR ↔ Plage.</p>
+
+  <h2>Conseils pour l'examen CCNA</h2>
+  <ul>
+    <li><strong>Trouvez l'octet significatif.</strong> C'est l'octet où le masque ne vaut ni 255 ni 0. La taille de bloc est 256 moins cet octet du masque ; les sous-réseaux commencent aux multiples de la taille de bloc.</li>
+    <li><strong>Comptez les bits d'hôte, pas les bits de sous-réseau.</strong> Hôtes = 2<sup>bits d'hôte</sup> − 2. Pour les questions « combien de sous-réseaux », bits de sous-réseau = nouveau préfixe − préfixe d'origine.</li>
+    <li><strong>Retenez les exceptions.</strong> Un /31 offre 2 adresses utilisables sur les liaisons point à point et un /32 est une route d'hôte unique ; les deux apparaissent dans de vraies configurations et dans les questions d'examen.</li>
+    <li><strong>Connaissez les plages spéciales.</strong> Privées RFC 1918 (10/8, 172.16/12, 192.168/16), boucle locale 127/8, lien local 169.254/16, CGNAT 100.64/10, multicast 224/4 et les blocs de documentation 192.0.2.0/24, 198.51.100.0/24 et 203.0.113.0/24.</li>
+    <li><strong>Entraînez-vous au VLSM.</strong> Les sujets d'examen listent généralement des services avec leur nombre d'hôtes ; triez par ordre décroissant, attribuez d'abord les plus grands et vérifiez que le total tient dans le bloc de base.</li>
+    <li><strong>Convertissez les masques génériques instantanément.</strong> 255 − octet du masque = octet du masque générique. Pour OSPF, vous pouvez aussi utiliser le masque de sous-réseau de l'interface comme masque générique (0.0.0.0 pour une seule interface).</li>
+  </ul>
+
+  <h2>Questions fréquentes</h2>
+  <div class="faq">
+    <details>
+      <summary>Comment calculer un sous-réseau ?</summary>
+      <p>Écrivez l'adresse IP et le masque de sous-réseau en binaire. L'adresse réseau est le ET bit à bit des deux ; l'adresse de broadcast est l'adresse réseau avec tous les bits d'hôte à 1. Pour 192.168.1.10/26, le masque est 255.255.255.192, le réseau 192.168.1.0, le broadcast 192.168.1.63 et les hôtes utilisables vont de .1 à .62. Le nombre d'adresses d'un bloc est 2 puissance (32 moins la longueur du préfixe), et le nombre d'hôtes utilisables est ce nombre moins 2.</p>
+    </details>
+    <details>
+      <summary>Quelle est la différence entre un masque de sous-réseau et un masque générique ?</summary>
+      <p>Un masque de sous-réseau marque les bits réseau avec des 1 (255.255.255.0 pour un /24). Un masque générique en est l'inverse bit à bit : les 0 marquent les bits qui doivent correspondre et les 1 ceux qui sont ignorés (0.0.0.255 pour un /24). Les protocoles de routage comme OSPF et EIGRP, ainsi que les listes d'accès Cisco, utilisent des masques génériques. Vous pouvez passer de l'un à l'autre en soustrayant chaque octet de 255.</p>
+    </details>
+    <details>
+      <summary>Combien d'hôtes dans un /27 ?</summary>
+      <p>Un /27 compte 32 adresses (2 puissance 5) et 30 hôtes utilisables, car une adresse est l'adresse réseau et une autre l'adresse de broadcast. Son masque de sous-réseau est 255.255.255.224 et son masque générique 0.0.0.31. Un /24 peut être divisé en huit sous-réseaux /27.</p>
+    </details>
+    <details>
+      <summary>Qu'est-ce que le VLSM ?</summary>
+      <p>Le masque de sous-réseau à longueur variable consiste à diviser un réseau en sous-réseaux de tailles différentes plutôt qu'en blocs égaux, pour que chaque service ou liaison obtienne un sous-réseau adapté à son nombre d'hôtes. Triez les besoins du plus grand au plus petit, attribuez à chacun le plus petit bloc qui contient ses hôtes plus les adresses réseau et broadcast, et allouez-les à la suite à partir du réseau de base. L'onglet VLSM automatise cela et indique les adresses gaspillées et l'efficacité.</p>
+    </details>
+    <details>
+      <summary>L'IPv6 a-t-il une adresse de broadcast ?</summary>
+      <p>Non. L'IPv6 a remplacé le broadcast par des groupes multicast comme ff02::1 (tous les nœuds du lien). Comme il n'y a ni broadcast ni adresse réseau réservée au même sens, chaque adresse d'un préfixe IPv6 est utilisable. Les réseaux locaux standard utilisent un /64 pour que l'autoconfiguration sans état (SLAAC) fonctionne, et les sites reçoivent généralement un /48 ou un /56 de leur fournisseur.</p>
+    </details>
+    <details>
+      <summary>Ce calculateur de sous-réseaux est-il gratuit ?</summary>
+      <p>Oui. Les calculateurs IPv4 et IPv6, le découpage en sous-réseaux, le VLSM jusqu'à cinq réseaux, la conversion CIDR vers plage, la vérification d'appartenance, la copie et les liens de partage sont gratuits, sans inscription, et tout fonctionne dans votre navigateur. Une licence Pro facultative en achat unique ajoute les réseaux VLSM illimités, l'outil d'agrégation de routes, les téléchargements CSV, les projets enregistrés et les plans de sous-réseaux imprimables.</p>
+    </details>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark lg" aria-hidden="true"></span>
+      <div>
+        <strong>Be Management Tools</strong>
+        <p>Une collection d'outils gratuits et confidentiels qui fonctionnent entièrement dans votre navigateur. SubnetKit est le calculateur de sous-réseaux IP de la famille, conçu et maintenu par Be Management.</p>
+      </div>
+    </div>
+    <div class="footer-tools">
+      <strong>Plus d'outils gratuits</strong>
+      <ul>
+        <li><a href="https://quickinvoice-tool.vercel.app">QuickInvoice · Factures</a></li>
+        <li><a href="https://ratecalc-tool.vercel.app">RateCalc · Tarifs freelance</a></li>
+        <li><a href="https://qrforge-tool.vercel.app">QRForge · Codes QR</a></li>
+        <li><a href="https://squish-tool.vercel.app">Squish · Compresseur d'images</a></li>
+        <li><a href="https://growthcalc-tool.vercel.app">GrowthCalc · Intérêts composés</a></li>
+        <li><a href="https://subnetkit-tool.vercel.app" class="current">SubnetKit · Sous-réseaux IP</a></li>
+        <li><a href="https://shotstudio-tool.vercel.app">Screenshot Studio · Mockups de captures d'écran</a></li>
+        <li><a href="https://mockuplab-tool.vercel.app">Social Mockup Lab · Mockups de chats et de posts</a></li>
+        <li><a href="https://carouselmaker-tool.vercel.app">Carousel Maker · Slides de carrousel</a></li>
+        <li><a href="https://creativeresize-tool.vercel.app">Creative Resize · Formats réseaux sociaux</a></li>
+        <li><a href="https://framelab-tool.vercel.app">Frame Lab · Cadres photo et mockups</a></li>
+        <li><a href="https://giveaway-tool.vercel.app">Giveaway Picker · Concours Instagram</a></li>
+        <li><a href="https://iplookup-tool.vercel.app">IP Lookup · Recherche d'IP</a></li>
+        <li><a href="https://sizeconverter-tool.vercel.app">Size Converter · Redimensionneur d'images et de vidéos</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">
+      <span>© <span data-year></span> Be Management · SubnetKit. Calculateur de sous-réseaux gratuit pour ingénieurs réseau.</span>
+      <span><a href="/fr/privacy" data-i18n-href="/fr/privacy">Confidentialité</a> · <a href="/fr/terms" data-i18n-href="/fr/terms">Conditions</a> · <a href="#" data-action="cookie-settings">Paramètres des cookies</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="proModal" role="dialog" aria-modal="true" aria-labelledby="proTitle">
+  <div class="card">
+    <button class="btn btn-sm close" data-action="close-pro" aria-label="Fermer">✕</button>
+    <h3 id="proTitle">Passer à SubnetKit Pro <span class="pro-badge">À VIE</span></h3>
+    <div class="price"><span id="proPrice"></span> <small>paiement unique</small></div>
+    <ul>
+      <li>Réseaux VLSM illimités</li>
+      <li>Outil d'agrégation de routes</li>
+      <li>Export CSV</li>
+      <li>Projets enregistrés</li>
+      <li>Plans de sous-réseaux imprimables</li>
+      <li>Mises à jour à vie</li>
+    </ul>
+    <button class="btn btn-primary btn-block" data-action="checkout">Passer à Pro</button>
+    <p class="hint" style="margin-top:12px">Déjà acheté ? <a href="#" data-action="toggle-license">Saisissez votre clé de licence</a></p>
+    <div class="row hidden" id="licenseRow"><input id="licenseKey" placeholder="Clé de licence" aria-label="Clé de licence"><button class="btn" data-action="activate-license">Activer</button></div>
+  </div>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

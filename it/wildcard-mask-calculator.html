@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calcolatore di wildcard mask per ACL Cisco e OSPF | SubnetKit</title>
+  <meta name="description" content="Calcolatore di wildcard mask: converti qualsiasi prefisso o subnet mask nella maschera inversa usata da ACL Cisco, OSPF ed EIGRP, con esempi svolti da /8 a /32.">
+  <link rel="canonical" href="https://subnetkit-tool.vercel.app/it/wildcard-mask-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://subnetkit-tool.vercel.app/it/wildcard-mask-calculator">
+  <meta property="og:title" content="Calcolatore di wildcard mask per ACL Cisco e OSPF | SubnetKit">
+  <meta property="og:description" content="Calcolatore di wildcard mask: converti qualsiasi prefisso o subnet mask nella maschera inversa usata da ACL Cisco, OSPF ed EIGRP, con esempi svolti da /8 a /32.">
+  <meta property="og:image" content="https://subnetkit-tool.vercel.app/favicon.svg">
+  <meta property="og:site_name" content="SubnetKit">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Calcolatore di wildcard mask per ACL Cisco e OSPF | SubnetKit">
+  <meta name="twitter:description" content="Calcolatore di wildcard mask: converti qualsiasi prefisso o subnet mask nella maschera inversa usata da ACL Cisco, OSPF ed EIGRP, con esempi svolti da /8 a /32.">
+  <meta name="twitter:image" content="https://subnetkit-tool.vercel.app/favicon.svg">
+  <meta name="theme-color" content="#050403">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SubnetKit">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/config.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/consent.js"></script>
+  <script src="/monetize.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Calcolatore di wildcard mask per ACL Cisco e OSPF | SubnetKit","description":"Calcolatore di wildcard mask: converti qualsiasi prefisso o subnet mask nella maschera inversa usata da ACL Cisco, OSPF ed EIGRP, con esempi svolti da /8 a /32.","url":"https://subnetkit-tool.vercel.app/wildcard-mask-calculator","isPartOf":{"@type":"WebSite","name":"SubnetKit","url":"https://subnetkit-tool.vercel.app/"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SubnetKit","item":"https://subnetkit-tool.vercel.app/"},{"@type":"ListItem","position":2,"name":"Calcolatore di wildcard mask","item":"https://subnetkit-tool.vercel.app/wildcard-mask-calculator"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Come si calcola una wildcard mask?","acceptedAnswer":{"@type":"Answer","text":"Sottrai da 255 ogni ottetto della subnet mask. Per 255.255.255.192 il risultato è 0.0.0.63."}},{"@type":"Question","name":"Una wildcard mask è uguale a una maschera inversa?","acceptedAnswer":{"@type":"Answer","text":"Sì. La documentazione Cisco usa entrambi i termini per il complemento bit a bit della subnet mask."}},{"@type":"Question","name":"Perché OSPF usa le wildcard mask?","acceptedAnswer":{"@type":"Answer","text":"Il comando network riutilizzava in origine la logica di corrispondenza delle ACL, che verifica i bit dell'indirizzo in modo selettivo. Le versioni moderne di IOS accettano qui anche una subnet mask e la convertono, ma gli esami si aspettano ancora la forma wildcard."}},{"@type":"Question","name":"Quale wildcard corrisponde a un singolo host?","acceptedAnswer":{"@type":"Answer","text":"0.0.0.0, cioè ogni bit deve corrispondere. Nelle ACL puoi scrivere host 10.1.1.5 invece di 10.1.1.5 0.0.0.0."}}]}</script>
+  <!-- hreflang:start -->
+  <meta name="bm-langs" content="en,es,pt,fr,de,it">
+  <link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator">
+  <link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/wildcard-mask-calculator">
+  <link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/wildcard-mask-calculator">
+  <link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/wildcard-mask-calculator">
+  <link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/wildcard-mask-calculator">
+  <link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/wildcard-mask-calculator">
+  <link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator">
+  <!-- hreflang:end -->
+  <meta property="og:locale" content="it_IT">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+    <a class="brand" href="/it/" aria-label="Home di SubnetKit">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text"><span class="brand-name">SubnetKit</span><span class="brand-desc">Calcolatore di subnet IP</span></span>
+    </a>
+    <nav class="nav" aria-label="Principale">
+      <details class="more-tools">
+        <summary class="btn btn-ghost btn-sm" aria-label="Altri strumenti"><span class="mt-label">Altri strumenti</span> ▾</summary>
+        <div class="menu">
+          <a href="https://quickinvoice-tool.vercel.app"><span class="mi">Q</span>QuickInvoice<small>Fatture</small></a>
+          <a href="https://ratecalc-tool.vercel.app"><span class="mi">R</span>RateCalc<small>Tariffe freelance</small></a>
+          <a href="https://qrforge-tool.vercel.app"><span class="mi">Q</span>QRForge<small>Codici QR</small></a>
+          <a href="https://squish-tool.vercel.app"><span class="mi">S</span>Squish<small>Compressore di immagini</small></a>
+          <a href="https://growthcalc-tool.vercel.app"><span class="mi">G</span>GrowthCalc<small>Interesse composto</small></a>
+          <a href="https://subnetkit-tool.vercel.app" class="current"><span class="mi">N</span>SubnetKit<small>Subnet IP</small></a>
+          <a href="https://shotstudio-tool.vercel.app"><span class="mi">S</span>Screenshot Studio<small>Mockup di screenshot</small></a>
+          <a href="https://mockuplab-tool.vercel.app"><span class="mi">M</span>Social Mockup Lab<small>Mockup di chat e post</small></a>
+          <a href="https://carouselmaker-tool.vercel.app"><span class="mi">C</span>Carousel Maker<small>Slide per caroselli</small></a>
+          <a href="https://creativeresize-tool.vercel.app"><span class="mi">R</span>Creative Resize<small>Formati social</small></a>
+          <a href="https://framelab-tool.vercel.app"><span class="mi">F</span>Frame Lab<small>Cornici e mockup per foto</small></a>
+          <a href="https://giveaway-tool.vercel.app"><span class="mi">G</span>Giveaway Picker<small>Giveaway su Instagram</small></a>
+          <a href="https://iplookup-tool.vercel.app"><span class="mi">I</span>IP Lookup<small>Ricerca IP</small></a>
+          <a href="https://sizeconverter-tool.vercel.app"><span class="mi">Z</span>Size Converter<small>Ridimensiona immagini e video</small></a>
+        </div>
+      </details>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="brand-by">di <b>Be Management</b></span>
+      <button class="btn btn-sm hidden" id="installBtn" data-action="install" title="Installa questo strumento come app">⤓ Installa</button>
+      <span class="lang-switch"><select id="langSelect" aria-label="Language" translate="no"><option value="en">EN</option></select></span>
+      <button class="btn btn-primary btn-sm" data-action="pro" data-arg="nav">Pro</button>
+      <button class="btn icon-btn" data-action="theme" aria-label="Cambia tema">◐</button>
+    </nav>
+    </div>
+  </div>
+</header>
+
+<section class="hero container">
+  <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Be Management Tools · IPv4 · Cisco IOS</span>
+  <h1>Calcolatore di wildcard mask</h1>
+  <p class="tagline">Ottieni la maschera inversa di qualsiasi subnet, così i comandi access-list e network di OSPF corrispondono esattamente agli indirizzi che intendi.</p>
+  <div class="badges">
+  <span class="badge">100% gratis</span>
+  <span class="badge">Nessuna registrazione</span>
+  <span class="badge">Funziona nel tuo browser</span>
+  <span class="badge">IPv4 + IPv6</span>
+  <span class="badge">Link condivisibili</span>
+  </div>
+</section>
+
+<main class="container">
+  <div class="tool-layout">
+    <div class="tool-col">
+
+      <section class="card tool-card" id="toolCard" aria-labelledby="toolTitle">
+        <h2 id="toolTitle" class="sr-only">Strumenti per subnet</h2>
+        <div class="tabs no-print" role="tablist" aria-label="Strumenti" id="tabBar">
+          <button class="tab active" role="tab" data-tab="ipv4" id="tab-ipv4" aria-selected="true" aria-controls="panel-ipv4">Subnet IPv4</button>
+          <button class="tab" role="tab" data-tab="vlsm" id="tab-vlsm" aria-selected="false" aria-controls="panel-vlsm">VLSM</button>
+          <button class="tab" role="tab" data-tab="ipv6" id="tab-ipv6" aria-selected="false" aria-controls="panel-ipv6">IPv6</button>
+          <button class="tab" role="tab" data-tab="cidr" id="tab-cidr" aria-selected="false" aria-controls="panel-cidr">CIDR ↔ Intervallo</button>
+          <button class="tab" role="tab" data-tab="supernet" id="tab-supernet" aria-selected="false" aria-controls="panel-supernet">Supernet <span class="pro-badge" data-pro-lock>PRO</span></button>
+        </div>
+
+        <!-- ================= IPv4 ================= -->
+        <div class="panel active" id="panel-ipv4" role="tabpanel" aria-labelledby="tab-ipv4">
+          <div class="print-only report-head"><h2>SubnetKit – Piano di subnet</h2><p id="ip4ReportMeta"></p><p>Generato il <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="grid-3 no-plan">
+            <div class="field">
+              <label for="ip4Addr">Indirizzo IP</label>
+              <input type="text" id="ip4Addr" class="mono" value="192.168.1.10" placeholder="192.168.1.10" autocomplete="off" spellcheck="false" inputmode="decimal" data-persist>
+            </div>
+            <div class="field">
+              <label for="ip4Prefix">Prefisso (CIDR)</label>
+              <select id="ip4Prefix" class="mono" data-persist></select>
+            </div>
+            <div class="field">
+              <label for="ip4Mask">Subnet mask</label>
+              <select id="ip4Mask" class="mono" data-persist></select>
+            </div>
+          </div>
+          <div class="field no-plan">
+            <label for="ip4Free">Oppure incolla qualsiasi forma: CIDR, IP + maschera, IP + wildcard</label>
+            <input type="text" id="ip4Free" class="mono" placeholder="192.168.1.10/24 · 192.168.1.10 255.255.255.0 · 192.168.1.10 0.0.0.255" autocomplete="off" spellcheck="false">
+            <p class="err" id="ip4Err" role="alert"></p>
+          </div>
+
+          <div id="ip4Results">
+            <dl class="kv" id="ip4Grid"></dl>
+            <h3 class="sub-title">Binario <span class="hint" style="margin:0">(bit di rete evidenziati)</span></h3>
+            <div class="bin" id="ip4Bin"></div>
+          </div>
+
+          <h3 class="sub-title no-plan">Dividi in subnet</h3>
+          <div class="grid-3 no-plan">
+            <div class="field">
+              <label for="ip4SplitMode">Dividi per</label>
+              <select id="ip4SplitMode" data-persist>
+                <option value="prefix">Nuova lunghezza del prefisso</option>
+                <option value="count">Numero di subnet</option>
+              </select>
+            </div>
+            <div class="field" id="ip4SplitPrefixWrap">
+              <label for="ip4SplitPrefix">Nuovo prefisso</label>
+              <select id="ip4SplitPrefix" class="mono" data-persist></select>
+            </div>
+            <div class="field hidden" id="ip4SplitCountWrap">
+              <label for="ip4SplitCount">Subnet</label>
+              <select id="ip4SplitCount" class="mono" data-persist></select>
+            </div>
+          </div>
+          <p class="err" id="ip4SplitErr" role="alert"></p>
+          <div id="ip4SplitOut">
+            <div class="table-actions no-print" data-table="ip4SplitTable">
+              <button class="btn btn-sm" type="button" data-act="copy-text">📋 Copia tabella come testo</button>
+              <button class="btn btn-sm" type="button" data-act="copy">Copia come CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Scarica CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Stampa piano <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="ip4SplitTable">
+                <thead><tr><th class="num">#</th><th>Rete</th><th>Intervallo utilizzabile</th><th>Broadcast</th><th class="num">Host</th></tr></thead>
+                <tbody id="ip4SplitBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="ip4SplitNote"></p>
+          </div>
+        </div>
+
+        <!-- ================= VLSM ================= -->
+        <div class="panel" id="panel-vlsm" role="tabpanel" aria-labelledby="tab-vlsm">
+          <div class="print-only report-head"><h2>SubnetKit – Piano di subnet VLSM</h2><p id="vlsmReportMeta"></p><p>Generato il <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="grid-2 no-plan">
+            <div class="field">
+              <label for="vlsmBase">Rete di base (CIDR)</label>
+              <input type="text" id="vlsmBase" class="mono" value="192.168.10.0/24" placeholder="192.168.10.0/24" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label class="checkbox" for="vlsmP2P" style="margin-top:28px"><input type="checkbox" id="vlsmP2P" data-persist> Usa /31 per i collegamenti punto-punto (2 host)</label>
+            </div>
+          </div>
+          <div class="vlsm-head no-plan" aria-hidden="true"><span>Nome della subnet</span><span>Host necessari</span><span></span></div>
+          <div class="vlsm-rows" id="vlsmRows" aria-label="Fabbisogni di subnet"></div>
+          <div class="row no-plan">
+            <button class="btn btn-sm" type="button" id="btnVlsmAdd">＋ Aggiungi rete</button>
+            <span class="hint" id="vlsmLimitHint" style="margin:0"></span>
+          </div>
+          <p class="err" id="vlsmErr" role="alert"></p>
+          <div id="vlsmOut">
+            <div class="table-actions no-print" data-table="vlsmTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copia come CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Scarica CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Stampa piano <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="vlsmTable">
+                <thead><tr><th class="name">Nome</th><th class="num">Necessari</th><th class="num">Assegnati</th><th>Rete</th><th>Maschera</th><th>Intervallo utilizzabile</th><th>Broadcast</th><th class="num">Sprecati</th></tr></thead>
+                <tbody id="vlsmBody"></tbody>
+              </table>
+            </div>
+            <div class="sum" id="vlsmSummary"></div>
+          </div>
+        </div>
+
+        <!-- ================= IPv6 ================= -->
+        <div class="panel" id="panel-ipv6" role="tabpanel" aria-labelledby="tab-ipv6">
+          <div class="print-only report-head"><h2>SubnetKit – Piano di subnet IPv6</h2><p id="ip6ReportMeta"></p><p>Generato il <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="field no-plan">
+            <label for="ip6Addr">Indirizzo IPv6 con prefisso</label>
+            <input type="text" id="ip6Addr" class="mono" value="2001:db8:85a3::8a2e:370:7334/64" placeholder="2001:db8::1/64" autocomplete="off" spellcheck="false" data-persist>
+            <p class="err" id="ip6Err" role="alert"></p>
+          </div>
+          <div id="ip6Results">
+            <dl class="kv" id="ip6Grid"></dl>
+            <h3 class="sub-title">Binario – primi 64 bit <span class="hint" style="margin:0">(bit di rete evidenziati)</span></h3>
+            <div class="bin" id="ip6Bin"></div>
+          </div>
+
+          <h3 class="sub-title no-plan">Dividi in subnet</h3>
+          <div class="grid-2 no-plan">
+            <div class="field">
+              <label for="ip6SplitPrefix">Nuova lunghezza del prefisso</label>
+              <input type="number" id="ip6SplitPrefix" class="mono" min="1" max="128" step="1" value="68" data-persist>
+            </div>
+            <div class="field">
+              <label>Risultato</label>
+              <p class="hint" id="ip6SplitInfo" style="margin-top:12px"></p>
+            </div>
+          </div>
+          <p class="err" id="ip6SplitErr" role="alert"></p>
+          <div id="ip6SplitOut">
+            <div class="table-actions no-print" data-table="ip6SplitTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copia come CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Scarica CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Stampa piano <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="ip6SplitTable">
+                <thead><tr><th class="num">#</th><th>Subnet</th><th>Primo indirizzo</th><th>Ultimo indirizzo</th></tr></thead>
+                <tbody id="ip6SplitBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="ip6SplitNote"></p>
+          </div>
+        </div>
+
+        <!-- ================= CIDR ↔ Range ================= -->
+        <div class="panel" id="panel-cidr" role="tabpanel" aria-labelledby="tab-cidr">
+          <h3 class="sub-title" style="border:none;padding-top:0;margin-top:0">CIDR → intervallo IP</h3>
+          <div class="field">
+            <label for="cidrIn">Blocco CIDR</label>
+            <input type="text" id="cidrIn" class="mono" value="10.0.0.0/22" placeholder="10.0.0.0/22" autocomplete="off" spellcheck="false" data-persist>
+            <p class="err" id="cidrErr" role="alert"></p>
+          </div>
+          <dl class="kv" id="cidrGrid"></dl>
+
+          <h3 class="sub-title">Intervallo IP → blocchi CIDR</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="rangeStart">IP iniziale</label>
+              <input type="text" id="rangeStart" class="mono" value="10.0.0.1" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label for="rangeEnd">IP finale</label>
+              <input type="text" id="rangeEnd" class="mono" value="10.0.0.254" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+          </div>
+          <p class="err" id="rangeErr" role="alert"></p>
+          <div id="rangeOut">
+            <p class="hint" id="rangeInfo"></p>
+            <div class="cidr-list" id="rangeList"></div>
+            <div class="table-actions no-print" data-table="rangeTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copia come CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Scarica CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="rangeTable">
+                <thead><tr><th class="num">#</th><th>CIDR</th><th>Maschera</th><th>Primo</th><th>Ultimo</th><th class="num">Indirizzi</th></tr></thead>
+                <tbody id="rangeBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <h3 class="sub-title">L'IP è nella subnet?</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="chkIp">Indirizzo IP</label>
+              <input type="text" id="chkIp" class="mono" value="192.168.1.130" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label for="chkCidr">Subnet (CIDR)</label>
+              <input type="text" id="chkCidr" class="mono" value="192.168.1.0/25" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+          </div>
+          <p class="err" id="chkErr" role="alert"></p>
+          <div class="check-out" id="chkOut" aria-live="polite"></div>
+
+          <details class="ref" id="refDetails">
+            <summary>Riferimento: tutti i prefissi da /0 a /32 (maschera, wildcard, indirizzi, host)</summary>
+            <div class="table-actions no-print" data-table="refTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copia come CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Scarica CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="refTable">
+                <thead><tr><th>CIDR</th><th>Subnet mask</th><th>Wildcard</th><th class="num">Indirizzi</th><th class="num">Host utilizzabili</th></tr></thead>
+                <tbody id="refBody"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+
+        <!-- ================= Supernet (Pro) ================= -->
+        <div class="panel" id="panel-supernet" role="tabpanel" aria-labelledby="tab-supernet">
+          <p class="hint" style="margin-top:0">Incolla un CIDR per riga (oppure separati da spazi/virgole). SubnetKit unisce i blocchi adiacenti e contenuti nel più piccolo insieme equivalente: ideale per aggregare le route e ripulire le ACL. <span class="pro-badge" data-pro-lock>PRO</span></p>
+          <div class="field">
+            <label for="snInput">Reti da aggregare</label>
+            <textarea id="snInput" class="mono" rows="7" spellcheck="false" data-persist>192.168.0.0/24
+192.168.1.0/24
+192.168.2.0/24
+192.168.3.0/24
+10.10.0.0/16
+10.10.5.0/24
+172.16.4.0/22
+172.16.8.0/22</textarea>
+          </div>
+          <div class="row">
+            <button class="btn btn-primary" type="button" id="btnSnRun">Aggrega le route</button>
+            <button class="btn btn-ghost" type="button" id="btnSnClear">Cancella</button>
+          </div>
+          <p class="err" id="snErr" role="alert"></p>
+          <div id="snOut" class="hidden">
+            <div class="sum" id="snSummary"></div>
+            <div class="table-actions no-print" data-table="snTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copia come CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Scarica CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="snTable">
+                <thead><tr><th class="num">#</th><th>Aggrega</th><th>Maschera</th><th>Primo</th><th>Ultimo</th><th class="num">Indirizzi</th><th class="name">Copre</th></tr></thead>
+                <tbody id="snBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="row actions no-print">
+          <button class="btn" id="btnCopyResults" type="button">📋 Copia risultati</button>
+          <button class="btn" id="btnShare" type="button">🔗 Link di condivisione</button>
+          <button class="btn btn-ghost" id="btnReset" type="button">↺ Ripristina scheda</button>
+        </div>
+      </section>
+
+      <!-- Saved projects (Pro: unlimited, free: 1) -->
+      <section class="card no-print" aria-labelledby="projTitle">
+        <h2 id="projTitle" class="card-title">Progetti salvati <span class="pro-badge" data-pro-lock title="Free: 1 project · Pro: unlimited">PRO</span></h2>
+        <p class="hint">Salva con un nome tutti i dati di tutte le schede e ricaricali in seguito. Piano gratuito: 1 progetto, Pro: illimitati.</p>
+        <div class="row">
+          <input type="text" id="projectName" placeholder="Nome del progetto (es. Piano di indirizzamento sede)" maxlength="60" aria-label="Nome del progetto">
+          <button class="btn btn-primary" id="btnSaveProject" type="button">💾 Salva progetto</button>
+        </div>
+        <div class="proj-list" id="projectList"></div>
+      </section>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="ad-slot" data-slot="sidebar-1"></div>
+      <div class="card pro-card">
+        <h3>Passa a Pro <span class="pro-badge">A VITA</span></h3>
+        <ul>
+          <li>Reti VLSM illimitate</li>
+          <li>Strumento di aggregazione delle route (supernet)</li>
+          <li>Esportazione CSV di ogni tabella</li>
+          <li>Progetti salvati e piani di subnet stampabili</li>
+        </ul>
+        <button class="btn btn-primary btn-block" data-action="pro" data-arg="sidebar">Passa a Pro – <span data-pro-price>$12</span> una tantum</button>
+      </div>
+      <div class="card lead-card" id="leadCard" hidden>
+        <h3>Prontuario del subnetting</h3>
+        <p class="hint">Ricevi il prontuario delle subnet da stampare e i nuovi strumenti di networking. Niente spam.</p>
+        <form class="lead-form" data-action="newsletter">
+          <input type="email" name="email" required placeholder="tu@email.com" aria-label="Indirizzo email" autocomplete="email">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+          <button class="btn btn-primary" type="submit">Inviala</button>
+        </form>
+        <p class="hint tiny">Niente spam. Annulli l'iscrizione quando vuoi.</p>
+      </div>
+      <div class="card course-card hidden" id="courseCard">
+        <h3>Corso consigliato</h3>
+        <p id="courseText">Migliora il tuo subnetting per la CCNA con un corso strutturato.</p>
+        <a class="btn btn-block" id="courseLink" href="#" rel="sponsored noopener" target="_blank">Vedi il corso →</a>
+        <p class="hint" style="margin-top:8px">Link di partner: potremmo ricevere una commissione senza costi aggiuntivi per te.</p>
+      </div>
+      <div class="ad-slot" data-slot="sidebar-2"></div>
+    </aside>
+  </div>
+
+  <div class="ad-slot horizontal" data-slot="below-tool"></div>
+</main>
+
+<!-- uses:start -->
+<section class="uses container" id="popular-uses" aria-labelledby="usesTitle">
+  <h2 id="usesTitle">Altri modi per usare SubnetKit</h2>
+  <ul class="uses-grid">
+      <li><a href="/it/24-subnet-calculator">Calcolatore subnet /24</a></li>
+      <li><a href="/it/30-and-31-point-to-point-subnets">Subnet /30 e /31 per collegamenti punto-punto</a></li>
+      <li><a href="/it/27-subnet-calculator">Calcolatore subnet /27</a></li>
+      <li><a href="/it/vlsm-calculator-ccna">Calcolatore VLSM per la CCNA</a></li>
+      <li><a href="/it/wildcard-mask-calculator" class="current" aria-current="page">Calcolatore di wildcard mask</a></li>
+      <li><a href="/it/ipv6-subnet-calculator-64">Calcolatore subnet IPv6 /64</a></li>
+      <li><a href="/it/ip-range-to-cidr">Convertitore da intervallo IP a CIDR</a></li>
+      <li><a href="/it/private-ip-address-ranges">Gli intervalli di indirizzi IP privati spiegati</a></li>
+  </ul>
+</section>
+<!-- uses:end -->
+
+<section class="content container">
+  <p class="breadcrumb"><a href="/it/">SubnetKit</a> › Calcolatore di wildcard mask</p>
+  <h2>Calcolatore di wildcard mask: come funziona</h2>
+  <p>Le access list Cisco e i comandi <code>network</code> di OSPF ed EIGRP accettano una wildcard mask invece di una subnet mask. Un bit 0 significa "deve corrispondere", un bit 1 significa "ignora", quindi la wildcard è semplicemente l'inverso bit a bit della subnet mask: 255.255.255.255 meno la maschera, ottetto per ottetto.</p><p>SubnetKit mostra la wildcard accanto alla subnet mask in ogni calcolo e il suo campo di input libero accetta la sintassi <code>address wildcard</code> direttamente da una configurazione IOS. È gratis e funziona nel browser.</p>
+  <h2>Esempio svolto: 172.16.32.0/20</h2>
+  <ul><li><strong>Subnet mask:</strong> 255.255.240.0</li><li><strong>Wildcard mask:</strong> 0.0.15.255 (255 − 255 = 0, 255 − 255 = 0, 255 − 240 = 15, 255 − 0 = 255)</li><li><strong>Intervallo di indirizzi coperto:</strong> 172.16.32.0 – 172.16.47.255 (4,096 indirizzi)</li></ul><p>Lo stesso blocco in sintassi IOS:</p><ul><li><code>access-list 10 permit 172.16.32.0 0.0.15.255</code></li><li><code>router ospf 1</code> poi <code>network 172.16.32.0 0.0.15.255 area 0</code></li></ul><p>Per corrispondere a un singolo host usa la wildcard 0.0.0.0, oppure la parola chiave <code>host</code>; per corrispondere a tutto usa 0.0.0.0 255.255.255.255, oppure <code>any</code>. Incolla <code>172.16.32.0 0.0.15.255</code> nel campo di inserimento rapido di SubnetKit e viene interpretato automaticamente come /20.</p>
+  <h2>Riferimento: prefisso, maschera e wildcard</h2>
+  <ul><li><strong>/8</strong> 255.0.0.0 → 0.255.255.255</li><li><strong>/16</strong> 255.255.0.0 → 0.0.255.255</li><li><strong>/20</strong> 255.255.240.0 → 0.0.15.255</li><li><strong>/24</strong> 255.255.255.0 → 0.0.0.255</li><li><strong>/25</strong> 255.255.255.128 → 0.0.0.127</li><li><strong>/26</strong> 255.255.255.192 → 0.0.0.63</li><li><strong>/27</strong> 255.255.255.224 → 0.0.0.31</li><li><strong>/28</strong> 255.255.255.240 → 0.0.0.15</li><li><strong>/30</strong> 255.255.255.252 → 0.0.0.3</li><li><strong>/32</strong> 255.255.255.255 → 0.0.0.0</li></ul><p>Le wildcard non sono limitate a sequenze contigue di uno. In una ACL, 0.0.1.0 corrisponderebbe a ogni terzo ottetto pari o dispari, un trucco usato a volte per indicare subnet alterne in una sola riga. Queste maschere non contigue sono valide nelle ACL ma non in OSPF.</p>
+  <h2>Domande frequenti</h2>
+  <div class="faq">
+    <details><summary>Come si calcola una wildcard mask?</summary><p>Sottrai da 255 ogni ottetto della subnet mask. Per 255.255.255.192 il risultato è 0.0.0.63.</p></details>
+    <details><summary>Una wildcard mask è uguale a una maschera inversa?</summary><p>Sì. La documentazione Cisco usa entrambi i termini per il complemento bit a bit della subnet mask.</p></details>
+    <details><summary>Perché OSPF usa le wildcard mask?</summary><p>Il comando network riutilizzava in origine la logica di corrispondenza delle ACL, che verifica i bit dell'indirizzo in modo selettivo. Le versioni moderne di IOS accettano qui anche una subnet mask e la convertono, ma gli esami si aspettano ancora la forma wildcard.</p></details>
+    <details><summary>Quale wildcard corrisponde a un singolo host?</summary><p>0.0.0.0, cioè ogni bit deve corrispondere. Nelle ACL puoi scrivere host 10.1.1.5 invece di 10.1.1.5 0.0.0.0.</p></details>
+  </div>
+  <p class="back-guide">Cerchi la guida completa, i consigli e tutte le FAQ? Leggi la <a href="/it/">pagina principale di SubnetKit</a>.</p>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark lg" aria-hidden="true"></span>
+      <div>
+        <strong>Be Management Tools</strong>
+        <p>Una raccolta di strumenti gratuiti e privati che funzionano interamente nel tuo browser. SubnetKit è il calcolatore di subnet IP della famiglia, creato e gestito da Be Management.</p>
+      </div>
+    </div>
+    <div class="footer-tools">
+      <strong>Altri strumenti gratuiti</strong>
+      <ul>
+        <li><a href="https://quickinvoice-tool.vercel.app">QuickInvoice · Fatture</a></li>
+        <li><a href="https://ratecalc-tool.vercel.app">RateCalc · Tariffe freelance</a></li>
+        <li><a href="https://qrforge-tool.vercel.app">QRForge · Codici QR</a></li>
+        <li><a href="https://squish-tool.vercel.app">Squish · Compressore di immagini</a></li>
+        <li><a href="https://growthcalc-tool.vercel.app">GrowthCalc · Interesse composto</a></li>
+        <li><a href="https://subnetkit-tool.vercel.app" class="current">SubnetKit · Subnet IP</a></li>
+        <li><a href="https://shotstudio-tool.vercel.app">Screenshot Studio · Mockup di screenshot</a></li>
+        <li><a href="https://mockuplab-tool.vercel.app">Social Mockup Lab · Mockup di chat e post</a></li>
+        <li><a href="https://carouselmaker-tool.vercel.app">Carousel Maker · Slide per caroselli</a></li>
+        <li><a href="https://creativeresize-tool.vercel.app">Creative Resize · Formati social</a></li>
+        <li><a href="https://framelab-tool.vercel.app">Frame Lab · Cornici e mockup per foto</a></li>
+        <li><a href="https://giveaway-tool.vercel.app">Giveaway Picker · Giveaway su Instagram</a></li>
+        <li><a href="https://iplookup-tool.vercel.app">IP Lookup · Ricerca IP</a></li>
+        <li><a href="https://sizeconverter-tool.vercel.app">Size Converter · Ridimensiona immagini e video</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">
+      <span>© <span data-year></span> Be Management · SubnetKit. Calcolatore di subnet gratuito per network engineer.</span>
+      <span><a href="/it/privacy" data-i18n-href="/it/privacy">Privacy</a> · <a href="/it/terms" data-i18n-href="/it/terms">Termini</a> · <a href="#" data-action="cookie-settings">Impostazioni cookie</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="proModal" role="dialog" aria-modal="true" aria-labelledby="proTitle">
+  <div class="card">
+    <button class="btn btn-sm close" data-action="close-pro" aria-label="Chiudi">✕</button>
+    <h3 id="proTitle">Passa a SubnetKit Pro <span class="pro-badge">A VITA</span></h3>
+    <div class="price"><span id="proPrice"></span> <small>una tantum</small></div>
+    <ul>
+      <li>Reti VLSM illimitate</li>
+      <li>Strumento di aggregazione delle route</li>
+      <li>Esportazione CSV</li>
+      <li>Progetti salvati</li>
+      <li>Piani di subnet stampabili</li>
+      <li>Aggiornamenti a vita</li>
+    </ul>
+    <button class="btn btn-primary btn-block" data-action="checkout">Passa a Pro</button>
+    <p class="hint" style="margin-top:12px">Hai già acquistato? <a href="#" data-action="toggle-license">Inserisci la chiave di licenza</a></p>
+    <div class="row hidden" id="licenseRow"><input id="licenseKey" placeholder="Chiave di licenza" aria-label="Chiave di licenza"><button class="btn" data-action="activate-license">Attiva</button></div>
+  </div>
+</div>
+<script src="/preset.js" data-q="tab=ipv4&amp;ip4Addr=172.16.32.0&amp;ip4Prefix=20"></script>
+<script src="/app.js"></script>
+</body>
+</html>

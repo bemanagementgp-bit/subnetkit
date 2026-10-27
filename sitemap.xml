@@ -1,14 +1,597 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://subnetkit-tool.vercel.app/</loc><lastmod>2026-10-27</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://subnetkit-tool.vercel.app/24-subnet-calculator</loc><lastmod>2026-10-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets</loc><lastmod>2026-10-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://subnetkit-tool.vercel.app/27-subnet-calculator</loc><lastmod>2026-10-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://subnetkit-tool.vercel.app/vlsm-calculator-ccna</loc><lastmod>2026-10-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://subnetkit-tool.vercel.app/wildcard-mask-calculator</loc><lastmod>2026-10-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64</loc><lastmod>2026-10-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://subnetkit-tool.vercel.app/ip-range-to-cidr</loc><lastmod>2026-10-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://subnetkit-tool.vercel.app/private-ip-address-ranges</loc><lastmod>2026-10-27</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://subnetkit-tool.vercel.app/privacy</loc><lastmod>2026-10-27</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://subnetkit-tool.vercel.app/terms</loc><lastmod>2026-10-27</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://subnetkit-tool.vercel.app/24-subnet-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/24-subnet-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/es/24-subnet-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/24-subnet-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/pt/24-subnet-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/24-subnet-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/fr/24-subnet-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/24-subnet-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/de/24-subnet-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/24-subnet-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/it/24-subnet-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/24-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/24-subnet-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/27-subnet-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/27-subnet-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/es/27-subnet-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/27-subnet-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/pt/27-subnet-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/27-subnet-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/fr/27-subnet-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/27-subnet-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/de/27-subnet-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/27-subnet-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/it/27-subnet-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/27-subnet-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/27-subnet-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/es/30-and-31-point-to-point-subnets</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/pt/30-and-31-point-to-point-subnets</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/fr/30-and-31-point-to-point-subnets</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/de/30-and-31-point-to-point-subnets</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/it/30-and-31-point-to-point-subnets</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/30-and-31-point-to-point-subnets"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/30-and-31-point-to-point-subnets"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/</loc><lastmod>2026-10-27</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/es/</loc><lastmod>2026-10-27</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/pt/</loc><lastmod>2026-10-27</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/fr/</loc><lastmod>2026-10-27</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/de/</loc><lastmod>2026-10-27</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/it/</loc><lastmod>2026-10-27</lastmod><priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/ip-range-to-cidr</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ip-range-to-cidr"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/es/ip-range-to-cidr</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ip-range-to-cidr"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/pt/ip-range-to-cidr</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ip-range-to-cidr"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/fr/ip-range-to-cidr</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ip-range-to-cidr"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/de/ip-range-to-cidr</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ip-range-to-cidr"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/it/ip-range-to-cidr</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ip-range-to-cidr"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ip-range-to-cidr"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/es/ipv6-subnet-calculator-64</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/pt/ipv6-subnet-calculator-64</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/fr/ipv6-subnet-calculator-64</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/de/ipv6-subnet-calculator-64</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/it/ipv6-subnet-calculator-64</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ipv6-subnet-calculator-64"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/privacy</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/privacy"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/es/privacy</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/privacy"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/pt/privacy</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/privacy"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/fr/privacy</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/privacy"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/de/privacy</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/privacy"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/it/privacy</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/privacy"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/privacy"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/privacy"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/privacy"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/privacy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/privacy"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/private-ip-address-ranges</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/es/private-ip-address-ranges</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/pt/private-ip-address-ranges</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/fr/private-ip-address-ranges</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/de/private-ip-address-ranges</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/it/private-ip-address-ranges</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/private-ip-address-ranges"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/private-ip-address-ranges"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/terms</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/terms"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/es/terms</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/terms"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/pt/terms</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/terms"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/fr/terms</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/terms"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/de/terms</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/terms"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/it/terms</loc><lastmod>2026-10-27</lastmod><priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/terms"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/terms"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/terms"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/terms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/terms"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/terms"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/terms"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/vlsm-calculator-ccna</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/es/vlsm-calculator-ccna</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/pt/vlsm-calculator-ccna</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/fr/vlsm-calculator-ccna</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/de/vlsm-calculator-ccna</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/it/vlsm-calculator-ccna</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/vlsm-calculator-ccna"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/wildcard-mask-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/es/wildcard-mask-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/pt/wildcard-mask-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/fr/wildcard-mask-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/de/wildcard-mask-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator"/>
+  </url>
+  <url><loc>https://subnetkit-tool.vercel.app/it/wildcard-mask-calculator</loc><lastmod>2026-10-27</lastmod><priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/wildcard-mask-calculator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/wildcard-mask-calculator"/>
+  </url>
 </urlset>

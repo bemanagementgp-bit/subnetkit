@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora VLSM para el CCNA – Ejemplo de subnetting resuelto | SubnetKit</title>
+  <meta name="description" content="Calculadora VLSM para practicar el CCNA: ingresa una red base y la cantidad de hosts por departamento y obtén la asignación de mayor a menor con máscaras, rangos y desperdicio.">
+  <link rel="canonical" href="https://subnetkit-tool.vercel.app/es/vlsm-calculator-ccna">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://subnetkit-tool.vercel.app/es/vlsm-calculator-ccna">
+  <meta property="og:title" content="Calculadora VLSM para el CCNA – Ejemplo de subnetting resuelto | SubnetKit">
+  <meta property="og:description" content="Calculadora VLSM para practicar el CCNA: ingresa una red base y la cantidad de hosts por departamento y obtén la asignación de mayor a menor con máscaras, rangos y desperdicio.">
+  <meta property="og:image" content="https://subnetkit-tool.vercel.app/favicon.svg">
+  <meta property="og:site_name" content="SubnetKit">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Calculadora VLSM para el CCNA – Ejemplo de subnetting resuelto | SubnetKit">
+  <meta name="twitter:description" content="Calculadora VLSM para practicar el CCNA: ingresa una red base y la cantidad de hosts por departamento y obtén la asignación de mayor a menor con máscaras, rangos y desperdicio.">
+  <meta name="twitter:image" content="https://subnetkit-tool.vercel.app/favicon.svg">
+  <meta name="theme-color" content="#050403">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SubnetKit">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/config.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/consent.js"></script>
+  <script src="/monetize.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Calculadora VLSM para el CCNA – Ejemplo de subnetting resuelto | SubnetKit","description":"Calculadora VLSM para practicar el CCNA: ingresa una red base y la cantidad de hosts por departamento y obtén la asignación de mayor a menor con máscaras, rangos y desperdicio.","url":"https://subnetkit-tool.vercel.app/vlsm-calculator-ccna","isPartOf":{"@type":"WebSite","name":"SubnetKit","url":"https://subnetkit-tool.vercel.app/"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SubnetKit","item":"https://subnetkit-tool.vercel.app/"},{"@type":"ListItem","position":2,"name":"Calculadora VLSM para el CCNA","item":"https://subnetkit-tool.vercel.app/vlsm-calculator-ccna"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Qué es VLSM en palabras simples?","acceptedAnswer":{"@type":"Answer","text":"Usar distintas máscaras de subred dentro de una red para que cada subred tenga el tamaño de su cantidad real de hosts, en lugar de darle a cada segmento el mismo tamaño fijo."}},{"@type":"Question","name":"¿Por qué asignar primero la subred más grande?","acceptedAnswer":{"@type":"Answer","text":"Los bloques grandes tienen una alineación estricta (una /26 debe empezar en un múltiplo de 64). Ubicarlos primero mantiene los bloques contiguos y evita huecos que, de otro modo, podrían haber llenado las subredes pequeñas."}},{"@type":"Question","name":"¿La calculadora admite /31 para enlaces punto a punto?","acceptedAnswer":{"@type":"Answer","text":"Sí. Activa la opción /31 y cualquier requisito de 2 hosts se convierte en una /31 según la RFC 3021, y un requisito de 1 se convierte en una /32."}},{"@type":"Question","name":"¿Cuántas redes puedo planificar gratis?","acceptedAnswer":{"@type":"Answer","text":"Hasta 5 requisitos por plan en la versión gratis, suficiente para las preguntas típicas de práctica del CCNA. Pro quita el límite para diseños más grandes."}}]}</script>
+  <!-- hreflang:start -->
+  <meta name="bm-langs" content="en,es,pt,fr,de,it">
+  <link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna">
+  <link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/vlsm-calculator-ccna">
+  <link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/vlsm-calculator-ccna">
+  <link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/vlsm-calculator-ccna">
+  <link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/vlsm-calculator-ccna">
+  <link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/vlsm-calculator-ccna">
+  <link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/vlsm-calculator-ccna">
+  <!-- hreflang:end -->
+  <meta property="og:locale" content="es_ES">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+    <a class="brand" href="/es/" aria-label="Inicio de SubnetKit">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text"><span class="brand-name">SubnetKit</span><span class="brand-desc">Calculadora de subredes IP</span></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <details class="more-tools">
+        <summary class="btn btn-ghost btn-sm" aria-label="Más herramientas"><span class="mt-label">Más herramientas</span> ▾</summary>
+        <div class="menu">
+          <a href="https://quickinvoice-tool.vercel.app"><span class="mi">Q</span>QuickInvoice<small>Facturas</small></a>
+          <a href="https://ratecalc-tool.vercel.app"><span class="mi">R</span>RateCalc<small>Tarifas freelance</small></a>
+          <a href="https://qrforge-tool.vercel.app"><span class="mi">Q</span>QRForge<small>Códigos QR</small></a>
+          <a href="https://squish-tool.vercel.app"><span class="mi">S</span>Squish<small>Compresor de imágenes</small></a>
+          <a href="https://growthcalc-tool.vercel.app"><span class="mi">G</span>GrowthCalc<small>Interés compuesto</small></a>
+          <a href="https://subnetkit-tool.vercel.app" class="current"><span class="mi">N</span>SubnetKit<small>Subredes IP</small></a>
+          <a href="https://shotstudio-tool.vercel.app"><span class="mi">S</span>Screenshot Studio<small>Mockups de capturas</small></a>
+          <a href="https://mockuplab-tool.vercel.app"><span class="mi">M</span>Social Mockup Lab<small>Mockups de chats y posts</small></a>
+          <a href="https://carouselmaker-tool.vercel.app"><span class="mi">C</span>Carousel Maker<small>Slides para carrusel</small></a>
+          <a href="https://creativeresize-tool.vercel.app"><span class="mi">R</span>Creative Resize<small>Formatos para redes</small></a>
+          <a href="https://framelab-tool.vercel.app"><span class="mi">F</span>Frame Lab<small>Marcos y mockups de fotos</small></a>
+          <a href="https://giveaway-tool.vercel.app"><span class="mi">G</span>Giveaway Picker<small>Sorteos de Instagram</small></a>
+          <a href="https://iplookup-tool.vercel.app"><span class="mi">I</span>IP Lookup<small>Consulta de IP</small></a>
+          <a href="https://sizeconverter-tool.vercel.app"><span class="mi">Z</span>Size Converter<small>Redimensionador de imágenes y videos</small></a>
+        </div>
+      </details>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="brand-by">por <b>Be Management</b></span>
+      <button class="btn btn-sm hidden" id="installBtn" data-action="install" title="Instala esta herramienta como app">⤓ Instalar</button>
+      <span class="lang-switch"><select id="langSelect" aria-label="Language" translate="no"><option value="en">EN</option></select></span>
+      <button class="btn btn-primary btn-sm" data-action="pro" data-arg="nav">Pro</button>
+      <button class="btn icon-btn" data-action="theme" aria-label="Cambiar tema">◐</button>
+    </nav>
+    </div>
+  </div>
+</header>
+
+<section class="hero container">
+  <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Be Management Tools · IPv4 · VLSM</span>
+  <h1>Calculadora VLSM para el CCNA</h1>
+  <p class="tagline">Convierte una lista de requisitos de hosts en un plan de subredes de longitud variable correcto, tal como lo espera el examen CCNA.</p>
+  <div class="badges">
+  <span class="badge">100 % gratis</span>
+  <span class="badge">Sin registro</span>
+  <span class="badge">Funciona en tu navegador</span>
+  <span class="badge">IPv4 + IPv6</span>
+  <span class="badge">Enlaces para compartir</span>
+  </div>
+</section>
+
+<main class="container">
+  <div class="tool-layout">
+    <div class="tool-col">
+
+      <section class="card tool-card" id="toolCard" aria-labelledby="toolTitle">
+        <h2 id="toolTitle" class="sr-only">Herramientas de subred</h2>
+        <div class="tabs no-print" role="tablist" aria-label="Herramientas" id="tabBar">
+          <button class="tab active" role="tab" data-tab="ipv4" id="tab-ipv4" aria-selected="true" aria-controls="panel-ipv4">Subred IPv4</button>
+          <button class="tab" role="tab" data-tab="vlsm" id="tab-vlsm" aria-selected="false" aria-controls="panel-vlsm">VLSM</button>
+          <button class="tab" role="tab" data-tab="ipv6" id="tab-ipv6" aria-selected="false" aria-controls="panel-ipv6">IPv6</button>
+          <button class="tab" role="tab" data-tab="cidr" id="tab-cidr" aria-selected="false" aria-controls="panel-cidr">CIDR ↔ Rango</button>
+          <button class="tab" role="tab" data-tab="supernet" id="tab-supernet" aria-selected="false" aria-controls="panel-supernet">Superred <span class="pro-badge" data-pro-lock>PRO</span></button>
+        </div>
+
+        <!-- ================= IPv4 ================= -->
+        <div class="panel active" id="panel-ipv4" role="tabpanel" aria-labelledby="tab-ipv4">
+          <div class="print-only report-head"><h2>SubnetKit – Plan de subredes</h2><p id="ip4ReportMeta"></p><p>Generado <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="grid-3 no-plan">
+            <div class="field">
+              <label for="ip4Addr">Dirección IP</label>
+              <input type="text" id="ip4Addr" class="mono" value="192.168.1.10" placeholder="192.168.1.10" autocomplete="off" spellcheck="false" inputmode="decimal" data-persist>
+            </div>
+            <div class="field">
+              <label for="ip4Prefix">Prefijo (CIDR)</label>
+              <select id="ip4Prefix" class="mono" data-persist></select>
+            </div>
+            <div class="field">
+              <label for="ip4Mask">Máscara de subred</label>
+              <select id="ip4Mask" class="mono" data-persist></select>
+            </div>
+          </div>
+          <div class="field no-plan">
+            <label for="ip4Free">O pega cualquier formato: CIDR, IP + máscara, IP + wildcard</label>
+            <input type="text" id="ip4Free" class="mono" placeholder="192.168.1.10/24 · 192.168.1.10 255.255.255.0 · 192.168.1.10 0.0.0.255" autocomplete="off" spellcheck="false">
+            <p class="err" id="ip4Err" role="alert"></p>
+          </div>
+
+          <div id="ip4Results">
+            <dl class="kv" id="ip4Grid"></dl>
+            <h3 class="sub-title">Binario <span class="hint" style="margin:0">(bits de red resaltados)</span></h3>
+            <div class="bin" id="ip4Bin"></div>
+          </div>
+
+          <h3 class="sub-title no-plan">Dividir en subredes</h3>
+          <div class="grid-3 no-plan">
+            <div class="field">
+              <label for="ip4SplitMode">Dividir por</label>
+              <select id="ip4SplitMode" data-persist>
+                <option value="prefix">Nueva longitud de prefijo</option>
+                <option value="count">Cantidad de subredes</option>
+              </select>
+            </div>
+            <div class="field" id="ip4SplitPrefixWrap">
+              <label for="ip4SplitPrefix">Nuevo prefijo</label>
+              <select id="ip4SplitPrefix" class="mono" data-persist></select>
+            </div>
+            <div class="field hidden" id="ip4SplitCountWrap">
+              <label for="ip4SplitCount">Subredes</label>
+              <select id="ip4SplitCount" class="mono" data-persist></select>
+            </div>
+          </div>
+          <p class="err" id="ip4SplitErr" role="alert"></p>
+          <div id="ip4SplitOut">
+            <div class="table-actions no-print" data-table="ip4SplitTable">
+              <button class="btn btn-sm" type="button" data-act="copy-text">📋 Copiar tabla como texto</button>
+              <button class="btn btn-sm" type="button" data-act="copy">Copiar como CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Descargar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Imprimir plan <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="ip4SplitTable">
+                <thead><tr><th class="num">#</th><th>Red</th><th>Rango utilizable</th><th>Broadcast</th><th class="num">Hosts</th></tr></thead>
+                <tbody id="ip4SplitBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="ip4SplitNote"></p>
+          </div>
+        </div>
+
+        <!-- ================= VLSM ================= -->
+        <div class="panel" id="panel-vlsm" role="tabpanel" aria-labelledby="tab-vlsm">
+          <div class="print-only report-head"><h2>SubnetKit – Plan de subredes VLSM</h2><p id="vlsmReportMeta"></p><p>Generado <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="grid-2 no-plan">
+            <div class="field">
+              <label for="vlsmBase">Red base (CIDR)</label>
+              <input type="text" id="vlsmBase" class="mono" value="192.168.10.0/24" placeholder="192.168.10.0/24" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label class="checkbox" for="vlsmP2P" style="margin-top:28px"><input type="checkbox" id="vlsmP2P" data-persist> Usar /31 para enlaces punto a punto (2 hosts)</label>
+            </div>
+          </div>
+          <div class="vlsm-head no-plan" aria-hidden="true"><span>Nombre de la subred</span><span>Hosts necesarios</span><span></span></div>
+          <div class="vlsm-rows" id="vlsmRows" aria-label="Requisitos de subred"></div>
+          <div class="row no-plan">
+            <button class="btn btn-sm" type="button" id="btnVlsmAdd">＋ Agregar red</button>
+            <span class="hint" id="vlsmLimitHint" style="margin:0"></span>
+          </div>
+          <p class="err" id="vlsmErr" role="alert"></p>
+          <div id="vlsmOut">
+            <div class="table-actions no-print" data-table="vlsmTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copiar como CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Descargar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Imprimir plan <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="vlsmTable">
+                <thead><tr><th class="name">Nombre</th><th class="num">Necesarios</th><th class="num">Asignado</th><th>Red</th><th>Máscara</th><th>Rango utilizable</th><th>Broadcast</th><th class="num">Desperdiciadas</th></tr></thead>
+                <tbody id="vlsmBody"></tbody>
+              </table>
+            </div>
+            <div class="sum" id="vlsmSummary"></div>
+          </div>
+        </div>
+
+        <!-- ================= IPv6 ================= -->
+        <div class="panel" id="panel-ipv6" role="tabpanel" aria-labelledby="tab-ipv6">
+          <div class="print-only report-head"><h2>SubnetKit – Plan de subredes IPv6</h2><p id="ip6ReportMeta"></p><p>Generado <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="field no-plan">
+            <label for="ip6Addr">Dirección IPv6 con prefijo</label>
+            <input type="text" id="ip6Addr" class="mono" value="2001:db8:85a3::8a2e:370:7334/64" placeholder="2001:db8::1/64" autocomplete="off" spellcheck="false" data-persist>
+            <p class="err" id="ip6Err" role="alert"></p>
+          </div>
+          <div id="ip6Results">
+            <dl class="kv" id="ip6Grid"></dl>
+            <h3 class="sub-title">Binario – primeros 64 bits <span class="hint" style="margin:0">(bits de red resaltados)</span></h3>
+            <div class="bin" id="ip6Bin"></div>
+          </div>
+
+          <h3 class="sub-title no-plan">Dividir en subredes</h3>
+          <div class="grid-2 no-plan">
+            <div class="field">
+              <label for="ip6SplitPrefix">Nueva longitud de prefijo</label>
+              <input type="number" id="ip6SplitPrefix" class="mono" min="1" max="128" step="1" value="68" data-persist>
+            </div>
+            <div class="field">
+              <label>Resultado</label>
+              <p class="hint" id="ip6SplitInfo" style="margin-top:12px"></p>
+            </div>
+          </div>
+          <p class="err" id="ip6SplitErr" role="alert"></p>
+          <div id="ip6SplitOut">
+            <div class="table-actions no-print" data-table="ip6SplitTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copiar como CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Descargar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Imprimir plan <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="ip6SplitTable">
+                <thead><tr><th class="num">#</th><th>Subred</th><th>Primera dirección</th><th>Última dirección</th></tr></thead>
+                <tbody id="ip6SplitBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="ip6SplitNote"></p>
+          </div>
+        </div>
+
+        <!-- ================= CIDR ↔ Range ================= -->
+        <div class="panel" id="panel-cidr" role="tabpanel" aria-labelledby="tab-cidr">
+          <h3 class="sub-title" style="border:none;padding-top:0;margin-top:0">CIDR → rango de IP</h3>
+          <div class="field">
+            <label for="cidrIn">Bloque CIDR</label>
+            <input type="text" id="cidrIn" class="mono" value="10.0.0.0/22" placeholder="10.0.0.0/22" autocomplete="off" spellcheck="false" data-persist>
+            <p class="err" id="cidrErr" role="alert"></p>
+          </div>
+          <dl class="kv" id="cidrGrid"></dl>
+
+          <h3 class="sub-title">Rango IP → bloques CIDR</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="rangeStart">IP inicial</label>
+              <input type="text" id="rangeStart" class="mono" value="10.0.0.1" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label for="rangeEnd">IP final</label>
+              <input type="text" id="rangeEnd" class="mono" value="10.0.0.254" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+          </div>
+          <p class="err" id="rangeErr" role="alert"></p>
+          <div id="rangeOut">
+            <p class="hint" id="rangeInfo"></p>
+            <div class="cidr-list" id="rangeList"></div>
+            <div class="table-actions no-print" data-table="rangeTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copiar como CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Descargar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="rangeTable">
+                <thead><tr><th class="num">#</th><th>CIDR</th><th>Máscara</th><th>Primera</th><th>Última</th><th class="num">Direcciones</th></tr></thead>
+                <tbody id="rangeBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <h3 class="sub-title">¿La IP está en la subred?</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="chkIp">Dirección IP</label>
+              <input type="text" id="chkIp" class="mono" value="192.168.1.130" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label for="chkCidr">Subred (CIDR)</label>
+              <input type="text" id="chkCidr" class="mono" value="192.168.1.0/25" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+          </div>
+          <p class="err" id="chkErr" role="alert"></p>
+          <div class="check-out" id="chkOut" aria-live="polite"></div>
+
+          <details class="ref" id="refDetails">
+            <summary>Referencia: todos los prefijos de /0 a /32 (máscara, wildcard, direcciones, hosts)</summary>
+            <div class="table-actions no-print" data-table="refTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copiar como CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Descargar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="refTable">
+                <thead><tr><th>CIDR</th><th>Máscara de subred</th><th>Wildcard</th><th class="num">Direcciones</th><th class="num">Hosts utilizables</th></tr></thead>
+                <tbody id="refBody"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+
+        <!-- ================= Supernet (Pro) ================= -->
+        <div class="panel" id="panel-supernet" role="tabpanel" aria-labelledby="tab-supernet">
+          <p class="hint" style="margin-top:0">Pega un CIDR por línea (o separados por espacios o comas). SubnetKit fusiona los bloques adyacentes y contenidos en el conjunto equivalente más pequeño, ideal para sumarizar rutas y limpiar ACL. <span class="pro-badge" data-pro-lock>PRO</span></p>
+          <div class="field">
+            <label for="snInput">Redes a sumarizar</label>
+            <textarea id="snInput" class="mono" rows="7" spellcheck="false" data-persist>192.168.0.0/24
+192.168.1.0/24
+192.168.2.0/24
+192.168.3.0/24
+10.10.0.0/16
+10.10.5.0/24
+172.16.4.0/22
+172.16.8.0/22</textarea>
+          </div>
+          <div class="row">
+            <button class="btn btn-primary" type="button" id="btnSnRun">Sumarizar rutas</button>
+            <button class="btn btn-ghost" type="button" id="btnSnClear">Borrar</button>
+          </div>
+          <p class="err" id="snErr" role="alert"></p>
+          <div id="snOut" class="hidden">
+            <div class="sum" id="snSummary"></div>
+            <div class="table-actions no-print" data-table="snTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copiar como CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Descargar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="snTable">
+                <thead><tr><th class="num">#</th><th>Agregado</th><th>Máscara</th><th>Primera</th><th>Última</th><th class="num">Direcciones</th><th class="name">Cubre</th></tr></thead>
+                <tbody id="snBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="row actions no-print">
+          <button class="btn" id="btnCopyResults" type="button">📋 Copiar resultados</button>
+          <button class="btn" id="btnShare" type="button">🔗 Compartir enlace</button>
+          <button class="btn btn-ghost" id="btnReset" type="button">↺ Restablecer pestaña</button>
+        </div>
+      </section>
+
+      <!-- Saved projects (Pro: unlimited, free: 1) -->
+      <section class="card no-print" aria-labelledby="projTitle">
+        <h2 id="projTitle" class="card-title">Proyectos guardados <span class="pro-badge" data-pro-lock title="Free: 1 project · Pro: unlimited">PRO</span></h2>
+        <p class="hint">Guarda todos los datos de todas las pestañas con un nombre y vuelve a cargarlos después. Plan gratis: 1 proyecto, Pro: ilimitados.</p>
+        <div class="row">
+          <input type="text" id="projectName" placeholder="Nombre del proyecto (p. ej., plan de direccionamiento de la sede)" maxlength="60" aria-label="Nombre del proyecto">
+          <button class="btn btn-primary" id="btnSaveProject" type="button">💾 Guardar proyecto</button>
+        </div>
+        <div class="proj-list" id="projectList"></div>
+      </section>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="ad-slot" data-slot="sidebar-1"></div>
+      <div class="card pro-card">
+        <h3>Hazte Pro <span class="pro-badge">DE POR VIDA</span></h3>
+        <ul>
+          <li>Redes VLSM ilimitadas</li>
+          <li>Herramienta de sumarización de rutas (superred)</li>
+          <li>Exportación CSV de todas las tablas</li>
+          <li>Proyectos guardados y planes de subred imprimibles</li>
+        </ul>
+        <button class="btn btn-primary btn-block" data-action="pro" data-arg="sidebar">Hazte Pro – <span data-pro-price>$12</span> pago único</button>
+      </div>
+      <div class="card lead-card" id="leadCard" hidden>
+        <h3>Guía rápida de subnetting</h3>
+        <p class="hint">Recibe la guía rápida de subredes imprimible y nuevas herramientas de redes. Sin spam.</p>
+        <form class="lead-form" data-action="newsletter">
+          <input type="email" name="email" required placeholder="tu@correo.com" aria-label="Correo electrónico" autocomplete="email">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+          <button class="btn btn-primary" type="submit">Envíalo</button>
+        </form>
+        <p class="hint tiny">Sin spam. Cancela cuando quieras.</p>
+      </div>
+      <div class="card course-card hidden" id="courseCard">
+        <h3>Curso recomendado</h3>
+        <p id="courseText">Mejora tu subnetting para el CCNA con un curso estructurado.</p>
+        <a class="btn btn-block" id="courseLink" href="#" rel="sponsored noopener" target="_blank">Ver curso →</a>
+        <p class="hint" style="margin-top:8px">Enlace de socio: podemos ganar una comisión sin costo extra para ti.</p>
+      </div>
+      <div class="ad-slot" data-slot="sidebar-2"></div>
+    </aside>
+  </div>
+
+  <div class="ad-slot horizontal" data-slot="below-tool"></div>
+</main>
+
+<!-- uses:start -->
+<section class="uses container" id="popular-uses" aria-labelledby="usesTitle">
+  <h2 id="usesTitle">Más formas de usar SubnetKit</h2>
+  <ul class="uses-grid">
+      <li><a href="/es/24-subnet-calculator">Calculadora de subred /24</a></li>
+      <li><a href="/es/30-and-31-point-to-point-subnets">Subredes /30 y /31 para enlaces punto a punto</a></li>
+      <li><a href="/es/27-subnet-calculator">Calculadora de subred /27</a></li>
+      <li><a href="/es/vlsm-calculator-ccna" class="current" aria-current="page">Calculadora VLSM para el CCNA</a></li>
+      <li><a href="/es/wildcard-mask-calculator">Calculadora de máscara wildcard</a></li>
+      <li><a href="/es/ipv6-subnet-calculator-64">Calculadora de subred IPv6 /64</a></li>
+      <li><a href="/es/ip-range-to-cidr">Convertidor de rango IP a CIDR</a></li>
+      <li><a href="/es/private-ip-address-ranges">Rangos de direcciones IP privadas explicados</a></li>
+  </ul>
+</section>
+<!-- uses:end -->
+
+<section class="content container">
+  <p class="breadcrumb"><a href="/es/">SubnetKit</a> › Calculadora VLSM para el CCNA</p>
+  <h2>Calculadora VLSM para el CCNA: cómo funciona</h2>
+  <p>Las máscaras de subred de longitud variable te permiten dividir un bloque de direcciones en subredes de distintos tamaños para que una LAN de 60 usuarios y un enlace WAN de 2 direcciones no consuman una /24 cada uno. El CCNA evalúa el método, no solo la respuesta: asigna primero el más grande, alinea cada bloque a su tamaño y evita solapamientos.</p><p>La pestaña VLSM de SubnetKit hace exactamente eso en el navegador, gratis, y muestra cada valor intermedio para que puedas comparar tu propio cálculo.</p>
+  <h2>Ejemplo resuelto: cuatro redes a partir de 192.168.10.0/24</h2>
+  <p>Requisitos: Ventas 60 hosts, Ingeniería 28, Administración 12, enlace WAN 2. Ordenados de mayor a menor:</p><ol><li><strong>Ventas, 60 hosts → /26</strong> (64 direcciones, 62 utilizables): 192.168.10.0/26, máscara 255.255.255.192, hosts .1–.62, broadcast .63</li><li><strong>Ingeniería, 28 → /27</strong> (32, 30 utilizables): 192.168.10.64/27, máscara 255.255.255.224, hosts .65–.94, broadcast .95</li><li><strong>Administración, 12 → /28</strong> (16, 14 utilizables): 192.168.10.96/28, máscara 255.255.255.240, hosts .97–.110, broadcast .111</li><li><strong>Enlace WAN, 2 → /30</strong> (4, 2 utilizables): 192.168.10.112/30, máscara 255.255.255.252, hosts .113–.114, broadcast .115</li></ol><p>Total usado: 116 de 256 direcciones; la siguiente dirección libre es 192.168.10.116, lo que deja espacio para crecer. Estas filas vienen precargadas en la calculadora.</p>
+  <h2>Cómo elegir cada prefijo</h2>
+  <p>Para un requisito de <em>n</em> hosts, busca la potencia de dos más pequeña que sea al menos <em>n</em> + 2 (red y broadcast), y luego el prefijo es 32 menos ese exponente. Para 28 hosts: 28 + 2 = 30, la siguiente potencia de dos es 32 = 2^5, así que el prefijo es 32 − 5 = /27.</p><p>Hay dos reglas que confunden a la gente. Primero, cada bloque debe empezar en un múltiplo de su propio tamaño: después de que la /26 termina en .63, una /27 puede empezar en .64 porque 64 es divisible por 32. Segundo, asigna en orden descendente de tamaño; ubicar primero la /30 WAN en .0 obligaría a la /26 a empezar en .64 y desperdiciaría el hueco. SubnetKit informa las direcciones desperdiciadas por fila para que veas el costo de cualquier plan.</p>
+  <h2>Preguntas frecuentes</h2>
+  <div class="faq">
+    <details><summary>¿Qué es VLSM en palabras simples?</summary><p>Usar distintas máscaras de subred dentro de una red para que cada subred tenga el tamaño de su cantidad real de hosts, en lugar de darle a cada segmento el mismo tamaño fijo.</p></details>
+    <details><summary>¿Por qué asignar primero la subred más grande?</summary><p>Los bloques grandes tienen una alineación estricta (una /26 debe empezar en un múltiplo de 64). Ubicarlos primero mantiene los bloques contiguos y evita huecos que, de otro modo, podrían haber llenado las subredes pequeñas.</p></details>
+    <details><summary>¿La calculadora admite /31 para enlaces punto a punto?</summary><p>Sí. Activa la opción /31 y cualquier requisito de 2 hosts se convierte en una /31 según la RFC 3021, y un requisito de 1 se convierte en una /32.</p></details>
+    <details><summary>¿Cuántas redes puedo planificar gratis?</summary><p>Hasta 5 requisitos por plan en la versión gratis, suficiente para las preguntas típicas de práctica del CCNA. Pro quita el límite para diseños más grandes.</p></details>
+  </div>
+  <p class="back-guide">¿Buscas la guía completa, consejos y todas las preguntas frecuentes? Lee la <a href="/es/">página principal de SubnetKit</a>.</p>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark lg" aria-hidden="true"></span>
+      <div>
+        <strong>Be Management Tools</strong>
+        <p>Una colección de herramientas gratis y privadas que funcionan por completo en tu navegador. SubnetKit es la calculadora de subredes IP de la familia, creada y mantenida por Be Management.</p>
+      </div>
+    </div>
+    <div class="footer-tools">
+      <strong>Más herramientas gratis</strong>
+      <ul>
+        <li><a href="https://quickinvoice-tool.vercel.app">QuickInvoice · Facturas</a></li>
+        <li><a href="https://ratecalc-tool.vercel.app">RateCalc · Tarifas freelance</a></li>
+        <li><a href="https://qrforge-tool.vercel.app">QRForge · Códigos QR</a></li>
+        <li><a href="https://squish-tool.vercel.app">Squish · Compresor de imágenes</a></li>
+        <li><a href="https://growthcalc-tool.vercel.app">GrowthCalc · Interés compuesto</a></li>
+        <li><a href="https://subnetkit-tool.vercel.app" class="current">SubnetKit · Subredes IP</a></li>
+        <li><a href="https://shotstudio-tool.vercel.app">Screenshot Studio · Mockups de capturas</a></li>
+        <li><a href="https://mockuplab-tool.vercel.app">Social Mockup Lab · Mockups de chats y posts</a></li>
+        <li><a href="https://carouselmaker-tool.vercel.app">Carousel Maker · Slides para carrusel</a></li>
+        <li><a href="https://creativeresize-tool.vercel.app">Creative Resize · Formatos para redes</a></li>
+        <li><a href="https://framelab-tool.vercel.app">Frame Lab · Marcos y mockups de fotos</a></li>
+        <li><a href="https://giveaway-tool.vercel.app">Giveaway Picker · Sorteos de Instagram</a></li>
+        <li><a href="https://iplookup-tool.vercel.app">IP Lookup · Consulta de IP</a></li>
+        <li><a href="https://sizeconverter-tool.vercel.app">Size Converter · Redimensionador de imágenes y videos</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">
+      <span>© <span data-year></span> Be Management · SubnetKit. Calculadora de subredes gratis para ingenieros de redes.</span>
+      <span><a href="/es/privacy" data-i18n-href="/es/privacy">Privacidad</a> · <a href="/es/terms" data-i18n-href="/es/terms">Términos</a> · <a href="#" data-action="cookie-settings">Configuración de cookies</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="proModal" role="dialog" aria-modal="true" aria-labelledby="proTitle">
+  <div class="card">
+    <button class="btn btn-sm close" data-action="close-pro" aria-label="Cerrar">✕</button>
+    <h3 id="proTitle">Pásate a SubnetKit Pro <span class="pro-badge">DE POR VIDA</span></h3>
+    <div class="price"><span id="proPrice"></span> <small>pago único</small></div>
+    <ul>
+      <li>Redes VLSM ilimitadas</li>
+      <li>Herramienta de sumarización de rutas</li>
+      <li>Exportación CSV</li>
+      <li>Proyectos guardados</li>
+      <li>Planes de subred imprimibles</li>
+      <li>Actualizaciones de por vida</li>
+    </ul>
+    <button class="btn btn-primary btn-block" data-action="checkout">Hazte Pro</button>
+    <p class="hint" style="margin-top:12px">¿Ya compraste? <a href="#" data-action="toggle-license">Ingresa la clave de licencia</a></p>
+    <div class="row hidden" id="licenseRow"><input id="licenseKey" placeholder="Clave de licencia" aria-label="Clave de licencia"><button class="btn" data-action="activate-license">Activar</button></div>
+  </div>
+</div>
+<script src="/preset.js" data-q="tab=vlsm&amp;vlsmBase=192.168.10.0%2F24&amp;vlsmP2P=0&amp;rows=Sales:60,Engineering:28,Admin:12,WAN%20link:2"></script>
+<script src="/app.js"></script>
+</body>
+</html>

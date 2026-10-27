@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de sub-rede IPv6 /64 – Rede, intervalo, forma expandida | SubnetKit</title>
+  <meta name="description" content="Calculadora de sub-rede IPv6 /64: prefixo de rede, primeiro e último endereço, notação expandida e comprimida, DNS reverso e quantas /64 cabem em uma /48 ou /56.">
+  <link rel="canonical" href="https://subnetkit-tool.vercel.app/pt/ipv6-subnet-calculator-64">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://subnetkit-tool.vercel.app/pt/ipv6-subnet-calculator-64">
+  <meta property="og:title" content="Calculadora de sub-rede IPv6 /64 – Rede, intervalo, forma expandida | SubnetKit">
+  <meta property="og:description" content="Calculadora de sub-rede IPv6 /64: prefixo de rede, primeiro e último endereço, notação expandida e comprimida, DNS reverso e quantas /64 cabem em uma /48 ou /56.">
+  <meta property="og:image" content="https://subnetkit-tool.vercel.app/favicon.svg">
+  <meta property="og:site_name" content="SubnetKit">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Calculadora de sub-rede IPv6 /64 – Rede, intervalo, forma expandida | SubnetKit">
+  <meta name="twitter:description" content="Calculadora de sub-rede IPv6 /64: prefixo de rede, primeiro e último endereço, notação expandida e comprimida, DNS reverso e quantas /64 cabem em uma /48 ou /56.">
+  <meta name="twitter:image" content="https://subnetkit-tool.vercel.app/favicon.svg">
+  <meta name="theme-color" content="#050403">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SubnetKit">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/config.js"></script>
+  <script src="/i18n.js"></script>
+  <script src="/consent.js"></script>
+  <script src="/monetize.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Calculadora de sub-rede IPv6 /64 – Rede, intervalo, forma expandida | SubnetKit","description":"Calculadora de sub-rede IPv6 /64: prefixo de rede, primeiro e último endereço, notação expandida e comprimida, DNS reverso e quantas /64 cabem em uma /48 ou /56.","url":"https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64","isPartOf":{"@type":"WebSite","name":"SubnetKit","url":"https://subnetkit-tool.vercel.app/"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"SubnetKit","item":"https://subnetkit-tool.vercel.app/"},{"@type":"ListItem","position":2,"name":"Calculadora de sub-rede IPv6 /64","item":"https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quantos endereços existem em uma /64 IPv6?","acceptedAnswer":{"@type":"Answer","text":"2^64, ou seja, 18.446.744.073.709.551.616. Não há broadcast nem endereço de rede reservado, embora por convenção se evite o identificador de interface só com zeros."}},{"@type":"Question","name":"Por que uma LAN precisa ser /64?","acceptedAnswer":{"@type":"Answer","text":"O SLAAC deriva um identificador de interface de 64 bits a partir do endereço MAC ou de um valor aleatório, então a autoconfiguração só funciona quando sobram exatamente 64 bits para a parte de host."}},{"@type":"Question","name":"Quantas /64 existem em uma /48?","acceptedAnswer":{"@type":"Answer","text":"65.536. Os 16 bits entre /48 e /64 formam o ID da sub-rede, normalmente escrito como o quarto hexteto."}},{"@type":"Question","name":"Posso usar /127 ou /126 em enlaces entre roteadores?","acceptedAnswer":{"@type":"Answer","text":"Sim, a RFC 6164 recomenda /127 em enlaces ponto a ponto entre roteadores para evitar ataques de esgotamento do cache de vizinhos. Os segmentos de hosts devem continuar /64."}}]}</script>
+  <!-- hreflang:start -->
+  <meta name="bm-langs" content="en,es,pt,fr,de,it">
+  <link rel="alternate" hreflang="en" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64">
+  <link rel="alternate" hreflang="es" href="https://subnetkit-tool.vercel.app/es/ipv6-subnet-calculator-64">
+  <link rel="alternate" hreflang="pt" href="https://subnetkit-tool.vercel.app/pt/ipv6-subnet-calculator-64">
+  <link rel="alternate" hreflang="fr" href="https://subnetkit-tool.vercel.app/fr/ipv6-subnet-calculator-64">
+  <link rel="alternate" hreflang="de" href="https://subnetkit-tool.vercel.app/de/ipv6-subnet-calculator-64">
+  <link rel="alternate" hreflang="it" href="https://subnetkit-tool.vercel.app/it/ipv6-subnet-calculator-64">
+  <link rel="alternate" hreflang="x-default" href="https://subnetkit-tool.vercel.app/ipv6-subnet-calculator-64">
+  <!-- hreflang:end -->
+  <meta property="og:locale" content="pt_BR">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <div class="navbar">
+    <a class="brand" href="/pt/" aria-label="Início do SubnetKit">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text"><span class="brand-name">SubnetKit</span><span class="brand-desc">Calculadora de sub-rede IP</span></span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <details class="more-tools">
+        <summary class="btn btn-ghost btn-sm" aria-label="Mais ferramentas"><span class="mt-label">Mais ferramentas</span> ▾</summary>
+        <div class="menu">
+          <a href="https://quickinvoice-tool.vercel.app"><span class="mi">Q</span>QuickInvoice<small>Faturas</small></a>
+          <a href="https://ratecalc-tool.vercel.app"><span class="mi">R</span>RateCalc<small>Preços para freelancers</small></a>
+          <a href="https://qrforge-tool.vercel.app"><span class="mi">Q</span>QRForge<small>QR codes</small></a>
+          <a href="https://squish-tool.vercel.app"><span class="mi">S</span>Squish<small>Compressor de imagens</small></a>
+          <a href="https://growthcalc-tool.vercel.app"><span class="mi">G</span>GrowthCalc<small>Juros compostos</small></a>
+          <a href="https://subnetkit-tool.vercel.app" class="current"><span class="mi">N</span>SubnetKit<small>Sub-redes IP</small></a>
+          <a href="https://shotstudio-tool.vercel.app"><span class="mi">S</span>Screenshot Studio<small>Mockups de capturas de tela</small></a>
+          <a href="https://mockuplab-tool.vercel.app"><span class="mi">M</span>Social Mockup Lab<small>Mockups de chats e posts</small></a>
+          <a href="https://carouselmaker-tool.vercel.app"><span class="mi">C</span>Carousel Maker<small>Slides de carrossel</small></a>
+          <a href="https://creativeresize-tool.vercel.app"><span class="mi">R</span>Creative Resize<small>Formatos para redes sociais</small></a>
+          <a href="https://framelab-tool.vercel.app"><span class="mi">F</span>Frame Lab<small>Molduras e mockups de fotos</small></a>
+          <a href="https://giveaway-tool.vercel.app"><span class="mi">G</span>Giveaway Picker<small>Sorteios no Instagram</small></a>
+          <a href="https://iplookup-tool.vercel.app"><span class="mi">I</span>IP Lookup<small>Consulta de IP</small></a>
+          <a href="https://sizeconverter-tool.vercel.app"><span class="mi">Z</span>Size Converter<small>Redimensionador de imagens e vídeos</small></a>
+        </div>
+      </details>
+      <span class="sep" aria-hidden="true"></span>
+      <span class="brand-by">por <b>Be Management</b></span>
+      <button class="btn btn-sm hidden" id="installBtn" data-action="install" title="Instale esta ferramenta como app">⤓ Instalar</button>
+      <span class="lang-switch"><select id="langSelect" aria-label="Language" translate="no"><option value="en">EN</option></select></span>
+      <button class="btn btn-primary btn-sm" data-action="pro" data-arg="nav">Pro</button>
+      <button class="btn icon-btn" data-action="theme" aria-label="Alternar tema">◐</button>
+    </nav>
+    </div>
+  </div>
+</header>
+
+<section class="hero container">
+  <span class="eyebrow"><span class="dot" aria-hidden="true"></span>Be Management Tools · IPv6 · Sub-redes</span>
+  <h1>Calculadora de sub-rede IPv6 /64</h1>
+  <p class="tagline">Resolva qualquer endereço IPv6 para a sua rede /64, veja as duas notações e planeje quantas /64 cabem na sua alocação.</p>
+  <div class="badges">
+  <span class="badge">100% grátis</span>
+  <span class="badge">Sem cadastro</span>
+  <span class="badge">Funciona no seu navegador</span>
+  <span class="badge">IPv4 + IPv6</span>
+  <span class="badge">Links compartilháveis</span>
+  </div>
+</section>
+
+<main class="container">
+  <div class="tool-layout">
+    <div class="tool-col">
+
+      <section class="card tool-card" id="toolCard" aria-labelledby="toolTitle">
+        <h2 id="toolTitle" class="sr-only">Ferramentas de sub-rede</h2>
+        <div class="tabs no-print" role="tablist" aria-label="Ferramentas" id="tabBar">
+          <button class="tab active" role="tab" data-tab="ipv4" id="tab-ipv4" aria-selected="true" aria-controls="panel-ipv4">Sub-rede IPv4</button>
+          <button class="tab" role="tab" data-tab="vlsm" id="tab-vlsm" aria-selected="false" aria-controls="panel-vlsm">VLSM</button>
+          <button class="tab" role="tab" data-tab="ipv6" id="tab-ipv6" aria-selected="false" aria-controls="panel-ipv6">IPv6</button>
+          <button class="tab" role="tab" data-tab="cidr" id="tab-cidr" aria-selected="false" aria-controls="panel-cidr">CIDR ↔ Intervalo</button>
+          <button class="tab" role="tab" data-tab="supernet" id="tab-supernet" aria-selected="false" aria-controls="panel-supernet">Superrede <span class="pro-badge" data-pro-lock>PRO</span></button>
+        </div>
+
+        <!-- ================= IPv4 ================= -->
+        <div class="panel active" id="panel-ipv4" role="tabpanel" aria-labelledby="tab-ipv4">
+          <div class="print-only report-head"><h2>SubnetKit – Plano de sub-redes</h2><p id="ip4ReportMeta"></p><p>Gerado em <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="grid-3 no-plan">
+            <div class="field">
+              <label for="ip4Addr">Endereço IP</label>
+              <input type="text" id="ip4Addr" class="mono" value="192.168.1.10" placeholder="192.168.1.10" autocomplete="off" spellcheck="false" inputmode="decimal" data-persist>
+            </div>
+            <div class="field">
+              <label for="ip4Prefix">Prefixo (CIDR)</label>
+              <select id="ip4Prefix" class="mono" data-persist></select>
+            </div>
+            <div class="field">
+              <label for="ip4Mask">Máscara de sub-rede</label>
+              <select id="ip4Mask" class="mono" data-persist></select>
+            </div>
+          </div>
+          <div class="field no-plan">
+            <label for="ip4Free">Ou cole em qualquer formato: CIDR, IP + máscara, IP + curinga</label>
+            <input type="text" id="ip4Free" class="mono" placeholder="192.168.1.10/24 · 192.168.1.10 255.255.255.0 · 192.168.1.10 0.0.0.255" autocomplete="off" spellcheck="false">
+            <p class="err" id="ip4Err" role="alert"></p>
+          </div>
+
+          <div id="ip4Results">
+            <dl class="kv" id="ip4Grid"></dl>
+            <h3 class="sub-title">Binário <span class="hint" style="margin:0">(bits de rede destacados)</span></h3>
+            <div class="bin" id="ip4Bin"></div>
+          </div>
+
+          <h3 class="sub-title no-plan">Dividir em sub-redes</h3>
+          <div class="grid-3 no-plan">
+            <div class="field">
+              <label for="ip4SplitMode">Dividir por</label>
+              <select id="ip4SplitMode" data-persist>
+                <option value="prefix">Novo tamanho de prefixo</option>
+                <option value="count">Número de sub-redes</option>
+              </select>
+            </div>
+            <div class="field" id="ip4SplitPrefixWrap">
+              <label for="ip4SplitPrefix">Novo prefixo</label>
+              <select id="ip4SplitPrefix" class="mono" data-persist></select>
+            </div>
+            <div class="field hidden" id="ip4SplitCountWrap">
+              <label for="ip4SplitCount">Sub-redes</label>
+              <select id="ip4SplitCount" class="mono" data-persist></select>
+            </div>
+          </div>
+          <p class="err" id="ip4SplitErr" role="alert"></p>
+          <div id="ip4SplitOut">
+            <div class="table-actions no-print" data-table="ip4SplitTable">
+              <button class="btn btn-sm" type="button" data-act="copy-text">📋 Copiar tabela como texto</button>
+              <button class="btn btn-sm" type="button" data-act="copy">Copiar como CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Baixar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Imprimir plano <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="ip4SplitTable">
+                <thead><tr><th class="num">#</th><th>Rede</th><th>Intervalo utilizável</th><th>Broadcast</th><th class="num">Hosts</th></tr></thead>
+                <tbody id="ip4SplitBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="ip4SplitNote"></p>
+          </div>
+        </div>
+
+        <!-- ================= VLSM ================= -->
+        <div class="panel" id="panel-vlsm" role="tabpanel" aria-labelledby="tab-vlsm">
+          <div class="print-only report-head"><h2>SubnetKit – Plano de sub-redes VLSM</h2><p id="vlsmReportMeta"></p><p>Gerado em <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="grid-2 no-plan">
+            <div class="field">
+              <label for="vlsmBase">Rede base (CIDR)</label>
+              <input type="text" id="vlsmBase" class="mono" value="192.168.10.0/24" placeholder="192.168.10.0/24" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label class="checkbox" for="vlsmP2P" style="margin-top:28px"><input type="checkbox" id="vlsmP2P" data-persist> Usar /31 em enlaces ponto a ponto (2 hosts)</label>
+            </div>
+          </div>
+          <div class="vlsm-head no-plan" aria-hidden="true"><span>Nome da sub-rede</span><span>Hosts necessários</span><span></span></div>
+          <div class="vlsm-rows" id="vlsmRows" aria-label="Necessidades de sub-redes"></div>
+          <div class="row no-plan">
+            <button class="btn btn-sm" type="button" id="btnVlsmAdd">＋ Adicionar rede</button>
+            <span class="hint" id="vlsmLimitHint" style="margin:0"></span>
+          </div>
+          <p class="err" id="vlsmErr" role="alert"></p>
+          <div id="vlsmOut">
+            <div class="table-actions no-print" data-table="vlsmTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copiar como CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Baixar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Imprimir plano <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="vlsmTable">
+                <thead><tr><th class="name">Nome</th><th class="num">Necessário</th><th class="num">Alocado</th><th>Rede</th><th>Máscara</th><th>Intervalo utilizável</th><th>Broadcast</th><th class="num">Desperdiçado</th></tr></thead>
+                <tbody id="vlsmBody"></tbody>
+              </table>
+            </div>
+            <div class="sum" id="vlsmSummary"></div>
+          </div>
+        </div>
+
+        <!-- ================= IPv6 ================= -->
+        <div class="panel" id="panel-ipv6" role="tabpanel" aria-labelledby="tab-ipv6">
+          <div class="print-only report-head"><h2>SubnetKit – Plano de sub-redes IPv6</h2><p id="ip6ReportMeta"></p><p>Gerado em <span data-report-date></span> · https://subnetkit-tool.vercel.app/</p></div>
+          <div class="field no-plan">
+            <label for="ip6Addr">Endereço IPv6 com prefixo</label>
+            <input type="text" id="ip6Addr" class="mono" value="2001:db8:85a3::8a2e:370:7334/64" placeholder="2001:db8::1/64" autocomplete="off" spellcheck="false" data-persist>
+            <p class="err" id="ip6Err" role="alert"></p>
+          </div>
+          <div id="ip6Results">
+            <dl class="kv" id="ip6Grid"></dl>
+            <h3 class="sub-title">Binário – primeiros 64 bits <span class="hint" style="margin:0">(bits de rede destacados)</span></h3>
+            <div class="bin" id="ip6Bin"></div>
+          </div>
+
+          <h3 class="sub-title no-plan">Dividir em sub-redes</h3>
+          <div class="grid-2 no-plan">
+            <div class="field">
+              <label for="ip6SplitPrefix">Novo tamanho de prefixo</label>
+              <input type="number" id="ip6SplitPrefix" class="mono" min="1" max="128" step="1" value="68" data-persist>
+            </div>
+            <div class="field">
+              <label>Resultado</label>
+              <p class="hint" id="ip6SplitInfo" style="margin-top:12px"></p>
+            </div>
+          </div>
+          <p class="err" id="ip6SplitErr" role="alert"></p>
+          <div id="ip6SplitOut">
+            <div class="table-actions no-print" data-table="ip6SplitTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copiar como CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Baixar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+              <button class="btn btn-sm" type="button" data-act="print">🖨 Imprimir plano <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="ip6SplitTable">
+                <thead><tr><th class="num">#</th><th>Sub-rede</th><th>Primeiro endereço</th><th>Último endereço</th></tr></thead>
+                <tbody id="ip6SplitBody"></tbody>
+              </table>
+            </div>
+            <p class="note" id="ip6SplitNote"></p>
+          </div>
+        </div>
+
+        <!-- ================= CIDR ↔ Range ================= -->
+        <div class="panel" id="panel-cidr" role="tabpanel" aria-labelledby="tab-cidr">
+          <h3 class="sub-title" style="border:none;padding-top:0;margin-top:0">CIDR → intervalo de IP</h3>
+          <div class="field">
+            <label for="cidrIn">Bloco CIDR</label>
+            <input type="text" id="cidrIn" class="mono" value="10.0.0.0/22" placeholder="10.0.0.0/22" autocomplete="off" spellcheck="false" data-persist>
+            <p class="err" id="cidrErr" role="alert"></p>
+          </div>
+          <dl class="kv" id="cidrGrid"></dl>
+
+          <h3 class="sub-title">Intervalo de IP → blocos CIDR</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="rangeStart">IP inicial</label>
+              <input type="text" id="rangeStart" class="mono" value="10.0.0.1" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label for="rangeEnd">IP final</label>
+              <input type="text" id="rangeEnd" class="mono" value="10.0.0.254" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+          </div>
+          <p class="err" id="rangeErr" role="alert"></p>
+          <div id="rangeOut">
+            <p class="hint" id="rangeInfo"></p>
+            <div class="cidr-list" id="rangeList"></div>
+            <div class="table-actions no-print" data-table="rangeTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copiar como CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Baixar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="rangeTable">
+                <thead><tr><th class="num">#</th><th>CIDR</th><th>Máscara</th><th>Primeiro</th><th>Último</th><th class="num">Endereços</th></tr></thead>
+                <tbody id="rangeBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <h3 class="sub-title">O IP está na sub-rede?</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="chkIp">Endereço IP</label>
+              <input type="text" id="chkIp" class="mono" value="192.168.1.130" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+            <div class="field">
+              <label for="chkCidr">Sub-rede (CIDR)</label>
+              <input type="text" id="chkCidr" class="mono" value="192.168.1.0/25" autocomplete="off" spellcheck="false" data-persist>
+            </div>
+          </div>
+          <p class="err" id="chkErr" role="alert"></p>
+          <div class="check-out" id="chkOut" aria-live="polite"></div>
+
+          <details class="ref" id="refDetails">
+            <summary>Referência: todos os prefixos de /0 a /32 (máscara, curinga, endereços, hosts)</summary>
+            <div class="table-actions no-print" data-table="refTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copiar como CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Baixar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="refTable">
+                <thead><tr><th>CIDR</th><th>Máscara de sub-rede</th><th>Curinga</th><th class="num">Endereços</th><th class="num">Hosts utilizáveis</th></tr></thead>
+                <tbody id="refBody"></tbody>
+              </table>
+            </div>
+          </details>
+        </div>
+
+        <!-- ================= Supernet (Pro) ================= -->
+        <div class="panel" id="panel-supernet" role="tabpanel" aria-labelledby="tab-supernet">
+          <p class="hint" style="margin-top:0">Cole um CIDR por linha (ou separados por espaços/vírgulas). O SubnetKit junta blocos adjacentes e contidos no menor conjunto equivalente – ideal para sumarização de rotas e limpeza de ACLs. <span class="pro-badge" data-pro-lock>PRO</span></p>
+          <div class="field">
+            <label for="snInput">Redes para sumarizar</label>
+            <textarea id="snInput" class="mono" rows="7" spellcheck="false" data-persist>192.168.0.0/24
+192.168.1.0/24
+192.168.2.0/24
+192.168.3.0/24
+10.10.0.0/16
+10.10.5.0/24
+172.16.4.0/22
+172.16.8.0/22</textarea>
+          </div>
+          <div class="row">
+            <button class="btn btn-primary" type="button" id="btnSnRun">Sumarizar rotas</button>
+            <button class="btn btn-ghost" type="button" id="btnSnClear">Limpar</button>
+          </div>
+          <p class="err" id="snErr" role="alert"></p>
+          <div id="snOut" class="hidden">
+            <div class="sum" id="snSummary"></div>
+            <div class="table-actions no-print" data-table="snTable">
+              <button class="btn btn-sm" type="button" data-act="copy">Copiar como CSV</button>
+              <button class="btn btn-sm" type="button" data-act="download">⬇ Baixar CSV <span class="pro-badge" data-pro-lock>PRO</span></button>
+            </div>
+            <div class="table-wrap">
+              <table id="snTable">
+                <thead><tr><th class="num">#</th><th>Agregado</th><th>Máscara</th><th>Primeiro</th><th>Último</th><th class="num">Endereços</th><th class="name">Abrange</th></tr></thead>
+                <tbody id="snBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="row actions no-print">
+          <button class="btn" id="btnCopyResults" type="button">📋 Copiar resultados</button>
+          <button class="btn" id="btnShare" type="button">🔗 Compartilhar link</button>
+          <button class="btn btn-ghost" id="btnReset" type="button">↺ Redefinir aba</button>
+        </div>
+      </section>
+
+      <!-- Saved projects (Pro: unlimited, free: 1) -->
+      <section class="card no-print" aria-labelledby="projTitle">
+        <h2 id="projTitle" class="card-title">Projetos salvos <span class="pro-badge" data-pro-lock title="Free: 1 project · Pro: unlimited">PRO</span></h2>
+        <p class="hint">Salve todos os dados de todas as abas com um nome e carregue-os depois. Plano grátis: 1 projeto, Pro: ilimitados.</p>
+        <div class="row">
+          <input type="text" id="projectName" placeholder="Nome do projeto (ex.: Plano de endereçamento da matriz)" maxlength="60" aria-label="Nome do projeto">
+          <button class="btn btn-primary" id="btnSaveProject" type="button">💾 Salvar projeto</button>
+        </div>
+        <div class="proj-list" id="projectList"></div>
+      </section>
+
+    </div>
+
+    <aside class="sidebar">
+      <div class="ad-slot" data-slot="sidebar-1"></div>
+      <div class="card pro-card">
+        <h3>Seja Pro <span class="pro-badge">VITALÍCIO</span></h3>
+        <ul>
+          <li>Redes VLSM ilimitadas</li>
+          <li>Ferramenta de sumarização de rotas (superrede)</li>
+          <li>Exportação CSV de todas as tabelas</li>
+          <li>Projetos salvos e planos de sub-redes para imprimir</li>
+        </ul>
+        <button class="btn btn-primary btn-block" data-action="pro" data-arg="sidebar">Seja Pro – <span data-pro-price>$12</span> pagamento único</button>
+      </div>
+      <div class="card lead-card" id="leadCard" hidden>
+        <h3>Tabela de referência de sub-redes</h3>
+        <p class="hint">Receba a tabela de sub-redes para imprimir e novas ferramentas de redes. Sem spam.</p>
+        <form class="lead-form" data-action="newsletter">
+          <input type="email" name="email" required placeholder="voce@email.com" aria-label="Endereço de e-mail" autocomplete="email">
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+          <button class="btn btn-primary" type="submit">Envie já</button>
+        </form>
+        <p class="hint tiny">Sem spam. Cancele quando quiser.</p>
+      </div>
+      <div class="card course-card hidden" id="courseCard">
+        <h3>Curso recomendado</h3>
+        <p id="courseText">Aprimore suas habilidades de sub-redes para o CCNA com um curso estruturado.</p>
+        <a class="btn btn-block" id="courseLink" href="#" rel="sponsored noopener" target="_blank">Ver curso →</a>
+        <p class="hint" style="margin-top:8px">Link de parceiro – podemos receber uma comissão sem custo extra para você.</p>
+      </div>
+      <div class="ad-slot" data-slot="sidebar-2"></div>
+    </aside>
+  </div>
+
+  <div class="ad-slot horizontal" data-slot="below-tool"></div>
+</main>
+
+<!-- uses:start -->
+<section class="uses container" id="popular-uses" aria-labelledby="usesTitle">
+  <h2 id="usesTitle">Mais formas de usar o SubnetKit</h2>
+  <ul class="uses-grid">
+      <li><a href="/pt/24-subnet-calculator">Calculadora de sub-rede /24</a></li>
+      <li><a href="/pt/30-and-31-point-to-point-subnets">Sub-redes /30 e /31 para enlaces ponto a ponto</a></li>
+      <li><a href="/pt/27-subnet-calculator">Calculadora de sub-rede /27</a></li>
+      <li><a href="/pt/vlsm-calculator-ccna">Calculadora VLSM para CCNA</a></li>
+      <li><a href="/pt/wildcard-mask-calculator">Calculadora de máscara curinga</a></li>
+      <li><a href="/pt/ipv6-subnet-calculator-64" class="current" aria-current="page">Calculadora de sub-rede IPv6 /64</a></li>
+      <li><a href="/pt/ip-range-to-cidr">Conversor de intervalo de IP para CIDR</a></li>
+      <li><a href="/pt/private-ip-address-ranges">Faixas de endereços IP privados explicadas</a></li>
+  </ul>
+</section>
+<!-- uses:end -->
+
+<section class="content container">
+  <p class="breadcrumb"><a href="/pt/">SubnetKit</a> › Calculadora de sub-rede IPv6 /64</p>
+  <h2>Calculadora de sub-rede IPv6 /64: como funciona</h2>
+  <p>A /64 é o tamanho padrão de sub-rede IPv6 para qualquer LAN, segmento sem fio ou rede de VMs. Ela é fixa em 64 bits porque a autoconfiguração sem estado (SLAAC) monta a parte de host a partir de um identificador de interface de 64 bits; qualquer prefixo maior que /64 quebra isso.</p><p>O SubnetKit trabalha com o espaço de endereços completo de 128 bits no seu navegador, de graça, e a aba IPv6 acima vem carregada com o prefixo de documentação <code>2001:db8:abcd:12::/64</code>.</p>
+  <h2>Exemplo resolvido: 2001:db8:abcd:12::/64</h2>
+  <ul><li><strong>Rede:</strong> 2001:db8:abcd:12::/64</li><li><strong>Forma expandida:</strong> 2001:0db8:abcd:0012:0000:0000:0000:0000</li><li><strong>Primeiro endereço:</strong> 2001:db8:abcd:12::</li><li><strong>Último endereço:</strong> 2001:db8:abcd:12:ffff:ffff:ffff:ffff</li><li><strong>Endereços:</strong> 2^64 = 18,446,744,073,709,551,616</li><li><strong>Tipo:</strong> unicast global (2001:db8::/32 é reservado para documentação)</li></ul><p>Os primeiros quatro hextetos (64 bits) são o prefixo de roteamento e o ID da sub-rede; os últimos quatro são o identificador de interface. Os roteadores anunciam esse prefixo no enlace e os hosts geram os próprios endereços, então nunca faltam endereços de host em uma /64 e não existe o conceito de endereço de broadcast.</p>
+  <h2>Quantas sub-redes /64 você obtém</h2>
+  <p>As alocações costumam ser expressas pela quantidade de /64 que contêm. Cada 4 bits de prefixo equivalem a um dígito hexadecimal, então a conta é rápida:</p><ul><li><strong>/48</strong> (site empresarial típico): 2^16 = 65.536 sub-redes /64</li><li><strong>/56</strong> (alocação residencial comum): 2^8 = 256 sub-redes /64</li><li><strong>/60</strong> (alguns provedores): 2^4 = 16 sub-redes /64</li><li><strong>/32</strong> (alocação de provedor feita por um RIR): 2^32 = 4.294.967.296 sub-redes /64</li></ul><p>No SubnetKit, informe uma /48 ou /56 e defina o prefixo de divisão como 64 para listar as primeiras sub-redes do intervalo com seus limites. Use uma /127 para enlaces ponto a ponto entre roteadores (RFC 6164) e uma /128 para loopbacks; tudo o que tem hosts finais continua /64.</p>
+  <h2>Perguntas frequentes</h2>
+  <div class="faq">
+    <details><summary>Quantos endereços existem em uma /64 IPv6?</summary><p>2^64, ou seja, 18.446.744.073.709.551.616. Não há broadcast nem endereço de rede reservado, embora por convenção se evite o identificador de interface só com zeros.</p></details>
+    <details><summary>Por que uma LAN precisa ser /64?</summary><p>O SLAAC deriva um identificador de interface de 64 bits a partir do endereço MAC ou de um valor aleatório, então a autoconfiguração só funciona quando sobram exatamente 64 bits para a parte de host.</p></details>
+    <details><summary>Quantas /64 existem em uma /48?</summary><p>65.536. Os 16 bits entre /48 e /64 formam o ID da sub-rede, normalmente escrito como o quarto hexteto.</p></details>
+    <details><summary>Posso usar /127 ou /126 em enlaces entre roteadores?</summary><p>Sim, a RFC 6164 recomenda /127 em enlaces ponto a ponto entre roteadores para evitar ataques de esgotamento do cache de vizinhos. Os segmentos de hosts devem continuar /64.</p></details>
+  </div>
+  <p class="back-guide">Procurando o guia completo, dicas e o FAQ completo? Leia a <a href="/pt/">página principal do SubnetKit</a>.</p>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark lg" aria-hidden="true"></span>
+      <div>
+        <strong>Be Management Tools</strong>
+        <p>Uma coleção de ferramentas grátis e privadas que rodam inteiramente no seu navegador. SubnetKit é a calculadora de sub-redes IP da família, criada e mantida pela Be Management.</p>
+      </div>
+    </div>
+    <div class="footer-tools">
+      <strong>Mais ferramentas grátis</strong>
+      <ul>
+        <li><a href="https://quickinvoice-tool.vercel.app">QuickInvoice · Faturas</a></li>
+        <li><a href="https://ratecalc-tool.vercel.app">RateCalc · Preços para freelancers</a></li>
+        <li><a href="https://qrforge-tool.vercel.app">QRForge · QR codes</a></li>
+        <li><a href="https://squish-tool.vercel.app">Squish · Compressor de imagens</a></li>
+        <li><a href="https://growthcalc-tool.vercel.app">GrowthCalc · Juros compostos</a></li>
+        <li><a href="https://subnetkit-tool.vercel.app" class="current">SubnetKit · Sub-redes IP</a></li>
+        <li><a href="https://shotstudio-tool.vercel.app">Screenshot Studio · Mockups de capturas de tela</a></li>
+        <li><a href="https://mockuplab-tool.vercel.app">Social Mockup Lab · Mockups de chat e post</a></li>
+        <li><a href="https://carouselmaker-tool.vercel.app">Carousel Maker · Slides de carrossel</a></li>
+        <li><a href="https://creativeresize-tool.vercel.app">Creative Resize · Formatos para redes sociais</a></li>
+        <li><a href="https://framelab-tool.vercel.app">Frame Lab · Molduras e mockups de fotos</a></li>
+        <li><a href="https://giveaway-tool.vercel.app">Giveaway Picker · Sorteios no Instagram</a></li>
+        <li><a href="https://iplookup-tool.vercel.app">IP Lookup · Consulta de IP</a></li>
+        <li><a href="https://sizeconverter-tool.vercel.app">Size Converter · Redimensionador de imagens e vídeos</a></li>
+      </ul>
+    </div>
+    <div class="footer-meta">
+      <span>© <span data-year></span> Be Management · SubnetKit. Calculadora de sub-redes grátis para engenheiros de redes.</span>
+      <span><a href="/pt/privacy" data-i18n-href="/pt/privacy">Privacidade</a> · <a href="/pt/terms" data-i18n-href="/pt/terms">Termos</a> · <a href="#" data-action="cookie-settings">Configurações de cookies</a> · <a href="https://www.bemanagement.pro" rel="noopener">bemanagement.pro</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="proModal" role="dialog" aria-modal="true" aria-labelledby="proTitle">
+  <div class="card">
+    <button class="btn btn-sm close" data-action="close-pro" aria-label="Fechar">✕</button>
+    <h3 id="proTitle">Faça upgrade para o SubnetKit Pro <span class="pro-badge">VITALÍCIO</span></h3>
+    <div class="price"><span id="proPrice"></span> <small>pagamento único</small></div>
+    <ul>
+      <li>Redes VLSM ilimitadas</li>
+      <li>Ferramenta de sumarização de rotas</li>
+      <li>Exportação CSV</li>
+      <li>Projetos salvos</li>
+      <li>Planos de sub-redes para imprimir</li>
+      <li>Atualizações vitalícias</li>
+    </ul>
+    <button class="btn btn-primary btn-block" data-action="checkout">Seja Pro</button>
+    <p class="hint" style="margin-top:12px">Já comprou? <a href="#" data-action="toggle-license">Digite a chave de licença</a></p>
+    <div class="row hidden" id="licenseRow"><input id="licenseKey" placeholder="Chave de licença" aria-label="Chave de licença"><button class="btn" data-action="activate-license">Ativar</button></div>
+  </div>
+</div>
+<script src="/preset.js" data-q="tab=ipv6&amp;ip6Addr=2001:db8:abcd:12::%2F64"></script>
+<script src="/app.js"></script>
+</body>
+</html>

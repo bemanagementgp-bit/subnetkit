@@ -393,6 +393,15 @@
   const baseText = { ipv4: '', ipv6: '' };
 
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  // JSON.parse that drops prototype-polluting keys (localStorage is untrusted input).
+  function safeJSON(raw) { return JSON.parse(raw, function (k, v) { return (k === '__proto__' || k === 'constructor' || k === 'prototype') ? undefined : v; }); }
+  function hasOwn(o, k) { return Object.prototype.hasOwnProperty.call(o, k); }
+  // Normalises VLSM rows coming from storage / share links.
+  function cleanVlsmRows(rows) {
+    return (Array.isArray(rows) ? rows : []).filter(function (r) { return r && typeof r === 'object'; }).slice(0, 1024).map(function (r) {
+      return { name: String(r.name == null ? '' : r.name).slice(0, 40), hosts: String(r.hosts == null ? '' : r.hosts).replace(/[^\d]/g, '').slice(0, 10) };
+    });
+  }
   function fmtNum(n) { return Number(n).toLocaleString('en-US'); }
   function setErr(el, msg) { if (el) el.textContent = msg || ''; }
   function show(el, on) { if (el) el.classList.toggle('hidden', !on); }
@@ -443,15 +452,15 @@
     if (!st) return;
     syncing = true;
     document.querySelectorAll('[data-persist]').forEach(function (el) {
-      if (!(el.id in st)) return;
+      if (!hasOwn(st, el.id)) return;
       if (el.type === 'checkbox') el.checked = !!st[el.id];
-      else el.value = st[el.id];
+      else el.value = String(st[el.id] == null ? '' : st[el.id]).slice(0, 20000);
     });
-    if (Array.isArray(st.vlsmRows)) renderVlsmRows(st.vlsmRows);
+    if (Array.isArray(st.vlsmRows)) renderVlsmRows(cleanVlsmRows(st.vlsmRows));
     syncing = false;
   }
   function saveState() { try { localStorage.setItem(LS_STATE, JSON.stringify(collectState())); } catch (e) { /* ignore */ } }
-  function loadState() { try { return JSON.parse(localStorage.getItem(LS_STATE) || 'null'); } catch (e) { return null; } }
+  function loadState() { try { const v = safeJSON(localStorage.getItem(LS_STATE) || 'null'); return v && typeof v === 'object' && !Array.isArray(v) ? v : null; } catch (e) { return null; } }
 
   /* ---------------- tabs ---------------- */
   function setTab(name, push) {
@@ -758,7 +767,8 @@
     });
   }
   function tableToCsv(table) {
-    return tableRows(table).map(function (r) { return r.map(function (v) { return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }).join(','); }).join('\n');
+    // Cells starting with = + - @ TAB or CR are prefixed with ' so spreadsheets don't evaluate them (CSV injection).
+    return tableRows(table).map(function (r) { return r.map(function (v) { if (/^[=+\-@\t\r]/.test(v)) v = "'" + v; return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }).join(','); }).join('\n');
   }
   function tableToText(table) {
     const rows = tableRows(table);
@@ -803,7 +813,14 @@
   }
 
   /* ---------------- projects (Pro: unlimited, free: 1) ---------------- */
-  function loadProjects() { try { return JSON.parse(localStorage.getItem(LS_PROJECTS) || '[]') || []; } catch (e) { return []; } }
+  function loadProjects() {
+    try {
+      const v = safeJSON(localStorage.getItem(LS_PROJECTS) || '[]');
+      return Array.isArray(v) ? v.filter(function (p) { return p && typeof p === 'object'; }).slice(0, 500).map(function (p) {
+        return { name: String(p.name == null ? 'Project' : p.name).slice(0, 80), created: Number(p.created) || 0, data: p.data && typeof p.data === 'object' && !Array.isArray(p.data) ? p.data : {} };
+      }) : [];
+    } catch (e) { return []; }
+  }
   function saveProjects(list) { try { localStorage.setItem(LS_PROJECTS, JSON.stringify(list)); } catch (e) { toast('Could not save project (storage full?)'); } }
   function renderProjects() {
     const list = loadProjects();
@@ -814,7 +831,7 @@
   }
   function saveProject() {
     const list = loadProjects();
-    const name = (els.projectName.value || '').trim() || 'Project ' + (list.length + 1);
+    const name = (els.projectName.value || '').trim().slice(0, 80) || 'Project ' + (list.length + 1);
     const existing = list.findIndex(function (p) { return p.name.toLowerCase() === name.toLowerCase(); });
     if (existing < 0 && !isPro() && list.length >= FREE_PROJECTS) { openPro('projects'); return; }
     const entry = { name: name, created: Date.now(), data: collectState() };
@@ -833,7 +850,7 @@
       if (!p) return;
       applyState(p.data);
       recalcAll();
-      if (p.data.tab) setTab(p.data.tab);
+      if (typeof p.data.tab === 'string' && TABS.indexOf(p.data.tab) >= 0) setTab(p.data.tab);
       saveState();
       toast('Loaded "' + p.name + '"');
       window.scrollTo({ top: els.toolCard.offsetTop - 70, behavior: 'smooth' });
@@ -868,11 +885,15 @@
     SHARE_FIELDS[tab].forEach(function (id) {
       if (!q.has(id)) return;
       const el = $(id);
-      if (el.type === 'checkbox') el.checked = q.get(id) === '1'; else el.value = q.get(id);
+      // Share-link values are untrusted: cap lengths and clamp numeric fields.
+      let v = String(q.get(id)).slice(0, id === 'snInput' ? 20000 : 100);
+      if (id === 'ip4Prefix') v = String(Math.min(32, Math.max(0, Math.floor(Number(v)) || 0)));
+      if (id === 'ip6SplitPrefix') v = String(Math.min(128, Math.max(0, Math.floor(Number(v)) || 0)));
+      if (el.type === 'checkbox') el.checked = v === '1'; else el.value = v;
     });
-    if (tab === 'ipv4' && q.has('ip4Prefix')) els.ip4Mask.value = M.intToIp4(M.prefixToMask(Number(q.get('ip4Prefix')) || 0));
+    if (tab === 'ipv4' && q.has('ip4Prefix')) els.ip4Mask.value = M.intToIp4(M.prefixToMask(Math.min(32, Math.max(0, Math.floor(Number(q.get('ip4Prefix'))) || 0))));
     if (tab === 'vlsm' && q.get('rows')) {
-      const rows = q.get('rows').split(',').map(function (s) { const i = s.lastIndexOf(':'); return { name: s.slice(0, i), hosts: s.slice(i + 1) }; }).filter(function (r) { return r.name; });
+      const rows = cleanVlsmRows(String(q.get('rows')).slice(0, 50000).split(',').slice(0, 1024).map(function (s) { const i = s.lastIndexOf(':'); return { name: s.slice(0, i), hosts: s.slice(i + 1) }; }).filter(function (r) { return r.name; }));
       if (rows.length) renderVlsmRows(rows);
     }
     syncing = false;
@@ -916,8 +937,9 @@
 
     // course card
     const course = (C.AFFILIATE_LINKS || {}).course;
-    if (course && course.url) {
+    if (course && /^https?:\/\//i.test(String(course.url || ''))) {
       els.courseLink.href = course.url;
+      els.courseLink.rel = 'sponsored noopener noreferrer';
       if (course.name) els.courseLink.textContent = course.name + ' →';
       els.courseLink.addEventListener('click', function () { track('affiliate_click', { name: course.name || 'course' }); });
       show(els.courseCard, true);
