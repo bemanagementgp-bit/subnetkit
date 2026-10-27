@@ -256,6 +256,7 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
 
 
 
+
 /* ===== SubnetKit – app specific ===== */
 :root{--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 .tool-col{display:flex;flex-direction:column;gap:20px;min-width:0}
